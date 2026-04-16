@@ -1,0 +1,50 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>LoginController</servlet-name>
+  	<display-name>LoginController</display-name>
+  	<description></description>
+  	<servlet-class>controller.LoginController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>RegisterController</servlet-name>
+  	<display-name>RegisterController</display-name>
+  	<description></description>
+  	<servlet-class>controller.RegisterController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LogoutController</servlet-name>
+  	<display-name>LogoutController</display-name>
+  	<description></description>
+  	<servlet-class>controller.LogoutController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>PropertyController</servlet-name>
+  	<display-name>PropertyController</display-name>
+  	<description></description>
+  	<servlet-class>controller.PropertyController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>BookingController</servlet-name>
+  	<display-name>BookingController</display-name>
+  	<description></description>
+  	<servlet-class>controller.BookingController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminController</servlet-name>
+  	<display-name>AdminController</display-name>
+  	<description></description>
+  	<servlet-class>controller.AdminController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>OwnerController</servlet-name>
+  	<display-name>OwnerController</display-name>
+  	<description></description>
+  	<servlet-class>controller.OwnerController</servlet-class>
+  </servlet>
+
+</web-app>
