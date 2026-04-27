@@ -1,0 +1,384 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+
+
+.top-navbar {
+  height: 70px;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 0 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+}
+
+.nav-links a,
+.auth-links a {
+  text-decoration: none;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-links a.active {
+  color: #2563eb;
+  border-bottom: 2px solid #2563eb;
+}
+
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.register-btn {
+  background-color: #2563eb;
+  color: white !important;
+  padding: 14px 24px;
+  border-radius: 30px;
+}
+
+.hero-section {
+  height: 720px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("${pageContext.request.contextPath}/images/hero-house.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay h1 {
+  color: white;
+  font-size: 58px;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+.search-box {
+  width: 850px;
+  min-height: 90px;
+  background-color: white;
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.search-item {
+  flex: 1;
+  padding: 0 20px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.search-item label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.search-item p {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 5px;
+}
+
+.search-item i {
+  color: #2563eb;
+  margin-right: 6px;
+}
+
+.search-btn {
+  width: 150px;
+  height: 55px;
+  border: none;
+  border-radius: 25px;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.featured-section,
+.commitment-section {
+  padding: 90px 70px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.section-header h2 {
+  font-size: 34px;
+}
+
+.section-header a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+}
+
+.property-card {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.property-img {
+  height: 260px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.img1 {
+  background-image: url("../images/property1.jpg");
+}
+
+.img2 {
+  background-image: url("../images/property2.jpg");
+}
+
+.img3 {
+  background-image: url("../images/property3.jpg");
+}
+
+.property-img span {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background-color: white;
+  color: #2563eb;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-weight: 700;
+}
+
+.property-info {
+  padding: 25px;
+}
+
+.property-info p {
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.property-info h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.property-meta {
+  display: flex;
+  justify-content: space-between;
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 25px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 18px;
+}
+
+.property-meta i {
+  color: #2563eb;
+}
+
+.property-info button {
+  width: 100%;
+  height: 48px;
+  background-color: white;
+  color: #2563eb;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.commitment-section {
+  text-align: center;
+  background-color: #f1f4f9;
+}
+
+.small-title {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.commitment-section h2 {
+  font-size: 34px;
+  margin: 10px 0;
+}
+
+.commitment-text {
+  color: #6b7280;
+  max-width: 600px;
+  margin: 0 auto 60px auto;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 45px;
+}
+
+.service-card {
+  background-color: white;
+  padding: 55px 35px;
+  border-radius: 12px;
+  border-bottom: 4px solid #6366f1;
+}
+
+.service-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #e8e5ff;
+  color: #2563eb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px auto;
+  font-size: 22px;
+}
+
+.service-card h3 {
+  margin-bottom: 18px;
+}
+
+.service-card p {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cta-section {
+  margin: 90px 70px;
+  padding: 70px 90px;
+  border-radius: 35px;
+  background: linear-gradient(135deg, #4f46e5, #7c6df5, #475569);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cta-section h2 {
+  font-size: 42px;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+
+.cta-section p {
+  color: #e5e7eb;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.cta-buttons a {
+  text-decoration: none;
+  padding: 22px 38px;
+  border-radius: 40px;
+  font-weight: 700;
+}
+
+.cta-main {
+  background-color: white;
+  color: #2563eb;
+}
+
+.cta-outline {
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+
+
+@media screen and (max-width: 900px) {
+  .top-navbar {
+    padding: 0 20px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero-overlay h1 {
+    font-size: 36px;
+    text-align: center;
+  }
+
+  .search-box {
+    width: 90%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .search-item {
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 10px;
+  }
+
+  .search-btn {
+    width: 100%;
+  }
+
+  .property-grid,
+  .service-grid,
+  footer {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-section,
+  .commitment-section {
+    padding: 60px 25px;
+  }
+
+  .cta-section {
+    margin: 60px 25px;
+    padding: 40px 30px;
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+}
