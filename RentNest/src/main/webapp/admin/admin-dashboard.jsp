@@ -17,7 +17,7 @@
 
 	<div class="main-container">
 		<!-- ================= SIDEBAR ================= -->
-		<jsp:include page="/include/admin-sidebar.jsp" />
+		<%@ include file="/include/admin-sidebar.jsp"%>
 
 		<div class="main">
 			<div class="searchbar2">

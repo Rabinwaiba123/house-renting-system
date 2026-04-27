@@ -435,7 +435,7 @@ footer {
 
 <body>
 	<!-- ================= NAVBAR ================= -->
-	<jsp:include page="/include/navbar.jsp" />
+	<%@ include file="/include/navbar.jsp"%>
 
 	<main class="properties-page">
 		<aside class="filter-sidebar">
@@ -665,7 +665,7 @@ footer {
 	</main>
 
 	<!-- ================= FOOTER ================= -->
-	<jsp:include page="/include/footer.jsp" />
+	<%@ include file="/include/footer.jsp"%>
 
 </body>
 </html>
