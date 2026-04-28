@@ -335,76 +335,7 @@ header {
 	padding: 20px;
 }
 
-.report-cards {
-	display: flex;
-	justify-content: space-between;
-	gap: 20px;
-	flex-wrap: wrap;
-	margin: 0 20px 30px 20px;
-}
 
-.report-card {
-	flex: 1 1 220px;
-	min-height: 120px;
-	background-color: #ffffff;
-	border-radius: 20px;
-	padding: 20px;
-	display: flex;
-	align-items: center;
-	gap: 18px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.report-icon {
-	width: 55px;
-	height: 55px;
-	border-radius: 50%;
-	background-color: #eff6ff;
-	color: #2563eb;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 22px;
-}
-
-.report-text p {
-	font-size: 14px;
-	color: #666;
-	margin-bottom: 6px;
-}
-
-.report-text h2 {
-	font-size: 28px;
-	color: #111;
-}
-
-.quick-report-actions {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 15px;
-	padding: 20px 20px 0 20px;
-}
-
-.report-btn {
-	height: 42px;
-	padding: 0 18px;
-	border: 1px solid #dbe2ea;
-	border-radius: 10px;
-	background-color: #ffffff;
-	color: #333;
-	font-size: 14px;
-	cursor: pointer;
-	transition: 0.3s;
-}
-
-.report-btn i {
-	margin-right: 8px;
-	color: #2563eb;
-}
-
-.report-btn:hover {
-	background-color: #f8fafc;
-}
 
 .booking-filter {
 	display: flex;

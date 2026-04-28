@@ -183,7 +183,7 @@
 <body>
 
 	<!-- ================= NAVBAR ================= -->
-	<%@ include file="/include/navbar.jsp"%>
+	<jsp:include page="/include/navbar.jsp" />
 
 	<!-- Hero -->
 	<section class="hero">
@@ -283,6 +283,6 @@
 	</section>
 
 	<!-- ================= FOOTER ================= -->
-	<%@ include file="/include/footer.jsp"%>
+	<jsp:include page="/include/footer.jsp" />
 </body>
 </html>

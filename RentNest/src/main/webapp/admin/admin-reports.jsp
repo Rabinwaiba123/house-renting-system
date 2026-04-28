@@ -12,18 +12,21 @@
 
 <body>
 	<!-- ================= NAVBAR ================= -->
-	<%@ include file="../include/admin-navbar.jsp"%>
+	<jsp:include page="/include/navbar2.jsp">
+		<jsp:param name="title" value="Admin Dashboard" />
+	</jsp:include>
 
 	<div class="main-container">
 		<!-- ================= SIDEBAR ================= -->
-		<%@ include file="/include/admin-sidebar.jsp"%>
+		<jsp:include page="/include/admin-sidebar.jsp" />
 
 		<div class="main">
 			<div class="searchbar2">
 				<input type="text" placeholder="Search" />
 				<div class="searchbtn">
-					<img src="../images/search-icon.svg" class="icn srchicn"
-						alt="search-icon" />
+					<img
+						src="${pageContext.request.contextPath}/images/search-icon.svg"
+						class="icn srchicn" alt="search-icon" />
 				</div>
 			</div>
 

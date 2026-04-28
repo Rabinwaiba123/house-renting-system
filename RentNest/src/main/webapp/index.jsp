@@ -22,7 +22,7 @@
 
 <body>
 	<!-- ================= NAVBAR ================= -->
-	<%@ include file="/include/navbar.jsp"%>
+	<jsp:include page="/include/navbar.jsp" />
 
 	<!-- ================= HERO ================= -->
 	<section class="hero-section">
@@ -133,7 +133,7 @@
 	</section>
 
 	<!-- ================= FOOTER ================= -->
-	<%@ include file="/include/footer.jsp"%>
+	<jsp:include page="/include/footer.jsp" />
 
 </body>
 </html>

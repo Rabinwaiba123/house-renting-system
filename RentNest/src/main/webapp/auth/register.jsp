@@ -18,132 +18,150 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/auth.css">
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+body {
+	min-height: 100vh;
+	background: #f4f7fb;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.register-container {
+	width: 100%;
+	max-width: 430px;
+	background: white;
+	padding: 30px;
+	border-radius: 14px;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.register-container h2 {
+	text-align: center;
+	margin-bottom: 22px;
+	color: #1f2937;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 6px;
+	font-size: 14px;
+	color: #374151;
+}
+
+.form-group input, .form-group select {
+	width: 100%;
+	padding: 11px 12px;
+	border: 1px solid #d1d5db;
+	border-radius: 8px;
+	font-size: 14px;
+	outline: none;
+}
+
+.form-group input:focus, .form-group select:focus {
+	border-color: #2563eb;
+}
+
+.register-btn {
+	width: 100%;
+	padding: 12px;
+	background: #2563eb;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-size: 15px;
+	cursor: pointer;
+	margin-top: 8px;
+}
+
+.register-btn:hover {
+	background: #1d4ed8;
+}
+
+.message {
+	margin-top: 12px;
+	text-align: center;
+	color: red;
+	font-size: 14px;
+}
+
+.login-link {
+	text-align: center;
+	margin-top: 16px;
+	font-size: 14px;
+}
+
+.login-link a {
+	color: #2563eb;
+	text-decoration: none;
+}
+
+@media ( max-width : 500px) {
+	.register-container {
+		margin: 15px;
+		padding: 22px;
+	}
+}
+</style>
 </head>
 <body>
 
-	<main class="auth-page auth-page--register">
-		<!-- Left Side -->
-		<section class="auth-banner auth-banner--register">
-			<div class="auth-banner__overlay"></div>
 
-			<div class="auth-banner__content auth-banner__content--bottom">
-				<h1>Find your next Sanctuary today.</h1>
-				<p>Experience a curated selection of homes designed for your
-					lifestyle. Your journey to a better living starts here.</p>
+	<div class="register-container">
+		<h2>Create Account</h2>
+
+		<form action="${pageContext.request.contextPath}/register"
+			method="post" enctype="multipart/form-data">
+
+			<div class="form-group">
+				<label>Full Name</label> <input type="text" name="fullName" required>
 			</div>
-		</section>
 
-		<!-- Right Side -->
-		<section class="auth-form-section">
-			<div class="auth-card auth-card--register">
-				<div class="auth-header auth-header--left">
-					<h2>Create Account</h2>
-					<p>Register to start using the house renting platform</p>
-				</div>
-
-				<form action="#" method="post" class="auth-form">
-					<div class="form-group">
-						<label for="fullname">Full Name</label>
-						<div class="input-box input-box--icon">
-							<i class="fa-regular fa-user"></i> <input type="text"
-								id="fullname" name="fullname" placeholder="John Doe" required>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="email">Email Address</label>
-						<div class="input-box input-box--icon">
-							<i class="fa-regular fa-envelope"></i> <input type="email"
-								id="email" name="email" placeholder="john@example.com" required>
-						</div>
-					</div>
-
-					<div class="form-row">
-						<div class="form-group">
-							<label for="phone">Phone Number</label>
-							<div class="input-box input-box--icon">
-								<i class="fa-solid fa-phone"></i> <input type="text" id="phone"
-									name="phone" placeholder="" required>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="role">Role</label>
-							<div class="input-box input-box--icon input-box--select">
-								<i class="fa-regular fa-user"></i> <select id="role" name="role"
-									required>
-									<option value="user">User</option>
-									<option value="owner">Owner</option>
-								</select> <i class="fa-solid fa-angle-down select-arrow"></i>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="password">Password</label>
-						<div class="input-box input-box--icon password-box">
-							<i class="fa-solid fa-lock"></i> <input type="password"
-								id="password" name="password" placeholder="••••••••" required>
-							<button type="button" class="password-toggle" id="togglePassword"
-								aria-label="Show password">
-								<i class="fa-regular fa-eye"></i>
-							</button>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="confirmPassword">Confirm Password</label>
-						<div class="input-box input-box--icon password-box">
-							<i class="fa-solid fa-rotate-left"></i> <input type="password"
-								id="confirmPassword" name="confirmPassword"
-								placeholder="••••••••" required>
-							<button type="button" class="password-toggle"
-								id="toggleConfirmPassword" aria-label="Show confirm password">
-								<i class="fa-regular fa-eye"></i>
-							</button>
-						</div>
-					</div>
-
-					<p class="form-note">
-						<i class="fa-solid fa-circle-info"></i> Owner accounts may require
-						admin approval before being active.
-					</p>
-
-					<label class="remember-me terms-check"> <input
-						type="checkbox" name="terms" required> <span>I
-							agree to <a href="#" class="auth-link">Terms and Conditions</a>
-					</span>
-					</label>
-
-					<button type="submit" class="btn btn-primary btn-block">
-						Register <i class="fa-solid fa-arrow-right"></i>
-					</button>
-
-					<p class="auth-footer-text auth-footer-text--small">
-						Already have an account? <a href="login.html" class="auth-link">Login</a>
-					</p>
-				</form>
+			<div class="form-group">
+				<label>Email</label> <input type="email" name="email" required>
 			</div>
-		</section>
-	</main>
 
-	<script>
-		function setupPasswordToggle(buttonId, inputId) {
-			const toggleButton = document.getElementById(buttonId);
-			const input = document.getElementById(inputId);
-			const icon = toggleButton.querySelector("i");
+			<div class="form-group">
+				<label>Phone</label> <input type="text" name="phone" required>
+			</div>
 
-			toggleButton.addEventListener("click", function() {
-				const isPassword = input.getAttribute("type") === "password";
-				input.setAttribute("type", isPassword ? "text" : "password");
+			<div class="form-group">
+				<label>Password</label> <input type="password" name="password"
+					required>
+			</div>
 
-				icon.classList.toggle("fa-eye");
-				icon.classList.toggle("fa-eye-slash");
-			});
-		}
+			<div class="form-group">
+				<label>Register As</label> <select name="role" required>
+					<option value="">Select role</option>
+					<option value="user">User</option>
+					<option value="owner">Owner</option>
+				</select>
+			</div>
 
-		setupPasswordToggle("togglePassword", "password");
-		setupPasswordToggle("toggleConfirmPassword", "confirmPassword");
-	</script>
+			<div class="form-group">
+				<label>Profile Image</label> <input type="file" name="image"
+					accept="image/*" required>
+			</div>
+
+			<button type="submit" class="register-btn">Register</button>
+
+			<p class="message">${message}</p>
+
+			<div class="login-link">
+				Already have an account? <a href="login.jsp">Login</a>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

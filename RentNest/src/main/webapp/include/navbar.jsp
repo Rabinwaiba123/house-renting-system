@@ -6,9 +6,9 @@
 
 		<ul class="nav-menu">
 			<li><a class="active"
-				href="${pageContext.request.contextPath}/public/index.jsp">Home</a></li>
+				href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/public//property-list.jsp">Properties</a></li>
+				href="${pageContext.request.contextPath}/public/property-list.jsp">Properties</a></li>
 			<li><a
 				href="${pageContext.request.contextPath}/public/about.jsp">About</a></li>
 			<li><a
@@ -55,7 +55,7 @@
 			<div class="profile-area">
 				<input type="checkbox" id="profile-toggle" /> <label
 					for="profile-toggle" class="profile-btn"> <img
-					src="${pageContext.request.contextPath}/images/images.jpg"
+					src="${pageContext.request.contextPath}/${sessionScope.user.imagePath}"
 					alt="User" /> <span>${sessionScope.user.firstName}</span> <i
 					class="fa fa-angle-down"></i>
 				</label>
@@ -78,4 +78,5 @@
 		</label>
 	</nav>
 </header>
+
 <script src="${pageContext.request.contextPath}/js/navbar.js"></script>

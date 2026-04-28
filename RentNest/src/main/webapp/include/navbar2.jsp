@@ -5,7 +5,7 @@
 		<i class="fa fa-bars fa-2x icn menuicn" id="menuicn"></i>
 		<div class="logo">
 			RentNest
-			<p>Admin Dashboard</p>
+			<p>${param.title}</p>
 		</div>
 	</div>
 	<div class="searchbar">
@@ -21,7 +21,7 @@
 		<img src="${pageContext.request.contextPath}/images/bell_icon.png"
 			class="icn" alt="bell-icon" />
 		<div class="dp">
-			<a href="admin-profile.html"><img
+			<a href="${pageContext.request.contextPath}/admin/admin-profile.jsp"><img
 				src="${pageContext.request.contextPath}/images/images.jpg"
 				class="dpicn" alt="dp" /></a>
 		</div>

@@ -12,7 +12,9 @@
 
 <body>
 	<!-- ================= NAVBAR ================= -->
-	<%@ include file="../include/owner-navbar.jsp"%>
+	<jsp:include page="/include/navbar2.jsp">
+		<jsp:param name="title" value="Owner Dashboard" />
+	</jsp:include>
 
 	<div class="main-container">
 		<!-- ================= SIDEBAR ================= -->
