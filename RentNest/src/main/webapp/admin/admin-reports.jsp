@@ -34,46 +34,40 @@
 				<h1>Reports Overview</h1>
 			</div>
 
-			<div class="report-cards">
-				<div class="report-card">
-					<div class="report-icon">
-						<i class="fa fa-users"></i>
-					</div>
-					<div class="report-text">
-						<p>Total Users</p>
-						<h2>120</h2>
+			<div class="box-container">
+
+				<div class="box box1">
+					<i class="fa fa-users fa-2x"></i>
+					<div class="text">
+						<p>TOTAL USERS</p>
+						<h2>150</h2>
 					</div>
 				</div>
 
-				<div class="report-card">
-					<div class="report-icon">
-						<i class="fa fa-building-o"></i>
-					</div>
-					<div class="report-text">
-						<p>Total Properties</p>
-						<h2>86</h2>
+				<div class="box box2">
+					<i class="fa fa-home fa-2x"></i>
+					<div class="text">
+						<p>TOTAL PROPERTIES</p>
+						<h2>80</h2>
 					</div>
 				</div>
 
-				<div class="report-card">
-					<div class="report-icon">
-						<i class="fa fa-calendar"></i>
-					</div>
-					<div class="report-text">
-						<p>Total Bookings</p>
-						<h2>54</h2>
+				<div class="box box3">
+					<i class="fa fa-calendar fa-2x"></i>
+					<div class="text">
+						<p>TOTAL BOOKINGS</p>
+						<h2>45</h2>
 					</div>
 				</div>
 
-				<div class="report-card">
-					<div class="report-icon">
-						<i class="fa fa-money"></i>
-					</div>
-					<div class="report-text">
-						<p>Total Revenue</p>
-						<h2>$8,450</h2>
+				<div class="box box4">
+					<i class="fa fa-money fa-2x"></i>
+					<div class="text">
+						<p>TOTAL REVENUE</p>
+						<h2>$5000</h2>
 					</div>
 				</div>
+
 			</div>
 
 			<div class="table-container">
@@ -104,20 +98,6 @@
 					<button class="filter-btn">Generate</button>
 				</div>
 
-				<div class="quick-report-actions">
-					<button class="report-btn">
-						<i class="fa fa-users"></i> User Report
-					</button>
-					<button class="report-btn">
-						<i class="fa fa-building-o"></i> Property Report
-					</button>
-					<button class="report-btn">
-						<i class="fa fa-calendar"></i> Booking Report
-					</button>
-					<button class="report-btn">
-						<i class="fa fa-money"></i> Payment Report
-					</button>
-				</div>
 
 				<div class="table-body">
 					<table class="users-table">

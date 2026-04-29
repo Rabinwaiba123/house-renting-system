@@ -20,7 +20,7 @@
 		<div class="nav-lower-options">
 			<a href="admin-profile.jsp" class="nav-option"> <i
 				class="fa fa-user nav-img"></i> <span>Profile</span>
-			</a> <a href="#" class="nav-option logout"> <i
+			</a> <a href="${pageContext.request.contextPath}/logout" class="nav-option logout"> <i
 				class="fa fa-sign-out nav-img"></i> <span>Logout</span>
 			</a>
 		</div>

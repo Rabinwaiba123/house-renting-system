@@ -10,76 +10,62 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+
 import service.RegisterService;
 
 @WebServlet("/register")
 @MultipartConfig
 public class RegisterController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getRequestDispatcher("/auth/register.jsp").forward(request, response);
-    }
+	private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	private RegisterService registerService = new RegisterService();
 
-        try {
-            String name = request.getParameter("fullName");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            String password = request.getParameter("password");
-            String role = request.getParameter("role");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-            if (name == null || name.trim().isEmpty()
-                    || email == null || email.trim().isEmpty()
-                    || phone == null || phone.trim().isEmpty()
-                    || password == null || password.trim().isEmpty()
-                    || role == null || role.trim().isEmpty()) {
+		request.getRequestDispatcher("/auth/register.jsp").forward(request, response);
+	}
 
-                request.setAttribute("message", "All fields are required!");
-                request.getRequestDispatcher("/auth/register.jsp").forward(request, response);
-                return;
-            }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-            // Do not allow admin registration
-            if (!role.equals("user") && !role.equals("owner")) {
-                role = "user";
-            }
+		String fullName = request.getParameter("fullName");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String password = request.getParameter("password");
+		String confirmPassword = request.getParameter("confirmPassword");
+		String role = request.getParameter("role");
 
-            Part imagePart = request.getPart("image");
-            String imagePath = "uploads/default.png";
+		String imagePath = null;
 
-            if (imagePart != null && imagePart.getSize() > 0) {
+		Part imagePart = request.getPart("image");
 
-                String originalFileName = imagePart.getSubmittedFileName();
-                String fileName = System.currentTimeMillis() + "_" + originalFileName;
+		if (imagePart != null && imagePart.getSize() > 0) {
 
-                String uploadPath = getServletContext().getRealPath("") 
-                        + File.separator + "uploads";
+			String fileName = System.currentTimeMillis() + "_" + imagePart.getSubmittedFileName();
 
-                File uploadDir = new File(uploadPath);
+			String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
 
-                if (!uploadDir.exists()) {
-                    uploadDir.mkdirs();
-                }
+			File uploadFolder = new File(uploadPath);
 
-                imagePart.write(uploadPath + File.separator + fileName);
+			if (!uploadFolder.exists()) {
+				uploadFolder.mkdir();
+			}
 
-                imagePath = "uploads/" + fileName;
-            }
+			imagePart.write(uploadPath + File.separator + fileName);
 
-            RegisterService service = new RegisterService();
-            service.addUser(name, email, phone, password, role, imagePath);
+			imagePath = "uploads/" + fileName;
+		}
 
-            response.sendRedirect(request.getContextPath() + "/login?success=registered");
+		String result = registerService.registerUser(fullName, email, phone, password, confirmPassword, role,
+				imagePath);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            request.setAttribute("message", "Registration failed. Email or phone may already exist.");
-            request.getRequestDispatcher("/auth/register.jsp").forward(request, response);
-        }
-    }
+		if (result.equals("success")) {
+			response.sendRedirect(request.getContextPath() + "/login?success=registered");
+		} else {
+			request.setAttribute("errorMessage", result);
+			request.getRequestDispatcher("/auth/register.jsp").forward(request, response);
+		}
+	}
 }

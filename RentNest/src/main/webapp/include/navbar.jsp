@@ -7,21 +7,26 @@
 		<ul class="nav-menu">
 			<li><a class="active"
 				href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+
 			<li><a
-				href="${pageContext.request.contextPath}/public/property-list.jsp">Properties</a></li>
+				href="${pageContext.request.contextPath}/public/property-list.jsp">Properties</a>
+			</li>
+
 			<li><a
-				href="${pageContext.request.contextPath}/public/about.jsp">About</a></li>
+				href="${pageContext.request.contextPath}/public/about.jsp">About</a>
+			</li>
+
 			<li><a
-				href="${pageContext.request.contextPath}/public/contact.jsp">Contact</a></li>
+				href="${pageContext.request.contextPath}/public/contact.jsp">Contact</a>
+			</li>
 
 			<!-- MOBILE NOT LOGIN -->
 			<c:if test="${empty sessionScope.user}">
 				<li class="mobile-auth"><a
-					href="${pageContext.request.contextPath}/auth/login.jsp">Login</a>
-				</li>
+					href="${pageContext.request.contextPath}/login">Login</a></li>
+
 				<li class="mobile-auth"><a
-					href="${pageContext.request.contextPath}/auth/register.jsp">Register</a>
-				</li>
+					href="${pageContext.request.contextPath}/register">Register</a></li>
 			</c:if>
 
 			<!-- MOBILE USER LOGIN -->
@@ -29,23 +34,26 @@
 				<li class="mobile-profile"><a
 					href="${pageContext.request.contextPath}/user/profile.jsp">My
 						Profile</a></li>
+
 				<li class="mobile-profile"><a
 					href="${pageContext.request.contextPath}/user/bookings.jsp">My
 						Bookings</a></li>
+
 				<li class="mobile-profile"><a
 					href="${pageContext.request.contextPath}/user/wishlist.jsp">Wishlist</a>
 				</li>
+
 				<li class="mobile-profile"><a
-					href="${pageContext.request.contextPath}/LogoutController"
-					class="logout">Logout</a></li>
+					href="${pageContext.request.contextPath}/logout" class="logout">Logout</a>
+				</li>
 			</c:if>
 		</ul>
 
 		<!-- DESKTOP NOT LOGIN -->
 		<c:if test="${empty sessionScope.user}">
 			<div class="auth-area">
-				<a href="${pageContext.request.contextPath}/auth/login.jsp">Login</a>
-				<a href="${pageContext.request.contextPath}/auth/register.jsp"
+				<a href="${pageContext.request.contextPath}/login">Login</a> <a
+					href="${pageContext.request.contextPath}/register"
 					class="register-link">Register</a>
 			</div>
 		</c:if>
@@ -54,9 +62,19 @@
 		<c:if test="${not empty sessionScope.user}">
 			<div class="profile-area">
 				<input type="checkbox" id="profile-toggle" /> <label
-					for="profile-toggle" class="profile-btn"> <img
-					src="${pageContext.request.contextPath}/${sessionScope.user.imagePath}"
-					alt="User" /> <span>${sessionScope.user.firstName}</span> <i
+					for="profile-toggle" class="profile-btn"> <c:choose>
+						<c:when test="${not empty sessionScope.user.imagePath}">
+							<img
+								src="${pageContext.request.contextPath}/${sessionScope.user.imagePath}"
+								alt="User" />
+						</c:when>
+
+						<c:otherwise>
+							<img
+								src="${pageContext.request.contextPath}/images/default-user.png"
+								alt="User" />
+						</c:otherwise>
+					</c:choose> <span>${sessionScope.user.fullName}</span> <i
 					class="fa fa-angle-down"></i>
 				</label>
 
@@ -67,8 +85,8 @@
 						<i class="fa fa-calendar"></i> My Bookings
 					</a> <a href="${pageContext.request.contextPath}/user/wishlist.jsp">
 						<i class="fa fa-heart"></i> Wishlist
-					</a> <a href="${pageContext.request.contextPath}/LogoutController"
-						class="logout"> <i class="fa fa-sign-out"></i> Logout
+					</a> <a href="${pageContext.request.contextPath}/logout" class="logout">
+						<i class="fa fa-sign-out"></i> Logout
 					</a>
 				</div>
 			</div>
