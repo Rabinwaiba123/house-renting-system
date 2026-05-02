@@ -44,7 +44,7 @@ public class RegisterService {
 
 		String hashedPassword = PasswordUtil.getHashPassword(password);
 
-		String status = "ACTIVE";
+		String status = "PENDING";
 
 		boolean result = userDAO.register(fullName, email, phone, hashedPassword, role, status, imagePath);
 

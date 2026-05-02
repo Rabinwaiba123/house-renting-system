@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +11,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
-
 <body>
 	<!-- ================= NAVBAR ================= -->
 	<jsp:include page="/include/navbar2.jsp">
@@ -71,61 +72,59 @@
 								<th>Email</th>
 								<th>Role</th>
 								<th>Status</th>
-								<th>Join Date</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Rabin Waiba</td>
-								<td>rabinwaaib87@gmail.com</td>
-								<td>Owner</td>
-								<td><span class="status-badge active">Active</span></td>
-								<td>2026-04-21</td>
-								<td class="actions"><i class="fa fa-pencil"></i> <i
-									class="fa fa-trash"></i></td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Jason Miller</td>
-								<td>jason@example.com</td>
-								<td>User</td>
-								<td><span class="status-badge active">Active</span></td>
-								<td>2026-04-18</td>
-								<td class="actions"><i class="fa fa-pencil"></i> <i
-									class="fa fa-trash"></i></td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Sophia Rai</td>
-								<td>sophia@example.com</td>
-								<td>Owner</td>
-								<td><span class="status-badge pending">Pending</span></td>
-								<td>2026-04-16</td>
-								<td class="actions"><i class="fa fa-pencil"></i> <i
-									class="fa fa-trash"></i></td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>Aarav Sharma</td>
-								<td>aarav@example.com</td>
-								<td>User</td>
-								<td><span class="status-badge blocked">Blocked</span></td>
-								<td>2026-04-12</td>
-								<td class="actions"><i class="fa fa-pencil"></i> <i
-									class="fa fa-trash"></i></td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>Mukesh Sharma</td>
-								<td>mukesh@example.com</td>
-								<td>Owner</td>
-								<td><span class="status-badge active">Active</span></td>
-								<td>2026-04-12</td>
-								<td class="actions"><i class="fa fa-pencil"></i> <i
-									class="fa fa-trash"></i></td>
-							</tr>
+							<c:choose>
+								<c:when test="${not empty users}">
+									<c:forEach var="user" items="${users}">
+										<tr>
+											<td>${user.userId}</td>
+											<td>${user.fullName}</td>
+											<td>${user.email}</td>
+											<td>${user.role}</td>
+
+											<td><span class="status-badge ${user.status}">
+													${user.status} </span></td>
+
+
+											<td class="actions"><c:if
+													test="${user.status == 'PENDING'}">
+													<form
+														action="${pageContext.request.contextPath}/admin/users"
+														method="post" style="display: inline;">
+														<input type="hidden" name="userId" value="${user.userId}">
+														<input type="hidden" name="action" value="approve">
+														<button type="submit">Approve</button>
+													</form>
+
+													<form
+														action="${pageContext.request.contextPath}/admin/users"
+														method="post" style="display: inline;">
+														<input type="hidden" name="userId" value="${user.userId}">
+														<input type="hidden" name="action" value="reject">
+														<button type="submit">Reject</button>
+													</form>
+												</c:if>
+
+												<form
+													action="${pageContext.request.contextPath}/admin/users"
+													method="post" style="display: inline;">
+													<input type="hidden" name="userId" value="${user.userId}">
+													<input type="hidden" name="action" value="delete">
+													<button type="submit">Delete</button>
+												</form></td>
+										</tr>
+									</c:forEach>
+								</c:when>
+
+								<c:otherwise>
+									<tr>
+										<td colspan="7">No users found.</td>
+									</tr>
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
 				</div>
