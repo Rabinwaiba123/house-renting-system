@@ -6,10 +6,10 @@
 
 		<ul class="nav-menu">
 			<li><a class="active"
-				href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+				href="${pageContext.request.contextPath}/home">Home</a></li>
 
 			<li><a
-				href="${pageContext.request.contextPath}/public/property-list.jsp">Properties</a>
+				href="${pageContext.request.contextPath}/property?action=list">Properties</a>
 			</li>
 
 			<li><a
@@ -36,7 +36,7 @@
 						Profile</a></li>
 
 				<li class="mobile-profile"><a
-					href="${pageContext.request.contextPath}/user/bookings.jsp">My
+					href="${pageContext.request.contextPath}/booking?action=myBookings">My
 						Bookings</a></li>
 
 				<li class="mobile-profile"><a

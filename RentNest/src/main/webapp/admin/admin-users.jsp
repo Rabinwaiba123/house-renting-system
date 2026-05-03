@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <!DOCTYPE html>
 <html>
@@ -37,31 +37,7 @@
 					<button class="view">Add user</button>
 				</div>
 
-				<div class="booking-filter">
-					<div class="filter-group">
-						<label>Role</label> <select>
-							<option>All</option>
-							<option>User</option>
-							<option>Owner</option>
-							<option>Admin</option>
-						</select>
-					</div>
 
-					<div class="filter-group">
-						<label>Status</label> <select>
-							<option>All</option>
-							<option>Active</option>
-							<option>Pending</option>
-							<option>Blocked</option>
-						</select>
-					</div>
-
-					<div class="filter-group">
-						<label>Join Date</label> <input type="date" />
-					</div>
-
-					<button class="filter-btn">Filter</button>
-				</div>
 
 				<div class="table-body">
 					<table class="users-table">

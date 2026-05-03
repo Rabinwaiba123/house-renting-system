@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter({"/admin/*", "/owner/*", "/user/*"})
+@WebFilter({"/admin/*", "/owner/*", "/tenant/*"})
 public class AuthFilter implements Filter {
 
     public void init(FilterConfig filterConfig) throws ServletException {}

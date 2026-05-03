@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="jakarta.tags.core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,83 +70,26 @@
 					<table class="users-table">
 						<thead>
 							<tr>
-								<th>ID</th>
-								<th>User</th>
 								<th>Property</th>
+								<th>Tenant</th>
 								<th>Owner</th>
-								<th>Booking Date</th>
-								<th>Move In</th>
-								<th>Amount</th>
+								<th>Start Date</th>
+								<th>End Date</th>
 								<th>Status</th>
-								<th>Actions</th>
 							</tr>
 						</thead>
 
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Rabin Waiba</td>
-								<td>Sunrise Apartment</td>
-								<td>Mukesh Sharma</td>
-								<td>2026-04-20</td>
-								<td>2026-05-01</td>
-								<td>$450</td>
-								<td><span class="status-badge active">Confirmed</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
-							</tr>
-
-							<tr>
-								<td>2</td>
-								<td>Jason Miller</td>
-								<td>Green Valley House</td>
-								<td>Sophia Rai</td>
-								<td>2026-04-18</td>
-								<td>2026-05-05</td>
-								<td>$700</td>
-								<td><span class="status-badge pending">Pending</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
-							</tr>
-
-							<tr>
-								<td>3</td>
-								<td>Aarav Sharma</td>
-								<td>City Room Rental</td>
-								<td>Rabin Waiba</td>
-								<td>2026-04-17</td>
-								<td>2026-04-28</td>
-								<td>$180</td>
-								<td><span class="status-badge active">Confirmed</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
-							</tr>
-
-							<tr>
-								<td>4</td>
-								<td>Sophia Rai</td>
-								<td>Heritage Flat</td>
-								<td>Jason Miller</td>
-								<td>2026-04-16</td>
-								<td>2026-05-03</td>
-								<td>$520</td>
-								<td><span class="status-badge blocked">Cancelled</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
-							</tr>
-
-							<tr>
-								<td>5</td>
-								<td>Mukesh Sharma</td>
-								<td>Lakeview Villa</td>
-								<td>Aarav Sharma</td>
-								<td>2026-04-14</td>
-								<td>2026-05-10</td>
-								<td>$1200</td>
-								<td><span class="status-badge pending">Pending</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
-							</tr>
+							<c:forEach var="b" items="${bookings}">
+								<tr>
+									<td>${b.propertyTitle}</td>
+									<td>${b.tenantName}</td>
+									<td>${b.ownerName}</td>
+									<td>${b.startDate}</td>
+									<td>${b.endDate}</td>
+									<td>${b.status}</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

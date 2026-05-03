@@ -14,422 +14,651 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 <style>
-.properties-page {
-	display: flex;
-	gap: 35px;
-	padding: 38px 55px 120px 55px;
-	min-height: 100vh;
+:root {
+	--primary: #eb7a30;
+	--primary-dark: #d6671f;
+	--bg-soft: #eef5ea;
+	--text: #111111;
+	--muted: #7a7a7a;
+	--border: #dddddd;
+	--white: #ffffff;
+	--shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-.filter-sidebar {
-	width: 250px;
-	flex-shrink: 0;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-.filter-title {
-	display: flex;
-	align-items: center;
-	gap: 15px;
-	margin-bottom: 30px;
+html {
+	scroll-behavior: smooth;
 }
 
-.filter-icon {
-	width: 42px;
-	height: 42px;
-	border-radius: 12px;
-	background-color: #ede9fe;
-	color: #4f46e5;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.filter-title h2 {
-	font-size: 20px;
-	color: #111827;
-}
-
-.filter-title p {
-	font-size: 12px;
-	color: #6b7280;
-}
-
-.filter-group {
-	margin-bottom: 28px;
-}
-
-.filter-group label {
-	display: block;
-	color: #526071;
-	font-size: 15px;
-	font-weight: 600;
-	margin-bottom: 14px;
-}
-
-.filter-group label i {
-	color: #4f46e5;
-	margin-right: 7px;
-}
-
-.filter-group input[type="range"] {
-	width: 100%;
-	accent-color: #4f46e5;
-}
-
-.range-text {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 8px;
-	color: #7b8794;
-	font-size: 12px;
-}
-
-.filter-group select {
-	width: 100%;
-	height: 48px;
-	border: none;
-	outline: none;
-	border-radius: 12px;
-	padding: 0 14px;
-	background-color: #ffffff;
-	color: #526071;
-	font-weight: 500;
-}
-
-.bed-options {
-	display: flex;
-	gap: 9px;
-}
-
-.bed-options button {
-	width: 48px;
-	height: 38px;
-	border: none;
-	border-radius: 10px;
-	background-color: #ffffff;
-	color: #526071;
-	font-weight: 600;
-	cursor: pointer;
-}
-
-.bed-options .selected {
-	background-color: #eef2ff;
-	color: #4f46e5;
-	border: 1px solid #c7d2fe;
-}
-
-.check-list label {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	margin-bottom: 9px;
-	color: #374151;
-}
-
-.check-list input {
-	width: 18px;
-	height: 18px;
-	accent-color: #4f46e5;
-}
-
-.apply-btn {
-	width: 100%;
-	height: 55px;
-	border: none;
-	border-radius: 14px;
-	background-color: #2563eb;
-	color: white;
-	font-weight: 700;
-	cursor: pointer;
-	box-shadow: 0 12px 22px rgba(37, 99, 235, 0.25);
-}
-
-.property-content {
-	flex: 1;
-}
-
-.property-topbar {
-	display: flex;
-	justify-content: space-between;
-	gap: 25px;
-	margin-bottom: 45px;
-}
-
-.property-search {
-	flex: 1;
-	height: 56px;
-	background-color: #ffffff;
-	border-radius: 18px;
-	display: flex;
-	align-items: center;
-	padding: 0 22px;
-	color: #94a3b8;
-}
-
-.property-search input {
-	width: 100%;
-	border: none;
-	outline: none;
-	margin-left: 14px;
-	font-size: 15px;
-	color: #526071;
-}
-
-.sort-box {
-	display: flex;
-	align-items: center;
-	gap: 14px;
-}
-
-.sort-box span {
-	color: #526071;
-	font-size: 14px;
-}
-
-.sort-box select {
-	height: 56px;
-	border: none;
-	outline: none;
-	border-radius: 16px;
-	padding: 0 20px;
-	background-color: #ffffff;
-	color: #111827;
-	font-weight: 600;
-}
-
-.property-grid {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 35px;
-}
-
-.property-card {
-	background-color: #ffffff;
-	border-radius: 22px;
-	overflow: hidden;
-	box-shadow: 0 20px 45px rgba(15, 23, 42, 0.04);
-}
-
-.property-img {
-	height: 250px;
-	position: relative;
-	background-size: cover;
-	background-position: center;
-}
-
-.img1 {
-	background-image: url("../images/property1.jpg");
-}
-
-.img2 {
-	background-image: url("../images/property2.jpg");
-}
-
-.img3 {
-	background-image: url("../images/property3.jpg");
-}
-
-.img4 {
-	background-image: url("../images/property4.jpg");
-}
-
-.img5 {
-	background-image: url("../images/property5.jpg");
-}
-
-.img6 {
-	background-image: url("../images/property6.jpg");
-}
-
-.price {
-	position: absolute;
-	top: 18px;
-	left: 18px;
-	background-color: #4f46e5;
-	color: #ffffff;
-	padding: 9px 15px;
-	border-radius: 22px;
-	font-size: 13px;
-	font-weight: 700;
-}
-
-.heart {
-	position: absolute;
-	top: 18px;
-	right: 18px;
-	width: 42px;
-	height: 42px;
-	border: none;
-	border-radius: 50%;
-	background-color: rgba(255, 255, 255, 0.45);
-	color: white;
-	font-size: 20px;
-	cursor: pointer;
-}
-
-.property-info {
-	padding: 24px;
-}
-
-.tag {
-	color: #4f46e5;
-	font-size: 11px;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	margin-bottom: 12px;
-}
-
-.tag span {
-	display: inline-block;
-	width: 8px;
-	height: 8px;
-	background-color: #4f46e5;
-	border-radius: 50%;
-	margin-right: 8px;
-}
-
-.tag.orange {
-	color: #f59e0b;
-}
-
-.tag.orange span {
-	background-color: #f59e0b;
-}
-
-.tag.light {
-	color: #94a3b8;
-}
-
-.tag.light span {
-	background-color: #cbd5e1;
-}
-
-.property-info h3 {
-	font-size: 20px;
-	color: #111827;
-	margin-bottom: 8px;
-}
-
-.location {
-	color: #64748b;
-	font-size: 14px;
-	margin-bottom: 22px;
-}
-
-.location i {
-	color: #4f46e5;
-}
-
-.property-meta {
-	border-top: 1px solid #eef2f7;
-	padding-top: 16px;
-	display: flex;
-	align-items: center;
-	gap: 14px;
-	color: #526071;
-	font-size: 13px;
-}
-
-.property-meta a {
-	margin-left: auto;
-	text-decoration: none;
-	color: #4f46e5;
-	font-weight: 700;
-}
-
-.pagination {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 14px;
-	margin-top: 65px;
-}
-
-.pagination button {
-	width: 42px;
-	height: 42px;
-	border: none;
-	border-radius: 12px;
-	background-color: #ffffff;
-	color: #526071;
-	font-weight: 700;
-	cursor: pointer;
-}
-
-.pagination .active-page {
-	background-color: #4f46e5;
-	color: white;
-}
-
-.pagination span {
-	color: #94a3b8;
-}
-
-footer {
-	background-color: #eef1f6;
-	padding: 70px 75px;
-	display: grid;
-	grid-template-columns: 2fr 1fr 1fr 1fr;
-	gap: 50px;
-}
-
-.footer-col h3, .footer-col h4 {
-	margin-bottom: 22px;
-}
-
-.footer-col h4 {
-	font-size: 12px;
-	letter-spacing: 3px;
-}
-
-.footer-col p, .footer-col a {
-	display: block;
-	color: #8b95a7;
-	font-size: 13px;
-	text-decoration: none;
-	margin-bottom: 12px;
+body {
+	font-family: 'Poppins', sans-serif;
+	color: var(--text);
+	background: #f7f7f7;
 	line-height: 1.6;
 }
 
-.social-icons i {
-	width: 35px;
-	height: 35px;
-	background-color: white;
-	color: #4f46e5;
-	border-radius: 50%;
-	text-align: center;
-	line-height: 35px;
-	margin-right: 10px;
+img {
+	max-width: 100%;
+	display: block;
 }
 
-@media screen and (max-width: 1000px) {
-	.properties-page {
-		flex-direction: column;
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+button, select {
+	font: inherit;
+}
+
+.container {
+	width: min(1180px, calc(100% - 40px));
+	margin: 0 auto;
+}
+
+.small-container {
+	width: min(1100px, calc(100% - 40px));
+}
+
+.section {
+	padding: 78px 0;
+}
+
+.hero-wrap {
+	background: linear-gradient(to bottom, #edf5ea 0 71%, #f7f7f7 71% 100%);
+	padding-top: 26px;
+}
+
+.navbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+}
+
+.logo img {
+	width: 145px;
+}
+
+.nav-links {
+	list-style: none;
+	display: flex;
+	align-items: center;
+	gap: 42px;
+}
+
+.nav-links a {
+	font-size: 15px;
+	font-weight: 500;
+	position: relative;
+}
+
+.nav-links a.active::after, .nav-links a:hover::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -7px;
+	width: 100%;
+	height: 2px;
+	background: var(--primary);
+}
+
+.nav-actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 999px;
+	font-weight: 600;
+	transition: 0.25s ease;
+}
+
+.btn-light {
+	min-width: 96px;
+	padding: 10px 18px;
+	border: 1px solid #b8b8b8;
+	color: #666;
+	background: transparent;
+}
+
+.btn-primary {
+	min-width: 96px;
+	padding: 11px 22px;
+	background: var(--primary);
+	color: var(--white);
+}
+
+.btn-primary:hover, .card-btn:hover, .search-btn:hover {
+	background: var(--primary-dark);
+}
+
+.hero {
+	display: grid;
+	grid-template-columns: 1.05fr 1fr;
+	align-items: center;
+	gap: 18px;
+	padding: 48px 0 20px;
+}
+
+.hero-text h1 {
+	font-size: clamp(2.3rem, 5vw, 4rem);
+	line-height: 1.16;
+	max-width: 620px;
+	font-weight: 800;
+	margin-bottom: 18px;
+}
+
+.hero-text p {
+	max-width: 470px;
+	color: #666;
+	font-size: 15px;
+	margin-bottom: 26px;
+}
+
+.hero-btn {
+	padding-inline: 22px;
+}
+
+.hero-image {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.hero-image img {
+	max-width: 760px;
+	width: 100%;
+}
+
+.search-box {
+	width: min(100%, 620px);
+	display: grid;
+	grid-template-columns: 1.25fr 0.7fr 1fr 132px;
+	gap: 14px;
+	background: #ec9967;
+	padding: 20px;
+	border-radius: 8px;
+	transform: translateY(-14px);
+}
+
+.field label {
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 8px;
+}
+
+.select-wrap {
+	position: relative;
+}
+
+.select-wrap select {
+	width: 100%;
+	border: none;
+	outline: none;
+	background: #fff;
+	border-radius: 3px;
+	padding: 11px 38px 11px 12px;
+	appearance: none;
+	color: #666;
+	font-size: 13px;
+}
+
+.select-wrap img {
+	width: 12px;
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+}
+
+.search-btn {
+	align-self: end;
+	height: 42px;
+	border: none;
+	border-radius: 4px;
+	background: #111;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.section-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	margin-bottom: 36px;
+}
+
+.section-head h2, .center-title, .help-text h2 {
+	font-size: clamp(2rem, 4vw, 3.3rem);
+	line-height: 1.18;
+	font-weight: 800;
+}
+
+.accent-line {
+	display: block;
+	width: 86px;
+	height: 3px;
+	margin-top: 12px;
+	background: #efb185;
+}
+
+.filter-tabs {
+	display: flex;
+	gap: 14px;
+	flex-wrap: wrap;
+}
+
+.tab {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	border: 2px solid #222;
+	border-radius: 999px;
+	padding: 8px 18px;
+	background: #fff;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.tab img {
+	width: 16px;
+	height: 16px;
+	object-fit: contain;
+}
+
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 22px;
+}
+
+.property-card {
+	background: #fff;
+	border: 1px solid var(--border);
+	border-radius: 18px;
+	overflow: hidden;
+	box-shadow: var(--shadow);
+}
+
+.property-img {
+	width: calc(100% - 18px);
+	height: 245px;
+	object-fit: cover;
+	margin: 9px auto 0;
+	border-radius: 16px;
+}
+
+.card-body {
+	padding: 16px 14px 16px;
+}
+
+.card-title-row {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	align-items: center;
+}
+
+.card-title-row h3 {
+	font-size: 1.55rem;
+	font-weight: 700;
+}
+
+.rating {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: 500;
+}
+
+.rating img {
+	width: 18px;
+}
+
+.location {
+	font-size: 14px;
+	color: var(--muted);
+	margin: 7px 0 10px;
+}
+
+.price {
+	color: var(--primary);
+	font-size: 1.7rem;
+	font-weight: 700;
+	margin-bottom: 14px;
+}
+
+.card-btn {
+	display: block;
+	width: 100%;
+	background: #000;
+	color: #fff;
+	text-align: center;
+	padding: 12px;
+	border-radius: 999px;
+	font-weight: 600;
+}
+
+.center-title {
+	text-align: center;
+	margin-bottom: 48px;
+}
+
+.feature-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 34px;
+}
+
+.feature-card {
+	text-align: center;
+	padding: 16px 14px;
+}
+
+.feature-icon {
+	width: 110px;
+	height: 110px;
+	margin: 0 auto 22px;
+	display: grid;
+	place-items: center;
+}
+
+.feature-icon img {
+	width: 90px;
+	height: 90px;
+	object-fit: contain;
+}
+
+.feature-card h3 {
+	font-size: 1.5rem;
+	margin-bottom: 14px;
+}
+
+.feature-card p {
+	font-size: 14px;
+	color: #666;
+	max-width: 300px;
+	margin: 0 auto;
+}
+
+.help {
+	background: #edf5ea;
+}
+
+.help-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 50px;
+	align-items: center;
+}
+
+.help-images {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0;
+}
+
+.help-images img {
+	height: 380px;
+	width: 100%;
+	object-fit: cover;
+}
+
+.help-images img:first-child {
+	object-position: center;
+}
+
+.help-text p {
+	color: #666;
+	margin: 18px 0 28px;
+	max-width: 520px;
+}
+
+.footer {
+	background: #f8f8f8;
+	padding: 72px 0 26px;
+}
+
+.footer-grid {
+	display: grid;
+	grid-template-columns: 1.9fr 1fr 1fr 1fr 1fr;
+	gap: 30px;
+}
+
+.footer-brand img {
+	width: 150px;
+	margin-bottom: 18px;
+}
+
+.footer-brand p, .footer-links a {
+	color: #666;
+	font-size: 14px;
+}
+
+.footer-brand p {
+	max-width: 350px;
+}
+
+.socials {
+	display: flex;
+	gap: 14px;
+	margin-top: 22px;
+}
+
+.socials img {
+	width: 34px;
+	height: 34px;
+}
+
+.footer-links {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.footer-links h4 {
+	font-size: 1.3rem;
+	margin-bottom: 8px;
+}
+
+.copyright {
+	text-align: center;
+	color: #555;
+	font-size: 14px;
+	margin-top: 54px;
+}
+
+@media ( max-width : 1080px) {
+	.hero {
+		grid-template-columns: 1fr;
 	}
-	.filter-sidebar {
+	.hero-image {
+		justify-content: center;
+	}
+	.search-box {
+		transform: none;
+		margin-top: 18px;
 		width: 100%;
 	}
-	.property-grid {
+	.card-grid, .feature-grid, .help-grid, .footer-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
-	.property-topbar {
-		flex-direction: column;
+	.footer-brand {
+		grid-column: 1/-1;
 	}
 }
 
-@media screen and (max-width: 700px) {
-	.top-navbar {
-		padding: 0 20px;
+@media ( max-width : 820px) {
+	.navbar {
+		flex-direction: column;
+		align-items: flex-start;
 	}
 	.nav-links {
-		display: none;
+		gap: 22px;
+		flex-wrap: wrap;
 	}
-	.properties-page {
-		padding: 30px 20px 80px 20px;
+	.search-box {
+		grid-template-columns: 1fr 1fr;
 	}
-	.property-grid {
+	.search-btn {
+		width: 100%;
+	}
+	.card-grid, .feature-grid, .help-grid, .footer-grid, .help-images {
 		grid-template-columns: 1fr;
+	}
+	.section-head {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+@media ( max-width : 560px) {
+	.container {
+		width: min(100% - 24px, 1180px);
+	}
+	.hero-wrap {
+		padding-top: 18px;
+	}
+	.nav-actions {
+		width: 100%;
+	}
+	.nav-actions .btn {
+		flex: 1;
+	}
+	.search-box {
+		grid-template-columns: 1fr;
+		padding: 16px;
+	}
+	.property-img {
+		height: 220px;
+	}
+	.help-images img {
+		height: 260px;
+	}
+}
+
+/* Properties Page */
+.subpage-header {
+	background: #edf5ea;
+	padding: 14px 0 8px;
+}
+
+.properties-page {
+	background: #f4f4f4;
+	min-height: 100vh;
+}
+
+.properties-hero {
+	padding: 34px 0 64px;
+}
+
+.properties-container h1 {
+	text-align: center;
+	font-size: clamp(2.2rem, 5vw, 4rem);
+	font-weight: 800;
+	line-height: 1.15;
+	margin-bottom: 34px;
+}
+
+.properties-search-box {
+	width: min(100%, 760px);
+	margin: 0 auto 48px;
+	display: grid;
+	grid-template-columns: 1.25fr 0.7fr 1fr 132px;
+	gap: 18px;
+	align-items: end;
+}
+
+.properties-search-box .field label {
+	margin-bottom: 8px;
+}
+
+.properties-search-box .select-wrap select {
+	border: 1px solid #ececec;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	min-height: 46px;
+}
+
+.properties-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 34px;
+}
+
+.page-card {
+	background: #fff;
+	border: 1px solid #d9d9d9;
+	border-radius: 22px;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+	overflow: hidden;
+}
+
+.page-card .property-img {
+	width: calc(100% - 24px);
+	height: 258px;
+	object-fit: cover;
+	margin: 12px auto 0;
+	border-radius: 18px;
+}
+
+.page-card .card-body {
+	padding: 14px 16px 20px;
+}
+
+.page-card .card-title-row h3 {
+	font-size: 18px;
+}
+
+.page-card .location {
+	font-size: 14px;
+}
+
+.page-card .price {
+	font-size: 16px;
+	margin: 8px 0 14px;
+}
+
+.page-card .card-btn {
+	width: 100%;
+	text-align: center;
+	padding: 12px 18px;
+	border-radius: 999px;
+}
+
+@media ( max-width : 991px) {
+	.properties-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.properties-search-box {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media ( max-width : 767px) {
+	.properties-container h1 {
+		margin-bottom: 24px;
+	}
+	.properties-grid {
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+	.properties-search-box {
+		grid-template-columns: 1fr;
+		gap: 14px;
+		margin-bottom: 28px;
 	}
 }
 </style>
@@ -440,228 +669,75 @@ footer {
 	<jsp:include page="/include/navbar.jsp" />
 
 	<main class="properties-page">
-		<aside class="filter-sidebar">
-			<div class="filter-title">
-				<div class="filter-icon">
-					<i class="fa fa-filter"></i>
-				</div>
-				<div>
-					<h2>Filter Results</h2>
-					<p>Refine your search</p>
-				</div>
-			</div>
+		<section class="properties-hero">
+			<div class="container properties-container">
+				<h1>Available Properties</h1>
 
-			<div class="filter-group">
-				<label><i class="fa fa-money"></i> Price Range</label> <input
-					type="range" min="1000" max="10000" />
-				<div class="range-text">
-					<span>$1,000</span> <span>$10,000+</span>
-				</div>
-			</div>
-
-			<div class="filter-group">
-				<label><i class="fa fa-map-marker"></i> Location</label> <select>
-					<option>Select Cities</option>
-					<option>Kathmandu</option>
-					<option>Lalitpur</option>
-					<option>Bhaktapur</option>
-					<option>Pokhara</option>
-				</select>
-			</div>
-
-			<div class="filter-group">
-				<label><i class="fa fa-bed"></i> Bedrooms</label>
-				<div class="bed-options">
-					<button>1</button>
-					<button class="selected">2</button>
-					<button>3</button>
-					<button>4+</button>
-				</div>
-			</div>
-
-			<div class="filter-group">
-				<label><i class="fa fa-building-o"></i> Property Type</label>
-				<div class="check-list">
-					<label><input type="checkbox" /> Apartment</label> <label><input
-						type="checkbox" checked /> House</label> <label><input
-						type="checkbox" /> Villa</label>
-				</div>
-			</div>
-
-			<button class="apply-btn">Apply Filters</button>
-		</aside>
-
-		<section class="property-content">
-			<div class="property-topbar">
-				<div class="property-search">
-					<i class="fa fa-search"></i> <input type="text"
-						placeholder="Search by address, neighborhood..." />
-				</div>
-
-				<div class="sort-box">
-					<span>Sort by:</span> <select>
-						<option>Newest Listings</option>
-						<option>Lowest Price</option>
-						<option>Highest Price</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="property-grid">
-				<div class="property-card">
-					<div class="property-img img1">
-						<span class="price">$4,500/mo</span>
-						<button class="heart">
-							<i class="fa fa-heart"></i>
-						</button>
-					</div>
-					<div class="property-info">
-						<p class="tag">
-							<span></span> Featured Property
-						</p>
-						<h3>Azure Skyline Villa</h3>
-						<p class="location">
-							<i class="fa fa-map-marker"></i> Hollywood Hills, CA
-						</p>
-						<div class="property-meta">
-							<span><i class="fa fa-bed"></i> 4</span> <span><i
-								class="fa fa-bath"></i> 3</span> <span><i
-								class="fa fa-area-chart"></i> 3.2k</span> <a
-								href="property-details.html">View Details</a>
+				<form class="properties-search-box">
+					<div class="field">
+						<label for="location">Location</label>
+						<div class="select-wrap">
+							<select id="location">
+								<option>Kathmandu, Nepal</option>
+								<option>Lalitpur, Nepal</option>
+								<option>Bhaktapur, Nepal</option>
+							</select> <img
+								src="${pageContext.request.contextPath}/images/down_icon-icons.com_61209.png"
+								alt="dropdown icon" />
 						</div>
 					</div>
-				</div>
 
-				<div class="property-card">
-					<div class="property-img img2">
-						<span class="price">$2,800/mo</span>
-						<button class="heart">
-							<i class="fa fa-heart-o"></i>
-						</button>
-					</div>
-					<div class="property-info">
-						<p class="tag">
-							<span></span> Just Listed
-						</p>
-						<h3>Oakwood Loft</h3>
-						<p class="location">
-							<i class="fa fa-map-marker"></i> Brooklyn, NY
-						</p>
-						<div class="property-meta">
-							<span><i class="fa fa-bed"></i> 2</span> <span><i
-								class="fa fa-bath"></i> 1</span> <span><i
-								class="fa fa-area-chart"></i> 1.1k</span> <a
-								href="property-details.html">View Details</a>
+					<div class="field small">
+						<label for="type">Type</label>
+						<div class="select-wrap">
+							<select id="type">
+								<option>Room</option>
+								<option>Flat</option>
+								<option>House</option>
+							</select> <img
+								src="${pageContext.request.contextPath}/images/down_icon-icons.com_61209.png"
+								alt="dropdown icon" />
 						</div>
 					</div>
-				</div>
 
-				<div class="property-card">
-					<div class="property-img img3">
-						<span class="price">$7,200/mo</span>
-					</div>
-					<div class="property-info">
-						<p class="tag orange">
-							<span></span> Exclusive
-						</p>
-						<h3>Summit Penthouse</h3>
-						<p class="location">
-							<i class="fa fa-map-marker"></i> Miami Beach, FL
-						</p>
-						<div class="property-meta">
-							<span><i class="fa fa-bed"></i> 3</span> <span><i
-								class="fa fa-bath"></i> 3</span> <span><i
-								class="fa fa-area-chart"></i> 2.8k</span> <a
-								href="property-details.html">View Details</a>
+					<div class="field">
+						<label for="price">Price Range</label>
+						<div class="select-wrap">
+							<select id="price">
+								<option>Rs3000 - Rs4000</option>
+								<option>Rs4000 - Rs8000</option>
+								<option>Rs8000 - Rs15000</option>
+							</select> <img
+								src="${pageContext.request.contextPath}/images/down_icon-icons.com_61209.png"
+								alt="dropdown icon" />
 						</div>
 					</div>
-				</div>
 
-				<div class="property-card">
-					<div class="property-img img4">
-						<span class="price">$3,900/mo</span>
-						<button class="heart">
-							<i class="fa fa-heart-o"></i>
-						</button>
-					</div>
-					<div class="property-info">
-						<p class="tag light">
-							<span></span> Available Now
-						</p>
-						<h3>Willow Bend Estate</h3>
-						<p class="location">
-							<i class="fa fa-map-marker"></i> Austin, TX
-						</p>
-						<div class="property-meta">
-							<span><i class="fa fa-bed"></i> 5</span> <span><i
-								class="fa fa-bath"></i> 4</span> <span><i
-								class="fa fa-area-chart"></i> 4.1k</span> <a
-								href="property-details.html">View Details</a>
-						</div>
-					</div>
-				</div>
+					<button type="submit" class="search-btn">Search</button>
+				</form>
 
-				<div class="property-card">
-					<div class="property-img img5">
-						<span class="price">$5,100/mo</span>
-						<button class="heart">
-							<i class="fa fa-heart-o"></i>
-						</button>
-					</div>
-					<div class="property-info">
-						<p class="tag">
-							<span></span> New Construction
-						</p>
-						<h3>Contemporary Manor</h3>
-						<p class="location">
-							<i class="fa fa-map-marker"></i> Seattle, WA
-						</p>
-						<div class="property-meta">
-							<span><i class="fa fa-bed"></i> 4</span> <span><i
-								class="fa fa-bath"></i> 3.5</span> <span><i
-								class="fa fa-area-chart"></i> 3.5k</span> <a
-								href="property-details.html">View Details</a>
-						</div>
-					</div>
-				</div>
+				<div class="properties-grid">
+					<c:forEach var="p" items="${properties}">
+						<article class="property-card page-card">
 
-				<div class="property-card">
-					<div class="property-img img6">
-						<span class="price">$8,400/mo</span>
-						<button class="heart">
-							<i class="fa fa-heart-o"></i>
-						</button>
-					</div>
-					<div class="property-info">
-						<p class="tag">
-							<span></span> Prime Selection
-						</p>
-						<h3>Oceanic Retreat</h3>
-						<p class="location">
-							<i class="fa fa-map-marker"></i> Malibu, CA
-						</p>
-						<div class="property-meta">
-							<span><i class="fa fa-bed"></i> 4</span> <span><i
-								class="fa fa-bath"></i> 4</span> <span><i
-								class="fa fa-area-chart"></i> 3.8k</span> <a
-								href="property-details.html">View Details</a>
-						</div>
-					</div>
-				</div>
-			</div>
+							<img src="${pageContext.request.contextPath}/${p.image}"
+								class="property-img">
+							<div class="card-body">
+								<div class="card-title-row">
+									<h3>${p.title}</h3>
+								</div>
 
-			<div class="pagination">
-				<button>
-					<i class="fa fa-angle-left"></i>
-				</button>
-				<button class="active-page">1</button>
-				<button>2</button>
-				<button>3</button>
-				<span>...</span>
-				<button>10</button>
-				<button>
-					<i class="fa fa-angle-right"></i>
-				</button>
+								<p class="location">${p.location}</p>
+								<p class="price">Rs. ${p.price}</p>
+
+								<a
+									href="${pageContext.request.contextPath}/property?action=detail&id=${p.propertyId}"
+									class="card-btn"> See More </a>
+							</div>
+						</article>
+					</c:forEach>
+
+				</div>
 			</div>
 		</section>
 	</main>

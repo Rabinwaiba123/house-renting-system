@@ -73,7 +73,7 @@
 							<label>Role</label>
 							<div class="select-wrap">
 								<select name="role">
-									<option value="user">User</option>
+									<option value="tenant">Tenant</option>
 									<option value="owner">Owner</option>
 								</select>
 							</div>

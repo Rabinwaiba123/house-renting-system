@@ -67,60 +67,6 @@
 				</div>
 			</div>
 
-			<div class="table-container">
-				<div class="table-header">
-					<h1 class="table-heading">Recent Users</h1>
-					<button class="view">View all</button>
-				</div>
-
-				<div class="table-body">
-					<table class="users-table">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Name</th>
-								<th>Email</th>
-								<th>Role</th>
-								<th>Status</th>
-								<th>Join Date</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Rabin Waiba</td>
-								<td>rabinwaaib87@gmail.com</td>
-								<td>Owner</td>
-								<td><span class="status-badge active">Active</span></td>
-								<td>2026-04-21</td>
-								<td class="actions"><i class="fa fa-pencil"></i> <i
-									class="fa fa-trash"></i></td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Jason Miller</td>
-								<td>jason@example.com</td>
-								<td>User</td>
-								<td><span class="status-badge active">Active</span></td>
-								<td>2026-04-18</td>
-								<td class="actions"><i class="fa fa-pencil"></i> <i
-									class="fa fa-trash"></i></td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Sophia Rai</td>
-								<td>sophia@example.com</td>
-								<td>Owner</td>
-								<td><span class="status-badge pending">Pending</span></td>
-								<td>2026-04-16</td>
-								<td class="actions"><i class="fa fa-pencil"></i> <i
-									class="fa fa-trash"></i></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
 		</div>
 	</div>
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,76 +101,33 @@
 					<table class="users-table">
 						<thead>
 							<tr>
-								<th>ID</th>
-								<th>Tenant Name</th>
 								<th>Property</th>
-								<th>Request Date</th>
-								<th>Move In Date</th>
-								<th>Amount</th>
+								<th>Tenant</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Message</th>
 								<th>Status</th>
-								<th>Actions</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Rabin Waiba</td>
-								<td>Sunrise Apartment</td>
-								<td>2026-04-21</td>
-								<td>2026-05-01</td>
-								<td>$450</td>
-								<td><span class="status-badge pending">Pending</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-check"></i> <i class="fa fa-times"></i></td>
-							</tr>
-
-							<tr>
-								<td>2</td>
-								<td>Jason Miller</td>
-								<td>Lakeview Villa</td>
-								<td>2026-04-20</td>
-								<td>2026-05-04</td>
-								<td>$1200</td>
-								<td><span class="status-badge active">Approved</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-check"></i> <i class="fa fa-times"></i></td>
-							</tr>
-
-							<tr>
-								<td>3</td>
-								<td>Sophia Rai</td>
-								<td>City Room Rental</td>
-								<td>2026-04-19</td>
-								<td>2026-04-28</td>
-								<td>$180</td>
-								<td><span class="status-badge blocked">Rejected</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-check"></i> <i class="fa fa-times"></i></td>
-							</tr>
-
-							<tr>
-								<td>4</td>
-								<td>Aarav Sharma</td>
-								<td>Green Valley House</td>
-								<td>2026-04-18</td>
-								<td>2026-05-03</td>
-								<td>$700</td>
-								<td><span class="status-badge pending">Pending</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-check"></i> <i class="fa fa-times"></i></td>
-							</tr>
-
-							<tr>
-								<td>5</td>
-								<td>Mukesh Sharma</td>
-								<td>Heritage Flat</td>
-								<td>2026-04-17</td>
-								<td>2026-05-06</td>
-								<td>$520</td>
-								<td><span class="status-badge active">Approved</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-check"></i> <i class="fa fa-times"></i></td>
-							</tr>
+							<c:forEach var="b" items="${bookings}">
+								<tr>
+									<td>${b.propertyTitle}</td>
+									<td>${b.tenantName}</td>
+									<td>${b.startDate}</td>
+									<td>${b.endDate}</td>
+									<td>${b.message}</td>
+									<td>${b.status}</td>
+									<td><c:if test="${b.status == 'pending'}">
+											<a
+												href="${pageContext.request.contextPath}/booking?action=approve&id=${b.bookingId}">Approve</a>
+						|
+						<a
+												href="${pageContext.request.contextPath}/booking?action=reject&id=${b.bookingId}">Reject</a>
+										</c:if></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

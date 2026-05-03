@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,117 +34,68 @@
 			<div class="table-container">
 				<div class="table-header">
 					<h1 class="table-heading">My Properties</h1>
-					<button class="view">Add Property</button>
+					<button
+						href="${pageContext.request.contextPath}/owner/add-property.jsp"
+						class="view">Add Property</button>
 				</div>
+				<c:if test="${param.success == 'added'}">
+					<p style="color: green;">Property added successfully. Waiting
+						for admin approval.</p>
+				</c:if>
 
-				<div class="booking-filter">
-					<div class="filter-group">
-						<label>Property Type</label> <select>
-							<option>All</option>
-							<option>House</option>
-							<option>Apartment</option>
-							<option>Room</option>
-							<option>Flat</option>
-							<option>Villa</option>
-						</select>
-					</div>
+				<c:if test="${param.success == 'updated'}">
+					<p style="color: green;">Property updated successfully.</p>
+				</c:if>
 
-					<div class="filter-group">
-						<label>Status</label> <select>
-							<option>All</option>
-							<option>Available</option>
-							<option>Booked</option>
-							<option>Pending</option>
-						</select>
-					</div>
+				<c:if test="${param.success == 'deleted'}">
+					<p style="color: green;">Property deleted successfully.</p>
+				</c:if>
 
-					<div class="filter-group">
-						<label>Location</label> <select>
-							<option>All</option>
-							<option>Kathmandu</option>
-							<option>Lalitpur</option>
-							<option>Bhaktapur</option>
-							<option>Pokhara</option>
-						</select>
-					</div>
+				<c:if test="${param.error != null}">
+					<p style="color: red;">Something went wrong. Please try again.</p>
+				</c:if>
 
-					<button class="filter-btn">Filter</button>
-				</div>
+
 
 				<div class="table-body">
 					<table class="users-table">
 						<thead>
 							<tr>
-								<th>ID</th>
-								<th>Property Title</th>
-								<th>Location</th>
+								<th>Image</th>
+								<th>Title</th>
 								<th>Type</th>
+								<th>Location</th>
 								<th>Price</th>
+								<th>Rooms</th>
 								<th>Status</th>
-								<th>Views</th>
-								<th>Actions</th>
+								<th>Availability</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Sunrise Apartment</td>
-								<td>Kathmandu</td>
-								<td>Apartment</td>
-								<td>$450/month</td>
-								<td><span class="status-badge active">Available</span></td>
-								<td>120</td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
-							</tr>
+							<c:forEach var="p" items="${properties}">
+								<tr>
+									<td><c:if test="${not empty p.image}">
+											<img src="${pageContext.request.contextPath}/${p.image}"
+												width="90" height="60">
+										</c:if></td>
 
-							<tr>
-								<td>2</td>
-								<td>Green Valley House</td>
-								<td>Lalitpur</td>
-								<td>House</td>
-								<td>$700/month</td>
-								<td><span class="status-badge pending">Pending</span></td>
-								<td>85</td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
-							</tr>
+									<td>${p.title}</td>
+									<td>${p.type}</td>
+									<td>${p.location}</td>
+									<td>Rs. ${p.price}</td>
+									<td>${p.rooms}</td>
+									<td>${p.status}</td>
+									<td>${p.availability}</td>
 
-							<tr>
-								<td>3</td>
-								<td>City Room Rental</td>
-								<td>Bhaktapur</td>
-								<td>Room</td>
-								<td>$180/month</td>
-								<td><span class="status-badge blocked">Booked</span></td>
-								<td>64</td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
-							</tr>
-
-							<tr>
-								<td>4</td>
-								<td>Heritage Flat</td>
-								<td>Pokhara</td>
-								<td>Flat</td>
-								<td>$520/month</td>
-								<td><span class="status-badge active">Available</span></td>
-								<td>98</td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
-							</tr>
-
-							<tr>
-								<td>5</td>
-								<td>Lakeview Villa</td>
-								<td>Pokhara</td>
-								<td>Villa</td>
-								<td>$1200/month</td>
-								<td><span class="status-badge active">Available</span></td>
-								<td>145</td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
-							</tr>
+									<td><a
+										href="${pageContext.request.contextPath}/owner/edit-property.jsp?id=${p.propertyId}">
+											Edit </a> | <a
+										href="${pageContext.request.contextPath}/property?action=delete&id=${p.propertyId}"
+										onclick="return confirm('Are you sure you want to delete this property?');">
+											Delete </a></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

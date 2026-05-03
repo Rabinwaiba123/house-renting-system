@@ -6,10 +6,11 @@
 				class="fa fa-th-large nav-img"></i> <span>Dashboard</span>
 			</a> <a href="${pageContext.request.contextPath}/admin/users"
 				class="nav-option"> <i class="fa fa-users nav-img"></i> <span>Users</span>
-			</a> <a href="admin-properties.jsp" class="nav-option"> <i
-				class="fa fa-building-o nav-img"></i> <span>Properties</span>
-			</a> <a href="admin-bookings.jsp" class="nav-option"> <i
-				class="fa fa-calendar nav-img"></i> <span>Bookings</span>
+			</a> <a href="${pageContext.request.contextPath}/property?action=pending"
+				class="nav-option"> <i class="fa fa-building-o nav-img"></i> <span>Properties</span>
+			</a> <a
+				href="${pageContext.request.contextPath}/booking?action=adminBookings"
+				class="nav-option"> <i class="fa fa-calendar nav-img"></i> <span>Bookings</span>
 			</a> <a href="admin-payments.jsp" class="nav-option"> <i
 				class="fa fa-money nav-img"></i> <span>Payments</span>
 			</a> <a href="admin-reports.jsp" class="nav-option"> <i

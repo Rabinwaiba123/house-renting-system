@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter({ "/admin/*", "/owner/*", "/user/*" })
+@WebFilter({ "/admin/*", "/owner/*", "/tenant/*" })
 public class RoleFilter implements Filter {
 
 	public void doFilter(jakarta.servlet.ServletRequest request, jakarta.servlet.ServletResponse response,
@@ -33,7 +33,7 @@ public class RoleFilter implements Filter {
 			return;
 		}
 
-		if (path.contains("/user/") && !role.equalsIgnoreCase("USER")) {
+		if (path.contains("/tenant/") && !role.equalsIgnoreCase("TENANT")) {
 			res.sendRedirect(req.getContextPath() + "/error/access-denied.jsp");
 			return;
 		}
