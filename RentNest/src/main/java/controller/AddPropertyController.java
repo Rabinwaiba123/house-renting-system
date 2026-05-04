@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
@@ -9,24 +8,39 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import model.Property;
+import model.User;
 import service.PropertyService;
+import util.ImageUtil;
+import util.SessionUtil;
 
 @WebServlet("/add-property")
 @MultipartConfig
 public class AddPropertyController extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private PropertyService propertyService = new PropertyService();
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.getRequestDispatcher("/WEB-INF/pages/owner/owner-add-property.jsp").forward(request, response);
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
-		int ownerId = (int) session.getAttribute("userId");
+		User user = (User) SessionUtil.getAttribute(request, "user");
+
+		if (user == null) {
+			response.sendRedirect(request.getContextPath() + "/login?error=loginRequired");
+			return;
+		}
+
+		if (!"owner".equalsIgnoreCase(user.getRole())) {
+			response.sendRedirect(request.getContextPath() + "/access-denied");
+			return;
+		}
 
 		String title = request.getParameter("title");
 		String type = request.getParameter("type");
@@ -36,26 +50,17 @@ public class AddPropertyController extends HttpServlet {
 		String description = request.getParameter("description");
 
 		Part imagePart = request.getPart("image");
-		String fileName = System.currentTimeMillis() + "_" + imagePart.getSubmittedFileName();
-
-		String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
-
-		File uploadDir = new File(uploadPath);
-		if (!uploadDir.exists()) {
-			uploadDir.mkdir();
-		}
-
-		imagePart.write(uploadPath + File.separator + fileName);
+		String imagePath = ImageUtil.uploadImage(imagePart, getServletContext(), "uploads");
 
 		Property property = new Property();
-		property.setOwnerId(ownerId);
+		property.setOwnerId(user.getUserId());
 		property.setTitle(title);
 		property.setType(type);
 		property.setLocation(location);
 		property.setPrice(price);
 		property.setRooms(rooms);
 		property.setDescription(description);
-		property.setImage("uploads/" + fileName);
+		property.setImage(imagePath);
 
 		boolean result = propertyService.addProperty(property);
 
@@ -65,6 +70,6 @@ public class AddPropertyController extends HttpServlet {
 			request.setAttribute("error", "Failed to add property.");
 		}
 
-		request.getRequestDispatcher("/owner/owner-add-property.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/owner/owner-add-property.jsp").forward(request, response);
 	}
 }

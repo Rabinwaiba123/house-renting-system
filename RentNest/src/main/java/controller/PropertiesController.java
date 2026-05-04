@@ -1,21 +1,25 @@
 package controller;
 
-import java.io.IOException;
-import java.util.List;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import model.Property;
 import service.PropertyService;
 
-@WebServlet({"/home", ""})
+import java.io.IOException;
+import java.util.List;
 
-public class HomeController extends HttpServlet {
+
+@WebServlet("/properties")
+public class PropertiesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	public PropertiesController() {
+		super();
+
+	}
 
 	private PropertyService propertyService = new PropertyService();
 
@@ -23,9 +27,9 @@ public class HomeController extends HttpServlet {
 			throws ServletException, IOException {
 
 		List<Property> properties = propertyService.getApprovedProperties();
-
 		request.setAttribute("properties", properties);
 
-		request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/public/property-list.jsp").forward(request, response);
 	}
+
 }

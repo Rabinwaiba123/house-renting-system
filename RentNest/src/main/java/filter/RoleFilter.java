@@ -8,7 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import util.SessionUtil;
 
 @WebFilter({ "/admin/*", "/owner/*", "/tenant/*" })
 public class RoleFilter implements Filter {
@@ -19,22 +19,26 @@ public class RoleFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 
-		HttpSession session = req.getSession(false);
-		String role = (String) session.getAttribute("role");
+		String role = (String) SessionUtil.getAttribute(req, "role");
 		String path = req.getRequestURI();
 
-		if (path.contains("/admin/") && !role.equalsIgnoreCase("ADMIN")) {
-			res.sendRedirect(req.getContextPath() + "/error/access-denied.jsp");
+		if (role == null) {
+			res.sendRedirect(req.getContextPath() + "/login");
 			return;
 		}
 
-		if (path.contains("/owner/") && !role.equalsIgnoreCase("OWNER")) {
-			res.sendRedirect(req.getContextPath() + "/error/access-denied.jsp");
+		if (path.contains("/admin/") && !role.equalsIgnoreCase("admin")) {
+			res.sendRedirect(req.getContextPath() + "/access-denied");
 			return;
 		}
 
-		if (path.contains("/tenant/") && !role.equalsIgnoreCase("TENANT")) {
-			res.sendRedirect(req.getContextPath() + "/error/access-denied.jsp");
+		if (path.contains("/owner/") && !role.equalsIgnoreCase("owner")) {
+			res.sendRedirect(req.getContextPath() + "/access-denied");
+			return;
+		}
+
+		if (path.contains("/tenant/") && !role.equalsIgnoreCase("tenant")) {
+			res.sendRedirect(req.getContextPath() + "/access-denied");
 			return;
 		}
 

@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import model.Property;
 import model.User;
 import service.PropertyService;
+import util.SessionUtil;
 
 @WebServlet("/property")
 public class PropertyController extends HttpServlet {
@@ -29,9 +30,7 @@ public class PropertyController extends HttpServlet {
 			action = "list";
 		}
 
-		if (action.equals("list")) {
-			listApprovedProperties(request, response);
-		} else if (action.equals("detail")) {
+		if (action.equals("detail")) {
 			viewPropertyDetails(request, response);
 		} else if (action.equals("ownerList")) {
 			ownerPropertyList(request, response);
@@ -64,14 +63,12 @@ public class PropertyController extends HttpServlet {
 
 	private void addProperty(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		HttpSession session = request.getSession(false);
+		User user = (User) SessionUtil.getAttribute(request, "user");
 
-		if (session == null || session.getAttribute("user") == null) {
-			response.sendRedirect("login.jsp");
+		if (user == null) {
+			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 		}
-
-		User user = (User) session.getAttribute("user");
 
 		Property property = new Property();
 
@@ -89,17 +86,8 @@ public class PropertyController extends HttpServlet {
 		if (result) {
 			response.sendRedirect("property?action=ownerList&success=added");
 		} else {
-			response.sendRedirect("owner/owner-add-property.jsp?error=failed");
+			response.sendRedirect("/WEB-INF/pages/owner/owner-add-property.jsp?error=failed");
 		}
-	}
-
-	private void listApprovedProperties(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<Property> properties = propertyService.getApprovedProperties();
-		request.setAttribute("properties", properties);
-
-		request.getRequestDispatcher("/public/property-list.jsp").forward(request, response);
 	}
 
 	private void viewPropertyDetails(HttpServletRequest request, HttpServletResponse response)
@@ -110,25 +98,23 @@ public class PropertyController extends HttpServlet {
 		Property property = propertyService.getPropertyById(propertyId);
 		request.setAttribute("property", property);
 
-		request.getRequestDispatcher("/public/property-details.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/public/property-details.jsp").forward(request, response);
 	}
 
 	private void ownerPropertyList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
+		User user = (User) SessionUtil.getAttribute(request, "user");
 
-		if (session == null || session.getAttribute("user") == null) {
-			response.sendRedirect("login.jsp");
+		if (user == null) {
+			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 		}
-
-		User user = (User) session.getAttribute("user");
 
 		List<Property> properties = propertyService.getPropertiesByOwner(user.getUserId());
 		request.setAttribute("properties", properties);
 
-		request.getRequestDispatcher("/owner/owner-properties.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/owner/owner-properties.jsp").forward(request, response);
 	}
 
 	private void updateProperty(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -182,7 +168,7 @@ public class PropertyController extends HttpServlet {
 		List<Property> properties = propertyService.getAllProperties();
 		request.setAttribute("properties", properties);
 
-		request.getRequestDispatcher("/admin/admin-properties.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/admin/admin-properties.jsp").forward(request, response);
 	}
 
 	private void approveProperty(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -235,6 +221,6 @@ public class PropertyController extends HttpServlet {
 		List<Property> properties = propertyService.searchProperties(location, type, maxPrice);
 
 		request.setAttribute("properties", properties);
-		request.getRequestDispatcher("/public/property-list.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/public/property-list.jsp").forward(request, response);
 	}
 }

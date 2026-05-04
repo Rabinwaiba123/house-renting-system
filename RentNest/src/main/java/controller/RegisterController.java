@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
@@ -12,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import service.RegisterService;
+import util.ImageUtil;
 
 @WebServlet("/register")
 @MultipartConfig
@@ -24,7 +24,7 @@ public class RegisterController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("/auth/register.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/auth/register.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -37,26 +37,8 @@ public class RegisterController extends HttpServlet {
 		String confirmPassword = request.getParameter("confirmPassword");
 		String role = request.getParameter("role");
 
-		String imagePath = null;
-
 		Part imagePart = request.getPart("image");
-
-		if (imagePart != null && imagePart.getSize() > 0) {
-
-			String fileName = System.currentTimeMillis() + "_" + imagePart.getSubmittedFileName();
-
-			String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
-
-			File uploadFolder = new File(uploadPath);
-
-			if (!uploadFolder.exists()) {
-				uploadFolder.mkdir();
-			}
-
-			imagePart.write(uploadPath + File.separator + fileName);
-
-			imagePath = "uploads/" + fileName;
-		}
+		String imagePath = ImageUtil.uploadImage(imagePart, getServletContext(), "uploads");
 
 		String result = registerService.registerUser(fullName, email, phone, password, confirmPassword, role,
 				imagePath);
@@ -65,7 +47,7 @@ public class RegisterController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/login?success=registered");
 		} else {
 			request.setAttribute("errorMessage", result);
-			request.getRequestDispatcher("/auth/register.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/pages/auth/register.jsp").forward(request, response);
 		}
 	}
 }

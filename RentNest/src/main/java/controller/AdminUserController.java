@@ -23,7 +23,7 @@ public class AdminUserController extends HttpServlet {
         List<User> users = userDAO.getAllUsers();
         request.setAttribute("users", users);
 
-        request.getRequestDispatcher("/admin/admin-users.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/admin/admin-users.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

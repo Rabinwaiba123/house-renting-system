@@ -1,45 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
-         https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee 
+                             https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
 	version="6.0">
-	<display-name>Archetype Created Web Application</display-name>
 
-	<servlet>
-		<servlet-name>LoginController</servlet-name>
-		<servlet-class>controller.LoginController</servlet-class>
-	</servlet>
+	<display-name>RentNest</display-name>
 
-	<servlet>
-		<servlet-name>RegisterController</servlet-name>
-		<servlet-class>controller.RegisterController</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>LogoutController</servlet-name>
-		<servlet-class>controller.LogoutController</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>PropertyController</servlet-name>
-		<servlet-class>controller.PropertyController</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>BookingController</servlet-name>
-		<servlet-class>controller.BookingController</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>AdminController</servlet-name>
-		<servlet-class>controller.AdminController</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>OwnerController</servlet-name>
-		<servlet-class>controller.OwnerController</servlet-class>
-	</servlet>
+	<welcome-file-list>
+		<welcome-file>home.jsp</welcome-file>
+	</welcome-file-list>
 
 </web-app>

@@ -7,32 +7,33 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
-@WebFilter({"/admin/*", "/owner/*", "/tenant/*"})
+import util.SessionUtil;
+
+@WebFilter({ "/admin/*", "/owner/*", "/tenant/*" })
 public class AuthFilter implements Filter {
 
-    public void init(FilterConfig filterConfig) throws ServletException {}
+	public void init(FilterConfig filterConfig) throws ServletException {
+	}
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
+	public void doFilter(jakarta.servlet.ServletRequest request, jakarta.servlet.ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
 
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
 
-        HttpSession session = req.getSession(false);
+		Object user = SessionUtil.getAttribute(req, "user");
 
-        if (session == null || session.getAttribute("user") == null) {
-            res.sendRedirect(req.getContextPath() + "/login?error=loginRequired");
-            return;
-        }
+		if (user == null) {
+			res.sendRedirect(req.getContextPath() + "/login?error=loginRequired");
+			return;
+		}
 
-        chain.doFilter(request, response);
-    }
+		chain.doFilter(request, response);
+	}
 
-    public void destroy() {}
+	public void destroy() {
+	}
 }

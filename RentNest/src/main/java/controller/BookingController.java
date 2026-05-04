@@ -9,10 +9,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import model.Booking;
 import model.User;
 import service.BookingService;
+import util.SessionUtil;
 
 @WebServlet("/booking")
 public class BookingController extends HttpServlet {
@@ -58,13 +58,7 @@ public class BookingController extends HttpServlet {
 	}
 
 	private User getLoggedUser(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-
-		if (session == null) {
-			return null;
-		}
-
-		return (User) session.getAttribute("user");
+		return (User) SessionUtil.getAttribute(request, "user");
 	}
 
 	private void showBookingForm(HttpServletRequest request, HttpServletResponse response)
@@ -85,7 +79,7 @@ public class BookingController extends HttpServlet {
 		int propertyId = Integer.parseInt(request.getParameter("propertyId"));
 
 		request.setAttribute("propertyId", propertyId);
-		request.getRequestDispatcher("/user/book-property.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/tenant/book-property.jsp").forward(request, response);
 	}
 
 	private void sendBookingRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -98,7 +92,7 @@ public class BookingController extends HttpServlet {
 		}
 
 		if (!"user".equalsIgnoreCase(user.getRole())) {
-			response.sendRedirect(request.getContextPath() + "/error/access-denied.jsp");
+			response.sendRedirect(request.getContextPath() + "WEB-INF/pages/error/access-denied.jsp");
 			return;
 		}
 
@@ -135,14 +129,14 @@ public class BookingController extends HttpServlet {
 		}
 
 		if (!"user".equalsIgnoreCase(user.getRole())) {
-			response.sendRedirect(request.getContextPath() + "/error/access-denied.jsp");
+			response.sendRedirect(request.getContextPath() + "WEB-INF/pages/error/access-denied.jsp");
 			return;
 		}
 
 		List<Booking> bookings = bookingService.getBookingsByTenant(user.getUserId());
 		request.setAttribute("bookings", bookings);
 
-		request.getRequestDispatcher("/user/my-bookings.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/tenant/my-bookings.jsp").forward(request, response);
 	}
 
 	private void ownerRequests(HttpServletRequest request, HttpServletResponse response)
@@ -156,14 +150,14 @@ public class BookingController extends HttpServlet {
 		}
 
 		if (!"owner".equalsIgnoreCase(user.getRole())) {
-			response.sendRedirect(request.getContextPath() + "/error/access-denied.jsp");
+			response.sendRedirect(request.getContextPath() + "/WEB-INF/pages/error/access-denied.jsp");
 			return;
 		}
 
 		List<Booking> bookings = bookingService.getBookingsByOwner(user.getUserId());
 		request.setAttribute("bookings", bookings);
 
-		request.getRequestDispatcher("/owner/owner-booking-requests.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/owner/owner-booking-requests.jsp").forward(request, response);
 	}
 
 	private void adminBookings(HttpServletRequest request, HttpServletResponse response)
@@ -177,14 +171,14 @@ public class BookingController extends HttpServlet {
 		}
 
 		if (!"admin".equalsIgnoreCase(user.getRole())) {
-			response.sendRedirect(request.getContextPath() + "/error/access-denied.jsp");
+			response.sendRedirect(request.getContextPath() + "/WEB-INF/pages/error/access-denied.jsp");
 			return;
 		}
 
 		List<Booking> bookings = bookingService.getAllBookings();
 		request.setAttribute("bookings", bookings);
 
-		request.getRequestDispatcher("/admin/admin-bookings.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/admin/admin-bookings.jsp").forward(request, response);
 	}
 
 	private void updateStatus(HttpServletRequest request, HttpServletResponse response, String status)
@@ -198,7 +192,7 @@ public class BookingController extends HttpServlet {
 		}
 
 		if (!"owner".equalsIgnoreCase(user.getRole())) {
-			response.sendRedirect(request.getContextPath() + "/error/access-denied.jsp");
+			response.sendRedirect(request.getContextPath() + "/WEB-INF/pages/error/access-denied.jsp");
 			return;
 		}
 
