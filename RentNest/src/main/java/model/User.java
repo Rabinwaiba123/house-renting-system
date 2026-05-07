@@ -1,15 +1,61 @@
 package model;
 
+import java.sql.Timestamp;
+
 public class User {
 
 	private int userId;
+
 	private String fullName;
+
 	private String email;
+
 	private String phone;
+
 	private String password;
+
+	private String gender;
+
+	private String dateOfBirth;
+
+	private String address;
+
+	private String image;
+
 	private String role;
-	private String status;
-	private String imagePath;
+
+	private boolean status;
+
+	private boolean isDeleted;
+
+	private Timestamp createdAt;
+
+	// ================= DEFAULT CONSTRUCTOR =================
+
+	public User() {
+
+	}
+
+	// ================= PARAMETERIZED CONSTRUCTOR =================
+
+	public User(int userId, String fullName, String email, String phone, String password, String gender,
+			String dateOfBirth, String address, String image, String role, boolean status, boolean isDeleted,
+			Timestamp createdAt) {
+
+		this.userId = userId;
+		this.fullName = fullName;
+		this.email = email;
+		this.phone = phone;
+		this.password = password;
+		this.gender = gender;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
+		this.image = image;
+		this.role = role;
+		this.status = status;
+		this.isDeleted = isDeleted;
+		this.createdAt = createdAt;
+	}
 
 	public int getUserId() {
 		return userId;
@@ -51,6 +97,38 @@ public class User {
 		this.password = password;
 	}
 
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public String getRole() {
 		return role;
 	}
@@ -59,20 +137,28 @@ public class User {
 		this.role = role;
 	}
 
-	public String getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
-	public String getImagePath() {
-		return imagePath;
+	public boolean isDeleted() {
+		return isDeleted;
 	}
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
 	}
 
 }
