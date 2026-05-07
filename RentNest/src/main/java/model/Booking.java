@@ -1,18 +1,41 @@
 package model;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 public class Booking {
 	private int bookingId;
+	private int userId;
 	private int propertyId;
-	private int tenantId;
-	private int ownerId;
-	private String startDate;
-	private String endDate;
+	private Date bookingDate;
+	private Date moveInDate;
+	private int durationMonths;
 	private String message;
-	private String status;
+	private boolean status;
+	private boolean isCancelled;
+	private boolean isDeleted;
+	private Timestamp createdAt;
 
-	private String propertyTitle;
-	private String tenantName;
-	private String ownerName;
+	// Default Constructor
+	public Booking() {
+	}
+
+	// Parameterized Constructor
+	public Booking(int bookingId, int userId, int propertyId, Date bookingDate, Date moveInDate, int durationMonths,
+			String message, boolean status, boolean isCancelled, boolean isDeleted, Timestamp createdAt) {
+
+		this.bookingId = bookingId;
+		this.userId = userId;
+		this.propertyId = propertyId;
+		this.bookingDate = bookingDate;
+		this.moveInDate = moveInDate;
+		this.durationMonths = durationMonths;
+		this.message = message;
+		this.status = status;
+		this.isCancelled = isCancelled;
+		this.isDeleted = isDeleted;
+		this.createdAt = createdAt;
+	}
 
 	public int getBookingId() {
 		return bookingId;
@@ -20,6 +43,14 @@ public class Booking {
 
 	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public int getPropertyId() {
@@ -30,36 +61,28 @@ public class Booking {
 		this.propertyId = propertyId;
 	}
 
-	public int getTenantId() {
-		return tenantId;
+	public Date getBookingDate() {
+		return bookingDate;
 	}
 
-	public void setTenantId(int tenantId) {
-		this.tenantId = tenantId;
+	public void setBookingDate(Date bookingDate) {
+		this.bookingDate = bookingDate;
 	}
 
-	public int getOwnerId() {
-		return ownerId;
+	public Date getMoveInDate() {
+		return moveInDate;
 	}
 
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
+	public void setMoveInDate(Date moveInDate) {
+		this.moveInDate = moveInDate;
 	}
 
-	public String getStartDate() {
-		return startDate;
+	public int getDurationMonths() {
+		return durationMonths;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-
-	public String getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setDurationMonths(int durationMonths) {
+		this.durationMonths = durationMonths;
 	}
 
 	public String getMessage() {
@@ -70,35 +93,36 @@ public class Booking {
 		this.message = message;
 	}
 
-	public String getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
-	public String getPropertyTitle() {
-		return propertyTitle;
+	public boolean isCancelled() {
+		return isCancelled;
 	}
 
-	public void setPropertyTitle(String propertyTitle) {
-		this.propertyTitle = propertyTitle;
+	public void setCancelled(boolean isCancelled) {
+		this.isCancelled = isCancelled;
 	}
 
-	public String getTenantName() {
-		return tenantName;
+	public boolean isDeleted() {
+		return isDeleted;
 	}
 
-	public void setTenantName(String tenantName) {
-		this.tenantName = tenantName;
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
-	public String getOwnerName() {
-		return ownerName;
+	public Timestamp getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
 	}
+
 }
