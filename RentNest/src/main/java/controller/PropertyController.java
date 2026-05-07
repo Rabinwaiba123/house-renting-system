@@ -72,12 +72,10 @@ public class PropertyController extends HttpServlet {
 
 		Property property = new Property();
 
-		property.setOwnerId(user.getUserId());
 		property.setTitle(request.getParameter("title"));
 		property.setType(request.getParameter("type"));
 		property.setLocation(request.getParameter("location"));
 		property.setPrice(Double.parseDouble(request.getParameter("price")));
-		property.setRooms(Integer.parseInt(request.getParameter("rooms")));
 		property.setDescription(request.getParameter("description"));
 		property.setImage(request.getParameter("image"));
 
@@ -126,10 +124,10 @@ public class PropertyController extends HttpServlet {
 		property.setType(request.getParameter("type"));
 		property.setLocation(request.getParameter("location"));
 		property.setPrice(Double.parseDouble(request.getParameter("price")));
-		property.setRooms(Integer.parseInt(request.getParameter("rooms")));
+		
 		property.setDescription(request.getParameter("description"));
 		property.setImage(request.getParameter("image"));
-		property.setAvailability(request.getParameter("availability"));
+		
 
 		boolean result = propertyService.updateProperty(property);
 

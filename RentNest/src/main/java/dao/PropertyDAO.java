@@ -22,12 +22,10 @@ public class PropertyDAO {
 			Connection conn = DBConnection.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 
-			ps.setInt(1, property.getOwnerId());
 			ps.setString(2, property.getTitle());
 			ps.setString(3, property.getType());
 			ps.setString(4, property.getLocation());
 			ps.setDouble(5, property.getPrice());
-			ps.setInt(6, property.getRooms());
 			ps.setString(7, property.getDescription());
 			ps.setString(8, property.getImage());
 
@@ -62,16 +60,14 @@ public class PropertyDAO {
 				Property p = new Property();
 
 				p.setPropertyId(rs.getInt("property_id"));
-				p.setOwnerId(rs.getInt("owner_id"));
+
 				p.setTitle(rs.getString("title"));
 				p.setType(rs.getString("type"));
 				p.setLocation(rs.getString("location"));
 				p.setPrice(rs.getDouble("price"));
-				p.setRooms(rs.getInt("rooms"));
+
 				p.setDescription(rs.getString("description"));
 				p.setImage(rs.getString("image"));
-				p.setStatus(rs.getString("status"));
-				p.setAvailability(rs.getString("availability"));
 
 				list.add(p);
 			}
@@ -105,16 +101,15 @@ public class PropertyDAO {
 				p = new Property();
 
 				p.setPropertyId(rs.getInt("property_id"));
-				p.setOwnerId(rs.getInt("owner_id"));
+
 				p.setTitle(rs.getString("title"));
 				p.setType(rs.getString("type"));
 				p.setLocation(rs.getString("location"));
 				p.setPrice(rs.getDouble("price"));
-				p.setRooms(rs.getInt("rooms"));
+
 				p.setDescription(rs.getString("description"));
 				p.setImage(rs.getString("image"));
-				p.setStatus(rs.getString("status"));
-				p.setAvailability(rs.getString("availability"));
+
 			}
 
 			rs.close();
@@ -146,16 +141,14 @@ public class PropertyDAO {
 				Property p = new Property();
 
 				p.setPropertyId(rs.getInt("property_id"));
-				p.setOwnerId(rs.getInt("owner_id"));
+
 				p.setTitle(rs.getString("title"));
 				p.setType(rs.getString("type"));
 				p.setLocation(rs.getString("location"));
 				p.setPrice(rs.getDouble("price"));
-				p.setRooms(rs.getInt("rooms"));
+
 				p.setDescription(rs.getString("description"));
 				p.setImage(rs.getString("image"));
-				p.setStatus(rs.getString("status"));
-				p.setAvailability(rs.getString("availability"));
 
 				list.add(p);
 			}
@@ -185,10 +178,10 @@ public class PropertyDAO {
 			ps.setString(2, property.getType());
 			ps.setString(3, property.getLocation());
 			ps.setDouble(4, property.getPrice());
-			ps.setInt(5, property.getRooms());
+
 			ps.setString(6, property.getDescription());
 			ps.setString(7, property.getImage());
-			ps.setString(8, property.getAvailability());
+
 			ps.setInt(9, property.getPropertyId());
 
 			int row = ps.executeUpdate();
@@ -249,16 +242,14 @@ public class PropertyDAO {
 				Property p = new Property();
 
 				p.setPropertyId(rs.getInt("property_id"));
-				p.setOwnerId(rs.getInt("owner_id"));
+
 				p.setTitle(rs.getString("title"));
 				p.setType(rs.getString("type"));
 				p.setLocation(rs.getString("location"));
 				p.setPrice(rs.getDouble("price"));
-				p.setRooms(rs.getInt("rooms"));
+
 				p.setDescription(rs.getString("description"));
 				p.setImage(rs.getString("image"));
-				p.setStatus(rs.getString("status"));
-				p.setAvailability(rs.getString("availability"));
 
 				list.add(p);
 			}
@@ -285,16 +276,14 @@ public class PropertyDAO {
 				Property p = new Property();
 
 				p.setPropertyId(rs.getInt("property_id"));
-				p.setOwnerId(rs.getInt("owner_id"));
+
 				p.setTitle(rs.getString("title"));
 				p.setType(rs.getString("type"));
 				p.setLocation(rs.getString("location"));
 				p.setPrice(rs.getDouble("price"));
-				p.setRooms(rs.getInt("rooms"));
+
 				p.setDescription(rs.getString("description"));
 				p.setImage(rs.getString("image"));
-				p.setStatus(rs.getString("status"));
-				p.setAvailability(rs.getString("availability"));
 
 				list.add(p);
 			}
@@ -387,16 +376,14 @@ public class PropertyDAO {
 				Property p = new Property();
 
 				p.setPropertyId(rs.getInt("property_id"));
-				p.setOwnerId(rs.getInt("owner_id"));
+
 				p.setTitle(rs.getString("title"));
 				p.setType(rs.getString("type"));
 				p.setLocation(rs.getString("location"));
 				p.setPrice(rs.getDouble("price"));
-				p.setRooms(rs.getInt("rooms"));
+
 				p.setDescription(rs.getString("description"));
 				p.setImage(rs.getString("image"));
-				p.setStatus(rs.getString("status"));
-				p.setAvailability(rs.getString("availability"));
 
 				list.add(p);
 			}
