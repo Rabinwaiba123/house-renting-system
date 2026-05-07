@@ -9,13 +9,13 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/main.css">
 <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/AdminUser.css">
+<link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <body>
 	<!-- ================= NAVBAR ================= -->
-	<jsp:include page="/WEB-INF/pages/include/navbar2.jsp">
-		<jsp:param name="title" value="Admin Dashboard" />
-	</jsp:include>
+	<jsp:include page="/WEB-INF/pages/include/admin-navbar.jsp" />
 
 	<div class="main-container">
 		<!-- ================= SIDEBAR ================= -->

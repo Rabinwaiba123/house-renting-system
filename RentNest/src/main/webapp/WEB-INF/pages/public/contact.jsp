@@ -206,59 +206,8 @@ button {
 						<p>concierge@residentialcurator.com</p>
 					</div>
 				</div>
-
-				<iframe
-					src="https://maps.google.com/maps?q=new%20york&t=&z=13&ie=UTF8&iwloc=&output=embed"
-					class="map"> </iframe>
 			</div>
 		</div>
-
-		<!-- FAQ -->
-		<div class="faq">
-			<h2>Frequently Asked Questions</h2>
-			<p class="center">Quick answers to common inquiries from our
-				tenants and owners.</p>
-
-			<div class="faq-item">
-				<div class="faq-question">
-					How do I book a property viewing? <i
-						class="fa-solid fa-chevron-down"></i>
-				</div>
-				<div class="faq-answer">You can book a viewing directly
-					through the “Properties” page by selecting your preferred unit and
-					clicking “Schedule Tour.” Our automated system will match you with
-					a curator for a physical or virtual walkthrough.</div>
-			</div>
-
-			<div class="faq-item">
-				<div class="faq-question">
-					What are the management fees for owners? <i
-						class="fa-solid fa-chevron-down"></i>
-				</div>
-				<div class="faq-answer">We offer a tiered commission structure
-					starting at 8% of monthly rent including tenant screening,
-					maintenance coordination, and marketing.</div>
-			</div>
-
-			<div class="faq-item">
-				<div class="faq-question">
-					Is the security deposit refundable? <i
-						class="fa-solid fa-chevron-down"></i>
-				</div>
-				<div class="faq-answer">Yes, deposits are held securely and
-					refunded within 14 business days after inspection.</div>
-			</div>
-
-			<div class="faq-item">
-				<div class="faq-question">
-					How long does approval take? <i class="fa-solid fa-chevron-down"></i>
-				</div>
-				<div class="faq-answer">Approval is typically completed within
-					24–48 hours after submission of documents.</div>
-			</div>
-		</div>
-	</div>
-
 
 	<!-- ================= FOOTER ================= -->
 	<jsp:include page="/WEB-INF/pages/include/footer.jsp" />

@@ -12,9 +12,7 @@
 
 <body>
 	<!-- ================= NAVBAR ================= -->
-	<jsp:include page="/WEB-INF/pages/include/navbar2.jsp">
-		<jsp:param name="title" value="Admin Dashboard" />
-	</jsp:include>
+	<jsp:include page="/WEB-INF/pages/include/admin-navbar.jsp" />
 
 	<div class="main-container">
 		<!-- ================= SIDEBAR ================= -->

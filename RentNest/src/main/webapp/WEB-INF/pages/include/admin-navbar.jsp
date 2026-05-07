@@ -5,7 +5,7 @@
 		<i class="fa fa-bars fa-2x icn menuicn" id="menuicn"></i>
 		<div class="logo">
 			RentNest
-			<p>${param.title}</p>
+			<p>Admin Dashbaord</p>
 		</div>
 	</div>
 	<div class="searchbar">
