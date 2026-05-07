@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+/* ===== ACTION BUTTON BASE ===== */
+.actions button {
+    border: none;
+    padding: 6px 12px;
+    margin: 2px;
+    font-size: 13px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+/* ===== APPROVE BUTTON ===== */
+.actions form input[value="approve"] + button,
+.actions button[value="approve"],
+.actions button.approve {
+    background-color: #28a745; /* green */
+}
+
+.actions button.approve:hover,
+.actions form:hover button[type="submit"]:first-child {
+    background-color: #218838;
+}
+
+/* ===== REJECT BUTTON ===== */
+.actions form input[value="reject"] + button,
+.actions button.reject {
+    background-color: #ffc107; /* yellow */
+    color: #000;
+}
+
+.actions button.reject:hover {
+    background-color: #e0a800;
+}
+
+/* ===== DELETE BUTTON ===== */
+.actions form input[value="delete"] + button,
+.actions button.delete {
+    background-color: #dc3545; /* red */
+}
+
+.actions button.delete:hover {
+    background-color: #c82333;
+}
+
+/* ===== OPTIONAL: SMALL ICON STYLE ===== */
+.actions button i {
+    margin-right: 4px;
+}
