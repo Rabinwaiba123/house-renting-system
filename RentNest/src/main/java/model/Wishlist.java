@@ -8,17 +8,7 @@ public class Wishlist {
 	private int propertyId;
 	private Timestamp createdAt;
 
-// Default Constructor
-	public Wishlist() {
-	}
-
-// Parameterized Constructor
-	public Wishlist(int wishlistId, int userId, int propertyId, Timestamp createdAt) {
-		this.wishlistId = wishlistId;
-		this.userId = userId;
-		this.propertyId = propertyId;
-		this.createdAt = createdAt;
-	}
+	// Getters and Setters
 
 	public int getWishlistId() {
 		return wishlistId;

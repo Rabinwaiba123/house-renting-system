@@ -27,7 +27,7 @@ public class ImageUtil {
 		File uploadFolder = new File(uploadPath);
 
 		if (!uploadFolder.exists()) {
-			uploadFolder.mkdir();
+			uploadFolder.mkdirs();
 		}
 
 		part.write(uploadPath + File.separator + fileName);

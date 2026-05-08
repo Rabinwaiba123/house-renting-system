@@ -18,32 +18,8 @@ public class Property {
 	private boolean isDeleted;
 	private Timestamp createdAt;
 
-	// Default Constructor
-	public Property() {
-
-	}
-
-	// Parameterized Constructor
-	public Property(int propertyId, String title, String type, String location, double price, int bedrooms,
-			int bathrooms, int areaSqft, String description, String image, boolean availability, boolean status,
-			boolean isDeleted, Timestamp createdAt) {
-
-		this.propertyId = propertyId;
-		this.title = title;
-		this.type = type;
-		this.location = location;
-		this.price = price;
-		this.bedrooms = bedrooms;
-		this.bathrooms = bathrooms;
-		this.areaSqft = areaSqft;
-		this.description = description;
-		this.image = image;
-		this.availability = availability;
-		this.status = status;
-		this.isDeleted = isDeleted;
-		this.createdAt = createdAt;
-	}
-
+	// Getters and Setters
+	
 	public int getPropertyId() {
 		return propertyId;
 	}
@@ -155,5 +131,5 @@ public class Property {
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-	
+
 }

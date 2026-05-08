@@ -10,22 +10,9 @@ public class Contact {
 	private String message;
 	private Timestamp createdAt;
 
-	// Default Constructor
-	public Contact() {
-
-	}
-
-	// Parameterized Constructor
-	public Contact(int contactId, String fullName, String email, String subject, String message, Timestamp createdAt) {
-
-		this.contactId = contactId;
-		this.fullName = fullName;
-		this.email = email;
-		this.subject = subject;
-		this.message = message;
-		this.createdAt = createdAt;
-	}
-
+	
+	// Getters and Setters
+	
 	public int getContactId() {
 		return contactId;
 	}

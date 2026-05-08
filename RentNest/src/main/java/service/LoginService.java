@@ -33,8 +33,6 @@ public class LoginService {
 					user.setPhone(rs.getString("phone"));
 					user.setPassword(storedPassword);
 					user.setRole(rs.getString("role"));
-					user.setStatus(rs.getString("status"));
-					user.setImagePath(rs.getString("image_path"));
 
 					return user;
 				}
