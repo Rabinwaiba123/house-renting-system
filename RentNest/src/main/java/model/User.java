@@ -5,57 +5,20 @@ import java.sql.Timestamp;
 public class User {
 
 	private int userId;
-
 	private String fullName;
-
 	private String email;
-
 	private String phone;
-
 	private String password;
-
 	private String gender;
-
 	private String dateOfBirth;
-
 	private String address;
-
 	private String image;
-
 	private String role;
-
 	private boolean status;
-
 	private boolean isDeleted;
-
 	private Timestamp createdAt;
 
-	// ================= DEFAULT CONSTRUCTOR =================
-
-	public User() {
-
-	}
-
-	// ================= PARAMETERIZED CONSTRUCTOR =================
-
-	public User(int userId, String fullName, String email, String phone, String password, String gender,
-			String dateOfBirth, String address, String image, String role, boolean status, boolean isDeleted,
-			Timestamp createdAt) {
-
-		this.userId = userId;
-		this.fullName = fullName;
-		this.email = email;
-		this.phone = phone;
-		this.password = password;
-		this.gender = gender;
-		this.dateOfBirth = dateOfBirth;
-		this.address = address;
-		this.image = image;
-		this.role = role;
-		this.status = status;
-		this.isDeleted = isDeleted;
-		this.createdAt = createdAt;
-	}
+	// Getters and Setters
 
 	public int getUserId() {
 		return userId;

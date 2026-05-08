@@ -10,22 +10,7 @@ public class Review {
 	private String comment;
 	private Timestamp createdAt;
 
-// Default Constructor
-	public Review() {
-	}
-
-// Parameterized Constructor
-	public Review(int reviewId, int userId, int propertyId, int rating, String comment, Timestamp createdAt) {
-
-		this.reviewId = reviewId;
-		this.userId = userId;
-		this.propertyId = propertyId;
-		this.rating = rating;
-		this.comment = comment;
-		this.createdAt = createdAt;
-	}
-
-// Getters and Setters
+	// Getters and Setters
 
 	public int getReviewId() {
 		return reviewId;

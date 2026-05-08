@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
 import util.DBConnection;
 
 public class UserDAO {
@@ -87,8 +86,6 @@ public class UserDAO {
 				user.setEmail(rs.getString("email"));
 				user.setPhone(rs.getString("phone"));
 				user.setRole(rs.getString("role"));
-				user.setStatus(rs.getString("status"));
-				user.setImagePath(rs.getString("image_path"));
 
 				list.add(user);
 			}

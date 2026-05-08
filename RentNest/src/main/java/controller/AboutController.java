@@ -13,14 +13,9 @@ import java.io.IOException;
 @WebServlet("/about")
 public class AboutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
-    public AboutController() {
-        super();
- 
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/pages/public/about.jsp").forward(request, response);
 	}
 

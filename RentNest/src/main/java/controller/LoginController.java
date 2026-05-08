@@ -53,12 +53,6 @@ public class LoginController extends HttpServlet {
 			return;
 		}
 
-		if (!"ACTIVE".equalsIgnoreCase(user.getStatus())) {
-			request.setAttribute("errorMessage", "Your account is not active. Please wait for admin approval.");
-			request.getRequestDispatcher("/WEB-INF/pages/auth/login.jsp").forward(request, response);
-			return;
-		}
-
 		SessionUtil.setAttribute(request, "user", user);
 		SessionUtil.setAttribute(request, "loggedInUser", user);
 		SessionUtil.setAttribute(request, "userId", user.getUserId());

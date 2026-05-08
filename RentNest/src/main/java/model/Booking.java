@@ -16,27 +16,8 @@ public class Booking {
 	private boolean isDeleted;
 	private Timestamp createdAt;
 
-	// Default Constructor
-	public Booking() {
-	}
-
-	// Parameterized Constructor
-	public Booking(int bookingId, int userId, int propertyId, Date bookingDate, Date moveInDate, int durationMonths,
-			String message, boolean status, boolean isCancelled, boolean isDeleted, Timestamp createdAt) {
-
-		this.bookingId = bookingId;
-		this.userId = userId;
-		this.propertyId = propertyId;
-		this.bookingDate = bookingDate;
-		this.moveInDate = moveInDate;
-		this.durationMonths = durationMonths;
-		this.message = message;
-		this.status = status;
-		this.isCancelled = isCancelled;
-		this.isDeleted = isDeleted;
-		this.createdAt = createdAt;
-	}
-
+	// Getters and Setters
+	
 	public int getBookingId() {
 		return bookingId;
 	}
