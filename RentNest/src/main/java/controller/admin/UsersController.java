@@ -8,15 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class AdminDashboardController
+ * Servlet implementation class UsersController
  */
-@WebServlet("/admin/dashboard")
-public class AdminDashboardController extends HttpServlet {
+@WebServlet("/admin/users")
+public class UsersController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/admin/users.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

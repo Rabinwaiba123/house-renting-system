@@ -9,13 +9,12 @@
 				class="nav-option"> <i class="fa fa-users nav-img"></i> <span>Users</span>
 			</a> <a href="${pageContext.request.contextPath}/admin/properties"
 				class="nav-option"> <i class="fa fa-building-o nav-img"></i> <span>Properties</span>
-			</a> <a
-				href="${pageContext.request.contextPath}/booking?action=adminBookings"
+			</a> <a href="${pageContext.request.contextPath}/admin/bookings"
 				class="nav-option"> <i class="fa fa-calendar nav-img"></i> <span>Bookings</span>
 			</a> <a href="${pageContext.request.contextPath}/admin/contacts"
 				class="nav-option"> <i class="fa fa-money nav-img"></i> <span>Contacts</span>
 			</a> <a href="${pageContext.request.contextPath}/admin/report"
-				class="nav-option"> <i class="fa fa-file-text-o nav-img"></i> <span>Reports</span>
+				class="nav-option"> <i class="fa fa-file-text-o nav-img"></i> <span>Report</span>
 			</a>
 		</div>
 

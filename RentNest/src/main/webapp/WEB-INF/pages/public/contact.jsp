@@ -102,34 +102,6 @@ button {
 	border-radius: 10px;
 	margin-top: 15px;
 }
-
-/* FAQ */
-.faq {
-	margin-top: 60px;
-	text-align: center;
-}
-
-.faq-item {
-	background: white;
-	padding: 18px;
-	margin: 12px auto;
-	width: 70%;
-	border-radius: 12px;
-	text-align: left;
-	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-}
-
-.faq-question {
-	display: flex;
-	justify-content: space-between;
-	font-weight: 600;
-}
-
-.faq-answer {
-	display: none;
-	margin-top: 10px;
-	color: #666;
-}
 </style>
 </head>
 
@@ -208,6 +180,7 @@ button {
 				</div>
 			</div>
 		</div>
+	</div>
 
 	<!-- ================= FOOTER ================= -->
 	<jsp:include page="/WEB-INF/pages/include/footer.jsp" />

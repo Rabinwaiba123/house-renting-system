@@ -9,8 +9,6 @@ public class User {
 	private String email;
 	private String phone;
 	private String password;
-	private String gender;
-	private String dateOfBirth;
 	private String address;
 	private String image;
 	private String role;
@@ -58,22 +56,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public String getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getAddress() {

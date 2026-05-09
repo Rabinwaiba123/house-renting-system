@@ -5,19 +5,15 @@
 		<input type="checkbox" id="check" /> <label class="nav-logo">RentNest</label>
 
 		<ul class="nav-menu">
-			<li><a class="active"
-				href="${pageContext.request.contextPath}/home">Home</a></li>
+			<li><a class="active" href="${pageContext.request.contextPath}/">Home</a></li>
 
-			<li><a
-				href="${pageContext.request.contextPath}/properties">Properties</a>
+			<li><a href="${pageContext.request.contextPath}/property-list">Properties</a>
 			</li>
 
-			<li><a
-				href="${pageContext.request.contextPath}/about">About</a>
+			<li><a href="${pageContext.request.contextPath}/about">About</a>
 			</li>
 
-			<li><a
-				href="${pageContext.request.contextPath}/contact">Contact</a>
+			<li><a href="${pageContext.request.contextPath}/contact">Contact</a>
 			</li>
 
 			<!-- MOBILE NOT LOGIN -->
@@ -32,16 +28,14 @@
 			<!-- MOBILE USER LOGIN -->
 			<c:if test="${not empty sessionScope.user}">
 				<li class="mobile-profile"><a
-					href="${pageContext.request.contextPath}/profile">My
-						Profile</a></li>
+					href="${pageContext.request.contextPath}/profile">My Profile</a></li>
 
 				<li class="mobile-profile"><a
 					href="${pageContext.request.contextPath}/booking?action=myBookings">My
 						Bookings</a></li>
 
 				<li class="mobile-profile"><a
-					href="${pageContext.request.contextPath}/wishlist">Wishlist</a>
-				</li>
+					href="${pageContext.request.contextPath}/wishlist">Wishlist</a></li>
 
 				<li class="mobile-profile"><a
 					href="${pageContext.request.contextPath}/logout" class="logout">Logout</a>
@@ -79,12 +73,12 @@
 				</label>
 
 				<div class="profile-dropdown">
-					<a href="${pageContext.request.contextPath}/profile">
-						<i class="fa fa-user"></i> My Profile
-					</a> <a href="${pageContext.request.contextPath}/bookings">
-						<i class="fa fa-calendar"></i> My Bookings
-					</a> <a href="${pageContext.request.contextPath}/wishlist">
-						<i class="fa fa-heart"></i> Wishlist
+					<a href="${pageContext.request.contextPath}/profile"> <i
+						class="fa fa-user"></i> My Profile
+					</a> <a href="${pageContext.request.contextPath}/bookings"> <i
+						class="fa fa-calendar"></i> My Bookings
+					</a> <a href="${pageContext.request.contextPath}/wishlist"> <i
+						class="fa fa-heart"></i> Wishlist
 					</a> <a href="${pageContext.request.contextPath}/logout" class="logout">
 						<i class="fa fa-sign-out"></i> Logout
 					</a>

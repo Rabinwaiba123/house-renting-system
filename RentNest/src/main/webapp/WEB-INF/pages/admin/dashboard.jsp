@@ -14,8 +14,7 @@
 
 	<!-- ================= NAVBAR ================= -->
 	<jsp:include page="/WEB-INF/pages/include/admin-navbar.jsp" />
-		<jsp:param name="title" value="Admin Dashboard" />
-	</jsp:include>
+
 
 	<div class="main-container">
 		<!-- ================= SIDEBAR ================= -->

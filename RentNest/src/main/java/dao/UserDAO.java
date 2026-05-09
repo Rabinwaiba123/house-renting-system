@@ -4,25 +4,26 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import model.User;
 import util.DBConnection;
 
 public class UserDAO {
 
-	public boolean register(String fullName, String email, String phone, String hashedPassword, String role,
-			String status, String imagePath) {
-
-		String sql = "INSERT INTO users(full_name, email, phone, password, role, status, image_path) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+	public boolean register(User user) {
+		String sql = "INSERT INTO users(full_name, email, phone, password, address, image, role, status, is_deleted) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
-			ps.setString(1, fullName);
-			ps.setString(2, email);
-			ps.setString(3, phone);
-			ps.setString(4, hashedPassword);
-			ps.setString(5, role);
-			ps.setString(6, status);
-			ps.setString(7, imagePath);
+			ps.setString(1, user.getFullName());
+			ps.setString(2, user.getEmail());
+			ps.setString(3, user.getPhone());
+			ps.setString(4, user.getPassword());
+			ps.setString(5, user.getAddress());
+			ps.setString(6, user.getImage());
+			ps.setString(7, user.getRole());
+			ps.setBoolean(8, false);
+			ps.setBoolean(9, false);
 
 			return ps.executeUpdate() > 0;
 
@@ -34,14 +35,13 @@ public class UserDAO {
 	}
 
 	public boolean emailExists(String email) {
-		String sql = "SELECT user_id FROM users WHERE email = ?";
+		String sql = "SELECT user_id FROM users WHERE email = ? AND is_deleted = false";
 
 		try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
 			ps.setString(1, email);
 
 			ResultSet rs = ps.executeQuery();
-
 			return rs.next();
 
 		} catch (Exception e) {
@@ -52,14 +52,13 @@ public class UserDAO {
 	}
 
 	public boolean phoneExists(String phone) {
-		String sql = "SELECT user_id FROM users WHERE phone = ?";
+		String sql = "SELECT user_id FROM users WHERE phone = ? AND is_deleted = false";
 
 		try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
 			ps.setString(1, phone);
 
 			ResultSet rs = ps.executeQuery();
-
 			return rs.next();
 
 		} catch (Exception e) {
@@ -69,63 +68,34 @@ public class UserDAO {
 		return false;
 	}
 
-	public java.util.List<model.User> getAllUsers() {
-		java.util.List<model.User> list = new java.util.ArrayList<>();
+	public User getUserByEmail(String email) {
 
-		String sql = "SELECT * FROM users ORDER BY user_id DESC";
+		String sql = "SELECT * FROM users WHERE email = ? AND is_deleted = false";
 
-		try (Connection con = DBConnection.getConnection();
-				PreparedStatement ps = con.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery()) {
+		try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
-			while (rs.next()) {
-				model.User user = new model.User();
+			ps.setString(1, email);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				User user = new User();
 
 				user.setUserId(rs.getInt("user_id"));
 				user.setFullName(rs.getString("full_name"));
 				user.setEmail(rs.getString("email"));
 				user.setPhone(rs.getString("phone"));
+				user.setPassword(rs.getString("password"));
 				user.setRole(rs.getString("role"));
+				user.setStatus(rs.getBoolean("status"));
 
-				list.add(user);
+				return user;
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return list;
-	}
-
-	public boolean updateUserStatus(int userId, String status) {
-		String sql = "UPDATE users SET status = ? WHERE user_id = ?";
-
-		try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
-			ps.setString(1, status);
-			ps.setInt(2, userId);
-
-			return ps.executeUpdate() > 0;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return false;
-	}
-
-	public boolean deleteUser(int userId) {
-		String sql = "DELETE FROM users WHERE user_id = ?";
-
-		try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
-			ps.setInt(1, userId);
-			return ps.executeUpdate() > 0;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return false;
+		return null;
 	}
 }

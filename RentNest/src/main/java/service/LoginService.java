@@ -1,47 +1,43 @@
 package service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
+import dao.UserDAO;
 import model.User;
-import util.DBConnection;
 import util.PasswordUtil;
 
 public class LoginService {
 
+	private UserDAO userDAO = new UserDAO();
+
 	public User login(String email, String password) {
+		User user = userDAO.getUserByEmail(email);
 
-		String sql = "SELECT * FROM users WHERE email = ?";
+		if (user == null) {
+			return null;
+		}
 
-		try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+		boolean passwordMatched = PasswordUtil.checkPassword(password, user.getPassword());
 
-			ps.setString(1, email);
-
-			ResultSet rs = ps.executeQuery();
-
-			if (rs.next()) {
-				String storedPassword = rs.getString("password");
-
-				if (PasswordUtil.checkPassword(password, storedPassword)) {
-
-					User user = new User();
-
-					user.setUserId(rs.getInt("user_id"));
-					user.setFullName(rs.getString("full_name"));
-					user.setEmail(rs.getString("email"));
-					user.setPhone(rs.getString("phone"));
-					user.setPassword(storedPassword);
-					user.setRole(rs.getString("role"));
-
-					return user;
-				}
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (passwordMatched) {
+			return user;
 		}
 
 		return null;
+	}
+
+	public String validateLogin(String email, String password) {
+
+		if (email == null || email.trim().isEmpty()) {
+			return "Email is required.";
+		}
+
+		if (password == null || password.trim().isEmpty()) {
+			return "Password is required.";
+		}
+
+		if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+			return "Please enter a valid email address.";
+		}
+
+		return "success";
 	}
 }

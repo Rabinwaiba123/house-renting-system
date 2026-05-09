@@ -20,7 +20,7 @@ public class LogoutController extends HttpServlet {
 			throws ServletException, IOException {
 
 		SessionUtil.invalidate(request);
-		CookieUtil.deleteCookie(response, "userEmail");
+		CookieUtil.deleteCookie(response, "rememberEmail");
 
 		response.sendRedirect(request.getContextPath() + "/home");
 	}
