@@ -10,179 +10,408 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/navbar.css">
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
 <style>
-/* CONTAINER */
-.container {
-	width: 85%;
+
+/* ================= HERO ================= */
+.contact-hero {
+	height: 320px;
+	background: linear-gradient(rgba(0, 72, 170, 0.88),
+		rgba(0, 52, 130, 0.92)),
+		url("${pageContext.request.contextPath}/images/contact-bg.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: white;
+	padding: 70px 20px 110px;
+	position: relative;
+}
+
+.contact-hero-content {
+	max-width: 620px;
+}
+
+.contact-hero-content h1 {
+	font-size: 52px;
+	font-weight: 400;
+	margin-bottom: 14px;
+	line-height: 1.1;
+}
+
+.contact-hero-content p {
+	font-size: 17px;
+	line-height: 1.5;
+	max-width: 520px;
 	margin: auto;
 }
 
-/* HERO */
-.header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 60px 0;
+/* ================= CONTACT SECTION ================= */
+.contact-section {
+	max-width: 1080px;
+	margin: -70px auto 60px;
+	padding: 0 20px;
+	position: relative;
+	z-index: 10;
 }
 
-.line {
-	width: 50px;
-	height: 3px;
-	background: #6c63ff;
-}
-
-.hero-image {
-	background: #dfe6e9;
-	padding: 20px;
-	border-radius: 15px;
-}
-
-.hero-image img {
-	width: 350px;
-}
-
-/* MAIN */
-.main {
-	display: flex;
-	gap: 20px;
-}
-
-/* FORM */
-.form-box {
-	flex: 2;
+.contact-card {
 	background: white;
-	padding: 25px;
-	border-radius: 15px;
+	border-radius: 12px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	box-shadow: 0 14px 35px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
 }
 
-.row {
-	display: flex;
-	gap: 10px;
+.contact-info, .contact-form {
+	padding: 46px;
 }
 
-input, select, textarea {
-	width: 100%;
-	padding: 12px;
-	margin-top: 10px;
-	border-radius: 8px;
-	border: 1px solid #ddd;
+.contact-info {
+	border-right: 1px solid #e5e7eb;
 }
 
-button {
-	width: 100%;
-	margin-top: 15px;
-	padding: 12px;
-	border: none;
-	background: linear-gradient(to right, #5a6cff, #6c63ff);
-	color: white;
-	border-radius: 25px;
+.contact-info h2, .contact-form h2 {
+	font-size: 28px;
+	margin-bottom: 14px;
+	color: #161b22;
 }
 
-/* INFO */
-.info-box {
-	flex: 1;
-	background: white;
-	padding: 20px;
-	border-radius: 15px;
+.contact-info>p {
+	font-size: 15px;
+	line-height: 1.5;
+	color: #4b5563;
+	margin-bottom: 30px;
 }
 
+/* ================= INFO ITEMS ================= */
 .info-item {
 	display: flex;
-	gap: 10px;
+	align-items: flex-start;
+	gap: 14px;
+	margin-bottom: 24px;
+}
+
+.info-icon {
+	width: 44px;
+	height: 44px;
+	background: #075ad9;
+	color: white;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+	flex-shrink: 0;
+}
+
+.info-text h3 {
+	font-size: 18px;
+	margin-bottom: 4px;
+	color: #161b22;
+}
+
+.info-text p {
+	font-size: 14px;
+	line-height: 1.5;
+	color: #4b5563;
+}
+
+.social-title {
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	color: #4b5563;
+	margin-top: 28px;
+	margin-bottom: 14px;
+}
+
+.social-icons {
+	display: flex;
+	align-items: center;
+	gap: 12px;
 	margin-top: 10px;
 }
 
-.map {
+.social-icons a {
+	width: 40px;
+	height: 40px;
+	background-color: #075ad9;
+	color: white;
+	border-radius: 50%;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-left: 8px;
+	position: relative;
+	overflow: hidden;
+	position: relative
+}
+
+.social-icons a::before, .social-icons a::after {
+	content: none;
+	display: none;
+}
+
+.social-icons a i {
+	color: white;
+	font-size: 18px;
+	position: static;
+	background: none;
+}
+
+/* ================= FORM ================= */
+.form-group {
+	margin-bottom: 14px;
+}
+
+.form-group label {
+	display: block;
+	font-size: 12px;
+	font-weight: 700;
+	color: #4b5563;
+	margin-bottom: 6px;
+	letter-spacing: 0.3px;
+}
+
+.form-group input, .form-group textarea {
 	width: 100%;
-	height: 200px;
-	border-radius: 10px;
-	margin-top: 15px;
+	border: 1px solid #cbd5e1;
+	background: #f8fafc;
+	border-radius: 7px;
+	padding: 14px;
+	font-size: 14px;
+	outline: none;
+	color: #1f2937;
+}
+
+.form-group input {
+	height: 50px;
+}
+
+.form-group textarea {
+	height: 110px;
+	resize: none;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+	border-color: #075ad9;
+	background: white;
+}
+
+.send-btn {
+	width: 100%;
+	height: 50px;
+	border: none;
+	border-radius: 7px;
+	background: #075ad9;
+	color: white;
+	font-size: 15px;
+	font-weight: 700;
+	cursor: pointer;
+	margin-top: 4px;
+}
+
+.send-btn:hover {
+	background: #004fc1;
+}
+
+/* ================= RESPONSIVE ================= */
+@media ( max-width : 900px) {
+	.contact-hero {
+		height: 280px;
+		padding: 60px 20px 100px;
+	}
+	.contact-hero-content h1 {
+		font-size: 42px;
+	}
+	.contact-hero-content p {
+		font-size: 15px;
+	}
+	.contact-card {
+		grid-template-columns: 1fr;
+	}
+	.contact-info {
+		border-right: none;
+		border-bottom: 1px solid #e5e7eb;
+	}
+}
+
+@media ( max-width : 600px) {
+	.contact-hero {
+		height: 240px;
+		padding: 50px 16px 90px;
+	}
+	.contact-hero-content h1 {
+		font-size: 34px;
+	}
+	.contact-hero-content p {
+		font-size: 14px;
+	}
+	.contact-section {
+		margin-top: -50px;
+	}
+	.contact-info, .contact-form {
+		padding: 30px 22px;
+	}
+	.contact-info h2, .contact-form h2 {
+		font-size: 24px;
+	}
 }
 </style>
 </head>
 
 <body>
+
 	<!-- ================= NAVBAR ================= -->
 	<jsp:include page="/WEB-INF/pages/include/navbar.jsp" />
 
-	<div class="container">
-		<!-- HERO -->
-		<div class="header">
-			<div>
-				<h1>Contact Us</h1>
-				<p>We're here to help you find your sanctuary.</p>
-				<div class="line"></div>
+	<!-- ================= HERO ================= -->
+	<section class="contact-hero">
+		<div class="contact-hero-content">
+			<h1>Contact us</h1>
+
+			<p>RentNest is ready to provide the right housing solution
+				according to your needs</p>
+		</div>
+	</section>
+
+	<!-- ================= CONTACT SECTION ================= -->
+	<section class="contact-section">
+
+		<div class="contact-card">
+
+			<!-- ================= LEFT INFO ================= -->
+			<div class="contact-info">
+
+				<h2>Get in touch</h2>
+
+				<p>Our team is here to assist you. Whether you're looking for a
+					new home or need management services, feel free to reach out.</p>
+
+				<div class="info-item">
+
+					<div class="info-icon">
+						<i class="fa fa-map-marker"></i>
+					</div>
+
+					<div class="info-text">
+						<h3>Head Office</h3>
+
+						<p>
+							123 Property Lane, Suite 400 <br> San Francisco, CA 94103
+						</p>
+					</div>
+
+				</div>
+
+				<div class="info-item">
+
+					<div class="info-icon">
+						<i class="fa fa-envelope-o"></i>
+					</div>
+
+					<div class="info-text">
+						<h3>Email Us</h3>
+
+						<p>
+							support@rentnest.com <br> hello@rentnest.com
+						</p>
+					</div>
+
+				</div>
+
+				<div class="info-item">
+
+					<div class="info-icon">
+						<i class="fa fa-phone"></i>
+					</div>
+
+					<div class="info-text">
+						<h3>Call Us</h3>
+
+						<p>
+							Phone: +1 (555) 123-4567 <br> Fax: +1 (555) 123-4568
+						</p>
+					</div>
+
+				</div>
+
+				<p class="social-title">FOLLOW OUR SOCIAL MEDIA</p>
+
+				<div class="social-icons">
+
+					<a href=""> <i class="fa fa-facebook"></i>
+					</a> <a href=""> <i class="fa fa-instagram"></i>
+					</a> <a href=""> <i class="fa fa-twitter"></i>
+					</a> <a href=""> <i class="fa fa-youtube-play"></i>
+					</a>
+
+				</div>
+
 			</div>
 
-			<div class="hero-image">
-				<img src="<%=request.getContextPath()%>/images/home.png" />
+			<!-- ================= RIGHT FORM ================= -->
+			<div class="contact-form">
+
+				<h2>Send us a message</h2>
+
+				<form action="${pageContext.request.contextPath}/contact"
+					method="post">
+
+					<div class="form-group">
+
+						<label>Name</label> <input type="text" name="name"
+							placeholder="Full Name" required>
+
+					</div>
+
+					<div class="form-group">
+
+						<label>Email</label> <input type="email" name="email"
+							placeholder="Email Address" required>
+
+					</div>
+
+					<div class="form-group">
+
+						<label>Subject</label> <input type="text" name="subject"
+							placeholder="What is this regarding?" required>
+
+					</div>
+
+					<div class="form-group">
+
+						<label>Message</label>
+
+						<textarea name="message" placeholder="Write your message here..."
+							required></textarea>
+
+					</div>
+
+					<button type="submit" class="send-btn">Send</button>
+
+				</form>
+
 			</div>
+
 		</div>
 
-		<!-- MAIN -->
-		<div class="main">
-			<!-- FORM -->
-			<div class="form-box">
-				<h3>Send us a message</h3>
-				<p class="sub">Our curation team typically responds within 4
-					business hours.</p>
-
-				<div class="row">
-					<input type="text" placeholder="Full Name" /> <input type="email"
-						id="email" placeholder="Email Address" />
-				</div>
-
-				<small id="error"></small> <select>
-					<option>Property Inquiry</option>
-					<option>Booking Issue</option>
-					<option>General Query</option>
-				</select>
-
-				<textarea placeholder="Tell us how we can help..."></textarea>
-
-				<button onclick="validateForm()">Submit Message</button>
-
-				<div class="success" id="successBox">
-					<i class="fa-solid fa-circle-check"></i> Message Sent Successfully
-				</div>
-			</div>
-
-			<!-- INFO -->
-			<div class="info-box">
-				<h3>Contact Information</h3>
-
-				<div class="info-item">
-					<i class="fa-solid fa-location-dot"></i>
-					<div>
-						<b>Headquarters</b>
-						<p>1221 Avenue of the Americas, New York, NY</p>
-					</div>
-				</div>
-
-				<div class="info-item">
-					<i class="fa-solid fa-phone"></i>
-					<div>
-						<b>Phone Support</b>
-						<p>+1 (555) 234-8890</p>
-					</div>
-				</div>
-
-				<div class="info-item">
-					<i class="fa-solid fa-envelope"></i>
-					<div>
-						<b>Direct Email</b>
-						<p>concierge@residentialcurator.com</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	</section>
 
 	<!-- ================= FOOTER ================= -->
 	<jsp:include page="/WEB-INF/pages/include/footer.jsp" />
+
 </body>
 </html>

@@ -21,9 +21,8 @@
 		<img src="${pageContext.request.contextPath}/images/bell_icon.png"
 			class="icn" alt="bell-icon" />
 		<div class="dp">
-			<a href="${pageContext.request.contextPath}/pages/admin/admin-profile.jsp"><img
-				src="${pageContext.request.contextPath}/images/images.jpg"
-				class="dpicn" alt="dp" /></a>
+			<img src="${pageContext.request.contextPath}/images/images.jpg"
+				class="dpicn" alt="dp" />
 		</div>
 	</div>
 </header>

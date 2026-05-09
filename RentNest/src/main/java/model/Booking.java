@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Booking {
+
 	private int bookingId;
 	private int userId;
 	private int propertyId;
@@ -17,7 +18,7 @@ public class Booking {
 	private Timestamp createdAt;
 
 	// Getters and Setters
-	
+
 	public int getBookingId() {
 		return bookingId;
 	}

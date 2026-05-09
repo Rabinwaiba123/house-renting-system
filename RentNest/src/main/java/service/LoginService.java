@@ -15,9 +15,7 @@ public class LoginService {
 			return null;
 		}
 
-		boolean passwordMatched = PasswordUtil.checkPassword(password, user.getPassword());
-
-		if (passwordMatched) {
+		if (PasswordUtil.checkPassword(password, user.getPassword())) {
 			return user;
 		}
 
@@ -38,6 +36,6 @@ public class LoginService {
 			return "Please enter a valid email address.";
 		}
 
-		return "success";
+		return null;
 	}
 }

@@ -48,9 +48,9 @@ public class RegisterService {
 
 		user.setDeleted(false);
 
-		boolean result = userDAO.register(user);
+		int status = userDAO.register(user);
 
-		if (result) {
+		if (status > 0) {
 			return "success";
 		}
 

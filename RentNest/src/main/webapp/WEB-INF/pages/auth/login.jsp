@@ -11,7 +11,7 @@
 <title>Login - RentNest</title>
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/auth.css?v=1">
+	href="${pageContext.request.contextPath}/css/auth.css">
 </head>
 
 <body>
@@ -45,22 +45,30 @@
 					<p class="auth-error">${errorMessage}</p>
 				</c:if>
 
-				<c:if test="${param.success == 'registered'}">
-					<p class="auth-success">Registration successful. Please wait
-						for admin approval.</p>
+				<c:if test="${not empty successMessage}">
+					<p class="auth-success">${successMessage}</p>
 				</c:if>
+
 
 				<form class="form" action="${pageContext.request.contextPath}/login"
 					method="post">
 
 					<div class="form__group">
 						<label>Email</label> <input type="email" name="email"
-							placeholder="Enter email">
+							placeholder="Enter email" value="${cookie.rememberEmail.value}"
+							required>
 					</div>
 
 					<div class="form__group">
 						<label>Password</label> <input type="password" name="password"
-							placeholder="Enter password">
+							placeholder="Enter password" required>
+					</div>
+
+					<div class="form__group">
+						<label> <input type="checkbox" name="remember"
+							<c:if test="${not empty cookie.rememberEmail.value}">checked</c:if>>
+							Remember me
+						</label>
 					</div>
 
 					<button type="submit" class="btn btn--primary btn--full">

@@ -1,18 +1,15 @@
 package model;
 
-import java.sql.Timestamp;
-
 public class Contact {
+
 	private int contactId;
 	private String fullName;
 	private String email;
 	private String subject;
 	private String message;
-	private Timestamp createdAt;
 
-	
 	// Getters and Setters
-	
+
 	public int getContactId() {
 		return contactId;
 	}
@@ -51,14 +48,6 @@ public class Contact {
 
 	public void setMessage(String message) {
 		this.message = message;
-	}
-
-	public Timestamp getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
 	}
 
 }

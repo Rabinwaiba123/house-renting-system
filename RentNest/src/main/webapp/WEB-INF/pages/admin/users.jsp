@@ -44,11 +44,12 @@
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Name</th>
+								<th>Full Name</th>
 								<th>Email</th>
+								<th>Phone</th>
 								<th>Role</th>
 								<th>Status</th>
-								<th>Actions</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -59,28 +60,25 @@
 											<td>${user.userId}</td>
 											<td>${user.fullName}</td>
 											<td>${user.email}</td>
+											<td>${user.phone}</td>
 											<td>${user.role}</td>
 
-											<td><span class="status-badge ${user.status}">
-													${user.status} </span></td>
+											<td><c:choose>
+													<c:when test="${user.status}">
+														<span class="status-badge approved">Approved</span>
+													</c:when>
+													<c:otherwise>
+														<span class="status-badge pending">Pending</span>
+													</c:otherwise>
+												</c:choose></td>
 
-
-											<td class="actions"><c:if
-													test="${user.status == 'PENDING'}">
+											<td class="actions"><c:if test="${!user.status}">
 													<form
 														action="${pageContext.request.contextPath}/admin/users"
 														method="post" style="display: inline;">
 														<input type="hidden" name="userId" value="${user.userId}">
 														<input type="hidden" name="action" value="approve">
-														<button type="submit">Approve</button>
-													</form>
-
-													<form
-														action="${pageContext.request.contextPath}/admin/users"
-														method="post" style="display: inline;">
-														<input type="hidden" name="userId" value="${user.userId}">
-														<input type="hidden" name="action" value="reject">
-														<button type="submit">Reject</button>
+														<button type="submit" class="approve-btn">Approve</button>
 													</form>
 												</c:if>
 
@@ -89,7 +87,7 @@
 													method="post" style="display: inline;">
 													<input type="hidden" name="userId" value="${user.userId}">
 													<input type="hidden" name="action" value="delete">
-													<button type="submit">Delete</button>
+													<button type="submit" class="delete-btn">Delete</button>
 												</form></td>
 										</tr>
 									</c:forEach>
@@ -97,7 +95,7 @@
 
 								<c:otherwise>
 									<tr>
-										<td colspan="7">No users found.</td>
+										<td colspan="8">No users found.</td>
 									</tr>
 								</c:otherwise>
 							</c:choose>

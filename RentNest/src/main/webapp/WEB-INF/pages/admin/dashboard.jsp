@@ -42,14 +42,6 @@
 				</div>
 
 				<div class="box box2">
-					<i class="fa fa-users fa-2x"></i>
-					<div class="text">
-						<p>TOTAL OWNERS</p>
-						<h2>24</h2>
-					</div>
-				</div>
-
-				<div class="box box3">
 					<i class="fa fa-file-text-o fa-2x"></i>
 					<div class="text">
 						<p>TOTAL BOOKINGS</p>
@@ -57,10 +49,18 @@
 					</div>
 				</div>
 
-				<div class="box box4">
+				<div class="box box3">
 					<i class="fa fa-home fa-2x"></i>
 					<div class="text">
 						<p>TOTAL PROPERTIES</p>
+						<h2>423</h2>
+					</div>
+				</div>
+
+				<div class="box box4">
+					<i class="fa fa-home fa-2x"></i>
+					<div class="text">
+						<p>TOTAL MESSAGE</p>
 						<h2>423</h2>
 					</div>
 				</div>

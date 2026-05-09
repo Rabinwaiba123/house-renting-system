@@ -3,6 +3,7 @@ package model;
 import java.sql.Timestamp;
 
 public class Property {
+
 	private int propertyId;
 	private String title;
 	private String type;
@@ -19,7 +20,7 @@ public class Property {
 	private Timestamp createdAt;
 
 	// Getters and Setters
-	
+
 	public int getPropertyId() {
 		return propertyId;
 	}

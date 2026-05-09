@@ -12,414 +12,131 @@ import util.DBConnection;
 public class PropertyDAO {
 
 	// Add new property
-	public boolean addProperty(Property property) {
-		boolean result = false;
-
-		String sql = "INSERT INTO properties(owner_id, title, type, location, price, rooms, description, image, status, availability) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', 'available')";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-
-			ps.setString(2, property.getTitle());
-			ps.setString(3, property.getType());
-			ps.setString(4, property.getLocation());
-			ps.setDouble(5, property.getPrice());
-			ps.setString(7, property.getDescription());
-			ps.setString(8, property.getImage());
-
-			int row = ps.executeUpdate();
-
-			if (row > 0) {
-				result = true;
-			}
-
-			ps.close();
-			conn.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
+	public int addProperty(Property property) {
+		int status = 0;
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "INSERT INTO properties(title, type, location, price, bedrooms, bathrooms, area_sqft, description, image, availability, status, is_deleted) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, property.getTitle());
+			ps.setString(2, property.getType());
+			ps.setString(3, property.getLocation());
+			ps.setDouble(4, property.getPrice());
+			ps.setInt(5, property.getBedrooms());
+			ps.setInt(6, property.getBathrooms());
+			ps.setInt(7, property.getAreaSqft());
+			ps.setString(8, property.getDescription());
+			ps.setString(9, property.getImage());
+			ps.setBoolean(10, property.isAvailability());
+			ps.setBoolean(11, property.isStatus());
+			ps.setBoolean(12, false);
+			status = ps.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
-		return result;
+		return status;
 	}
 
 	// Get all approved properties for public/user side
-	public List<Property> getApprovedProperties() {
-		List<Property> list = new ArrayList<Property>();
-
-		String sql = "SELECT * FROM properties WHERE status = 'approved' AND availability = 'available'";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
+	public List<Property> getAllProperties() {
+		List<Property> list = new ArrayList<>();
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "SELECT * FROM properties WHERE is_deleted = FALSE ORDER BY created_at DESC";
+			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-
 			while (rs.next()) {
 				Property p = new Property();
-
 				p.setPropertyId(rs.getInt("property_id"));
-
 				p.setTitle(rs.getString("title"));
 				p.setType(rs.getString("type"));
 				p.setLocation(rs.getString("location"));
 				p.setPrice(rs.getDouble("price"));
-
+				p.setBedrooms(rs.getInt("bedrooms"));
+				p.setBathrooms(rs.getInt("bathrooms"));
+				p.setAreaSqft(rs.getInt("area_sqft"));
 				p.setDescription(rs.getString("description"));
 				p.setImage(rs.getString("image"));
-
+				p.setAvailability(rs.getBoolean("availability"));
+				p.setStatus(rs.getBoolean("status"));
+				p.setDeleted(rs.getBoolean("is_deleted"));
+				p.setCreatedAt(rs.getTimestamp("created_at"));
 				list.add(p);
 			}
-
-			rs.close();
-			ps.close();
-			conn.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
 		return list;
 	}
 
 	// Get property by id
 	public Property getPropertyById(int propertyId) {
 		Property p = null;
-
-		String sql = "SELECT * FROM properties WHERE property_id = ?";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "SELECT * FROM properties WHERE property_id = ? AND is_deleted = FALSE";
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, propertyId);
-
 			ResultSet rs = ps.executeQuery();
-
 			if (rs.next()) {
 				p = new Property();
-
 				p.setPropertyId(rs.getInt("property_id"));
-
 				p.setTitle(rs.getString("title"));
 				p.setType(rs.getString("type"));
 				p.setLocation(rs.getString("location"));
 				p.setPrice(rs.getDouble("price"));
-
+				p.setBedrooms(rs.getInt("bedrooms"));
+				p.setBathrooms(rs.getInt("bathrooms"));
+				p.setAreaSqft(rs.getInt("area_sqft"));
 				p.setDescription(rs.getString("description"));
 				p.setImage(rs.getString("image"));
-
+				p.setAvailability(rs.getBoolean("availability"));
+				p.setStatus(rs.getBoolean("status"));
+				p.setDeleted(rs.getBoolean("is_deleted"));
+				p.setCreatedAt(rs.getTimestamp("created_at"));
 			}
-
-			rs.close();
-			ps.close();
-			conn.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
 		return p;
 	}
 
-	// Get properties added by one owner
-	public List<Property> getPropertiesByOwner(int ownerId) {
-		List<Property> list = new ArrayList<Property>();
-
-		String sql = "SELECT * FROM properties WHERE owner_id = ?";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-
-			ps.setInt(1, ownerId);
-
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				Property p = new Property();
-
-				p.setPropertyId(rs.getInt("property_id"));
-
-				p.setTitle(rs.getString("title"));
-				p.setType(rs.getString("type"));
-				p.setLocation(rs.getString("location"));
-				p.setPrice(rs.getDouble("price"));
-
-				p.setDescription(rs.getString("description"));
-				p.setImage(rs.getString("image"));
-
-				list.add(p);
-			}
-
-			rs.close();
-			ps.close();
-			conn.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
-	}
-
 	// Update property
-	public boolean updateProperty(Property property) {
-		boolean result = false;
-
-		String sql = "UPDATE properties SET title = ?, type = ?, location = ?, price = ?, rooms = ?, description = ?, image = ?, availability = ? WHERE property_id = ?";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-
+	public int updateProperty(Property property) {
+		int status = 0;
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "UPDATE properties SET title = ?, type = ?, location = ?, price = ?, "
+					+ "bedrooms = ?, bathrooms = ?, area_sqft = ?, description = ?, image = ?, "
+					+ "availability = ?, status = ? WHERE property_id = ? AND is_deleted = FALSE";
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, property.getTitle());
 			ps.setString(2, property.getType());
 			ps.setString(3, property.getLocation());
 			ps.setDouble(4, property.getPrice());
-
-			ps.setString(6, property.getDescription());
-			ps.setString(7, property.getImage());
-
-			ps.setInt(9, property.getPropertyId());
-
-			int row = ps.executeUpdate();
-
-			if (row > 0) {
-				result = true;
-			}
-
-			ps.close();
-			conn.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
+			ps.setInt(5, property.getBedrooms());
+			ps.setInt(6, property.getBathrooms());
+			ps.setInt(7, property.getAreaSqft());
+			ps.setString(8, property.getDescription());
+			ps.setString(9, property.getImage());
+			ps.setBoolean(10, property.isAvailability());
+			ps.setBoolean(11, property.isStatus());
+			ps.setInt(12, property.getPropertyId());
+			status = ps.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
-		return result;
+		return status;
 	}
 
 	// Delete property
-	public boolean deleteProperty(int propertyId) {
-		boolean result = false;
-
-		String sql = "DELETE FROM properties WHERE property_id = ?";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-
+	public int deleteProperty(int propertyId) {
+		int status = 0;
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "UPDATE properties SET is_deleted = TRUE WHERE property_id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, propertyId);
-
-			int row = ps.executeUpdate();
-
-			if (row > 0) {
-				result = true;
-			}
-
-			ps.close();
-			conn.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
+			status = ps.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
-		return result;
-	}
-
-	public List<Property> getAllProperties() {
-		List<Property> list = new ArrayList<Property>();
-
-		String sql = "SELECT * FROM properties";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				Property p = new Property();
-
-				p.setPropertyId(rs.getInt("property_id"));
-
-				p.setTitle(rs.getString("title"));
-				p.setType(rs.getString("type"));
-				p.setLocation(rs.getString("location"));
-				p.setPrice(rs.getDouble("price"));
-
-				p.setDescription(rs.getString("description"));
-				p.setImage(rs.getString("image"));
-
-				list.add(p);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
-	}
-
-	// Admin: get pending properties
-	public List<Property> getPendingProperties() {
-		List<Property> list = new ArrayList<Property>();
-
-		String sql = "SELECT * FROM properties WHERE status = 'pending'";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				Property p = new Property();
-
-				p.setPropertyId(rs.getInt("property_id"));
-
-				p.setTitle(rs.getString("title"));
-				p.setType(rs.getString("type"));
-				p.setLocation(rs.getString("location"));
-				p.setPrice(rs.getDouble("price"));
-
-				p.setDescription(rs.getString("description"));
-				p.setImage(rs.getString("image"));
-
-				list.add(p);
-			}
-
-			rs.close();
-			ps.close();
-			conn.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
-	}
-
-	// Admin approve property
-	public boolean approveProperty(int propertyId) {
-		boolean result = false;
-
-		String sql = "UPDATE properties SET status = 'approved' WHERE property_id = ?";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-
-			ps.setInt(1, propertyId);
-
-			int row = ps.executeUpdate();
-
-			if (row > 0) {
-				result = true;
-			}
-
-			ps.close();
-			conn.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-
-	// Admin reject property
-	public boolean rejectProperty(int propertyId) {
-		boolean result = false;
-
-		String sql = "UPDATE properties SET status = 'rejected' WHERE property_id = ?";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-
-			ps.setInt(1, propertyId);
-
-			int row = ps.executeUpdate();
-
-			if (row > 0) {
-				result = true;
-			}
-
-			ps.close();
-			conn.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-
-	// Search and filter properties
-	public List<Property> searchProperties(String location, String type, double maxPrice) {
-		List<Property> list = new ArrayList<Property>();
-
-		String sql = "SELECT * FROM properties WHERE status = 'approved' AND availability = 'available' "
-				+ "AND location LIKE ? AND type LIKE ? AND price <= ?";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-
-			ps.setString(1, "%" + location + "%");
-			ps.setString(2, "%" + type + "%");
-			ps.setDouble(3, maxPrice);
-
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				Property p = new Property();
-
-				p.setPropertyId(rs.getInt("property_id"));
-
-				p.setTitle(rs.getString("title"));
-				p.setType(rs.getString("type"));
-				p.setLocation(rs.getString("location"));
-				p.setPrice(rs.getDouble("price"));
-
-				p.setDescription(rs.getString("description"));
-				p.setImage(rs.getString("image"));
-
-				list.add(p);
-			}
-
-			rs.close();
-			ps.close();
-			conn.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
-	}
-
-	public int getOwnerIdByPropertyId(int propertyId) {
-		int ownerId = 0;
-
-		String sql = "SELECT owner_id FROM properties WHERE property_id=?";
-
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-
-			ps.setInt(1, propertyId);
-
-			ResultSet rs = ps.executeQuery();
-
-			if (rs.next()) {
-				ownerId = rs.getInt("owner_id");
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return ownerId;
+		return status;
 	}
 }

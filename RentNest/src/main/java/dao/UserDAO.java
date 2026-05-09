@@ -3,18 +3,20 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.User;
 import util.DBConnection;
 
 public class UserDAO {
 
-	public boolean register(User user) {
-		String sql = "INSERT INTO users(full_name, email, phone, password, address, image, role, status, is_deleted) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-		try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
+	public int register(User user) {
+		int status = 0;
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "INSERT INTO users(full_name, email, phone, password, address, image, role, status, is_deleted) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, user.getFullName());
 			ps.setString(2, user.getEmail());
 			ps.setString(3, user.getPhone());
@@ -25,77 +27,113 @@ public class UserDAO {
 			ps.setBoolean(8, false);
 			ps.setBoolean(9, false);
 
-			return ps.executeUpdate() > 0;
-
-		} catch (Exception e) {
-			e.printStackTrace();
+			status = ps.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
-		return false;
+		return status;
 	}
 
 	public boolean emailExists(String email) {
-		String sql = "SELECT user_id FROM users WHERE email = ? AND is_deleted = false";
-
-		try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "SELECT user_id FROM users WHERE email = ? AND is_deleted = false";
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, email);
-
 			ResultSet rs = ps.executeQuery();
 			return rs.next();
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
 		return false;
 	}
 
 	public boolean phoneExists(String phone) {
-		String sql = "SELECT user_id FROM users WHERE phone = ? AND is_deleted = false";
-
-		try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "SELECT user_id FROM users WHERE phone = ? AND is_deleted = false";
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, phone);
-
 			ResultSet rs = ps.executeQuery();
 			return rs.next();
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
 		return false;
 	}
 
 	public User getUserByEmail(String email) {
-
-		String sql = "SELECT * FROM users WHERE email = ? AND is_deleted = false";
-
-		try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-
+		User e = null;
+		try (Connection conn = DBConnection.getConnection()) {
+			String sql = "SELECT * FROM users WHERE email = ? AND is_deleted = FALSE";
+			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
-
 			ResultSet rs = ps.executeQuery();
-
 			if (rs.next()) {
-				User user = new User();
-
-				user.setUserId(rs.getInt("user_id"));
-				user.setFullName(rs.getString("full_name"));
-				user.setEmail(rs.getString("email"));
-				user.setPhone(rs.getString("phone"));
-				user.setPassword(rs.getString("password"));
-				user.setRole(rs.getString("role"));
-				user.setStatus(rs.getBoolean("status"));
-
-				return user;
+				e = new User();
+				e.setUserId(rs.getInt("user_id"));
+				e.setFullName(rs.getString("full_name"));
+				e.setEmail(rs.getString("email"));
+				e.setPhone(rs.getString("phone"));
+				e.setPassword(rs.getString("password"));
+				e.setAddress(rs.getString("address"));
+				e.setImage(rs.getString("image"));
+				e.setRole(rs.getString("role"));
+				e.setStatus(rs.getBoolean("status"));
 			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
+		return e;
+	}
 
-		return null;
+	public List<User> getAllUsers() {
+		List<User> list = new ArrayList<>();
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "SELECT * FROM users WHERE is_deleted = FALSE ORDER BY created_at DESC";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				User e = new User();
+				e.setUserId(rs.getInt("user_id"));
+				e.setFullName(rs.getString("full_name"));
+				e.setEmail(rs.getString("email"));
+				e.setPhone(rs.getString("phone"));
+				e.setAddress(rs.getString("address"));
+				e.setImage(rs.getString("image"));
+				e.setRole(rs.getString("role"));
+				e.setStatus(rs.getBoolean("status"));
+				e.setDeleted(rs.getBoolean("is_deleted"));
+				e.setCreatedAt(rs.getTimestamp("created_at"));
+				list.add(e);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
+	}
+
+	public int approveUser(int userId) {
+		int status = 0;
+		try (Connection conn = DBConnection.getConnection()) {
+			String sql = "UPDATE users SET status = TRUE WHERE user_id=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, userId);
+			status = ps.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return status;
+	}
+
+	public int deleteUser(int userId) {
+		int status = 0;
+		try (Connection conn = DBConnection.getConnection()) {
+			String sql = "UPDATE users SET is_deleted = TRUE WHERE user_id=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, userId);
+			status = ps.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return status;
 	}
 }

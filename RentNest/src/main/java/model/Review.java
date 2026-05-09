@@ -1,14 +1,12 @@
 package model;
 
-import java.sql.Timestamp;
-
 public class Review {
+
 	private int reviewId;
 	private int userId;
 	private int propertyId;
 	private int rating;
 	private String comment;
-	private Timestamp createdAt;
 
 	// Getters and Setters
 
@@ -50,14 +48,6 @@ public class Review {
 
 	public void setComment(String comment) {
 		this.comment = comment;
-	}
-
-	public Timestamp getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
 	}
 
 }

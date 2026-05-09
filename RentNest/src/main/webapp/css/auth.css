@@ -184,6 +184,21 @@ body {
 	margin-right: 10px;
 }
 
+.form__group input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin-right: 8px;
+	border-radius: 3px;
+	accent-color: #2f66ea;
+}
+
+.form__group label:has(input[type="checkbox"]) {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: 600;
+}
 /* ================= BUTTON ================= */
 .btn {
 	width: 100%;

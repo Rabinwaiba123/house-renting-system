@@ -11,7 +11,7 @@
 <title>Register - RentNest</title>
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/auth.css?v=50">
+	href="${pageContext.request.contextPath}/css/auth.css">
 </head>
 <body>
 
