@@ -1,57 +1,59 @@
 package service;
 
 import dao.UserDAO;
+import model.User;
 import util.PasswordUtil;
 
 public class RegisterService {
 
 	private UserDAO userDAO = new UserDAO();
 
-	public String registerUser(String fullName, String email, String phone, String password, String confirmPassword,
-			String role, String imagePath) {
+	public String registerUser(User user, String confirmPassword) {
 
-		if (fullName == null || fullName.trim().isEmpty()) {
+		if (user.getFullName() == null || user.getFullName().trim().isEmpty()) {
 			return "Full name is required.";
 		}
 
-		if (email == null || email.trim().isEmpty()) {
+		if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
 			return "Email is required.";
 		}
 
-		if (phone == null || phone.trim().isEmpty()) {
+		if (user.getPhone() == null || user.getPhone().trim().isEmpty()) {
 			return "Phone number is required.";
 		}
 
-		if (password == null || password.trim().isEmpty()) {
+		if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
 			return "Password is required.";
 		}
 
-		if (confirmPassword == null || confirmPassword.trim().isEmpty()) {
-			return "Confirm password is required.";
-		}
-
-		if (!password.equals(confirmPassword)) {
+		if (!user.getPassword().equals(confirmPassword)) {
 			return "Password and confirm password do not match.";
 		}
 
-		if (userDAO.emailExists(email)) {
+		if (userDAO.emailExists(user.getEmail())) {
 			return "Email already exists.";
 		}
 
-		if (userDAO.phoneExists(phone)) {
+		if (userDAO.phoneExists(user.getPhone())) {
 			return "Phone number already exists.";
 		}
 
-		String hashedPassword = PasswordUtil.getHashPassword(password);
+		user.setPassword(PasswordUtil.getHashPassword(user.getPassword()));
 
-		String status = "PENDING";
+		if ("admin".equalsIgnoreCase(user.getRole())) {
+			user.setStatus(true);
+		} else {
+			user.setStatus(false);
+		}
 
-		boolean result = userDAO.register(fullName, email, phone, hashedPassword, role, status, imagePath);
+		user.setDeleted(false);
+
+		boolean result = userDAO.register(user);
 
 		if (result) {
 			return "success";
-		} else {
-			return "Registration failed. Please try again.";
 		}
+
+		return "Registration failed.";
 	}
 }

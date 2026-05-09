@@ -11,13 +11,13 @@
 <title>Register - RentNest</title>
 
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/auth.css">
+	href="${pageContext.request.contextPath}/css/auth.css?v=50">
 </head>
-
 <body>
+
+	<div class="auth-logo">
+		<a href="${pageContext.request.contextPath}/">RentNest</a>
+	</div>
 
 	<main class="auth auth--register">
 
@@ -41,7 +41,7 @@
 				</div>
 
 				<c:if test="${not empty errorMessage}">
-					<p style="color: red; margin-bottom: 15px;">${errorMessage}</p>
+					<p class="auth-error">${errorMessage}</p>
 				</c:if>
 
 				<form class="form"
@@ -74,11 +74,16 @@
 							<div class="select-wrap">
 								<select name="role">
 									<option value="tenant">Tenant</option>
-									<option value="owner">Owner</option>
+
 								</select>
 							</div>
 						</div>
 
+					</div>
+
+					<div class="form__group">
+						<label>Address</label> <input type="text" name="address"
+							placeholder="Enter address">
 					</div>
 
 					<div class="form__grid">
@@ -96,7 +101,8 @@
 					</div>
 
 					<div class="form__group">
-						<label>Profile Image</label> <input type="file" name="image">
+						<label>Profile Image</label> <input type="file" name="image"
+							accept="image/*">
 					</div>
 
 					<button type="submit" class="btn btn--primary btn--full">
@@ -105,7 +111,7 @@
 
 				</form>
 
-				<div class="auth__footer auth__footer--small">
+				<div class="auth__footer">
 					Already have an account? <a
 						href="${pageContext.request.contextPath}/login" class="text-link">
 						Login </a>

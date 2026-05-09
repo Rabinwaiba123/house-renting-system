@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
 
 
@@ -561,45 +561,6 @@ button, select {
 				<div class="hero-image">
 					<img src="images/Untitled design.png" alt="Modern rental house" />
 				</div>
-				<form class="search-box">
-					<div class="field">
-						<label for="location">Location</label>
-						<div class="select-wrap">
-							<select id="location">
-								<option>Kathmandu, Nepal</option>
-								<option>Lalitpur, Nepal</option>
-								<option>Bhaktapur, Nepal</option>
-							</select> <img src="images/down_icon-icons.com_61209.png"
-								alt="dropdown icon" />
-						</div>
-					</div>
-
-					<div class="field small">
-						<label for="type">Type</label>
-						<div class="select-wrap">
-							<select id="type">
-								<option>Room</option>
-								<option>Flat</option>
-								<option>House</option>
-							</select> <img src="images/down_icon-icons.com_61209.png"
-								alt="dropdown icon" />
-						</div>
-					</div>
-
-					<div class="field">
-						<label for="price">Price Range</label>
-						<div class="select-wrap">
-							<select id="price">
-								<option>Rs3000 - Rs4000</option>
-								<option>Rs4000 - Rs8000</option>
-								<option>Rs8000 - Rs15000</option>
-							</select> <img src="images/down_icon-icons.com_61209.png"
-								alt="dropdown icon" />
-						</div>
-					</div>
-
-					<button type="submit" class="search-btn">Search</button>
-				</form>
 			</div>
 		</section>
 

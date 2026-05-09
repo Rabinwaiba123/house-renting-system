@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-
+import model.User;
 import service.RegisterService;
 import util.ImageUtil;
 
@@ -35,13 +35,22 @@ public class RegisterController extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
+		String address = request.getParameter("address");
 		String role = request.getParameter("role");
 
 		Part imagePart = request.getPart("image");
 		String imagePath = ImageUtil.uploadImage(imagePart, getServletContext(), "uploads");
 
-		String result = registerService.registerUser(fullName, email, phone, password, confirmPassword, role,
-				imagePath);
+		User user = new User();
+		user.setFullName(fullName);
+		user.setEmail(email);
+		user.setPhone(phone);
+		user.setPassword(password);
+		user.setAddress(address);
+		user.setImage(imagePath);
+		user.setRole(role);
+
+		String result = registerService.registerUser(user, confirmPassword);
 
 		if (result.equals("success")) {
 			response.sendRedirect(request.getContextPath() + "/login?success=registered");

@@ -23,6 +23,11 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		if ("registered".equals(request.getParameter("success"))) {
+			request.setAttribute("successMessage",
+					"Registration successful. Please wait for admin approval if you are a tenant.");
+		}
+
 		request.getRequestDispatcher("/WEB-INF/pages/auth/login.jsp").forward(request, response);
 	}
 
@@ -33,14 +38,10 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 		String remember = request.getParameter("remember");
 
-		if (email == null || email.trim().isEmpty()) {
-			request.setAttribute("errorMessage", "Email is required.");
-			request.getRequestDispatcher("/WEB-INF/pages/auth/login.jsp").forward(request, response);
-			return;
-		}
+		String validationMessage = loginService.validateLogin(email, password);
 
-		if (password == null || password.trim().isEmpty()) {
-			request.setAttribute("errorMessage", "Password is required.");
+		if (!"success".equals(validationMessage)) {
+			request.setAttribute("errorMessage", validationMessage);
 			request.getRequestDispatcher("/WEB-INF/pages/auth/login.jsp").forward(request, response);
 			return;
 		}
@@ -53,24 +54,24 @@ public class LoginController extends HttpServlet {
 			return;
 		}
 
+		if (!user.isStatus()) {
+			request.setAttribute("errorMessage", "Your account is waiting for admin approval.");
+			request.getRequestDispatcher("/WEB-INF/pages/auth/login.jsp").forward(request, response);
+			return;
+		}
+
 		SessionUtil.setAttribute(request, "user", user);
-		SessionUtil.setAttribute(request, "loggedInUser", user);
 		SessionUtil.setAttribute(request, "userId", user.getUserId());
-		SessionUtil.setAttribute(request, "fullName", user.getFullName());
 		SessionUtil.setAttribute(request, "role", user.getRole());
 
 		if (remember != null) {
-			CookieUtil.addCookie(response, "userEmail", user.getEmail(), 60 * 60 * 24 * 7);
+			CookieUtil.addCookie(response, "rememberEmail", email, 60 * 60 * 24 * 7);
 		} else {
-			CookieUtil.deleteCookie(response, "userEmail");
+			CookieUtil.deleteCookie(response, "rememberEmail");
 		}
 
-		String role = user.getRole();
-
-		if ("admin".equalsIgnoreCase(role)) {
+		if ("admin".equalsIgnoreCase(user.getRole())) {
 			response.sendRedirect(request.getContextPath() + "/admin/dashboard");
-		} else if ("owner".equalsIgnoreCase(role)) {
-			response.sendRedirect(request.getContextPath() + "/owner/dashboard");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/home");
 		}

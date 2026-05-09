@@ -4,79 +4,69 @@ import java.io.IOException;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import model.User;
 import util.SessionUtil;
 
 @WebFilter("/*")
 public class AuthFilter implements Filter {
 
-	private static final String LOGIN = "/login";
-	private static final String REGISTER = "/register";
-	private static final String LOGOUT = "/logout";
-
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-
-	}
-
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+	public void doFilter(jakarta.servlet.ServletRequest request, jakarta.servlet.ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 
-		String uri = req.getRequestURI();
 		String contextPath = req.getContextPath();
+		String path = req.getRequestURI().substring(contextPath.length());
 
-		String path = uri.substring(contextPath.length());
-
-		// Allow static resources
-		if (path.startsWith("/css/") || path.startsWith("/js/") || path.startsWith("/images/") || path.endsWith(".css")
-				|| path.endsWith(".js") || path.endsWith(".png") || path.endsWith(".jpg")) {
-
+		// Allow static files
+		if (path.startsWith("/css/") || path.startsWith("/js/") || path.startsWith("/images/")
+				|| path.startsWith("/uploads/")) {
 			chain.doFilter(request, response);
 			return;
 		}
 
-		// Public pages
-		boolean isPublicPage = path.equals("/") || path.equals(LOGIN) || path.equals(REGISTER)
-				|| path.equals(LOGOUT) || path.equals("/about") || path.equals("/contact")
-				|| path.equals("/property-list") || path.startsWith("/property-detail");
+		// Allow public pages
+		boolean publicPage = path.equals("/") || path.equals("/home") || path.equals("/login")
+				|| path.equals("/register") || path.equals("/about") || path.equals("/contact")
+				|| path.equals("/property-list") || path.startsWith("/property-detail") || path.startsWith("/error/");
 
-		// Check session
-		Object user = SessionUtil.getAttribute(req, "user");
+		User user = (User) SessionUtil.getAttribute(req, "user");
 
-		boolean isLoggedIn = (user != null);
-
-		// Not logged in
-		if (!isLoggedIn) {
-
-			if (isPublicPage) {
-
+		// If not logged in
+		if (user == null) {
+			if (publicPage) {
 				chain.doFilter(request, response);
-
 			} else {
-
-				res.sendRedirect(contextPath + LOGIN);
+				res.sendRedirect(contextPath + "/login");
 			}
-
-		} else {
-
-			// Logged in
-			chain.doFilter(request, response);
+			return;
 		}
-	}
 
-	@Override
-	public void destroy() {
+		String role = user.getRole();
 
+		// Logged in user should not go login/register again
+		if (path.equals("/login") || path.equals("/register")) {
+			if ("admin".equalsIgnoreCase(role)) {
+				res.sendRedirect(contextPath + "/admin/dashboard");
+			} else {
+				res.sendRedirect(contextPath + "/home");
+			}
+			return;
+		}
+
+		// Only admin can access /admin pages
+		if (path.startsWith("/admin") && !"admin".equalsIgnoreCase(role)) {
+			res.sendRedirect(contextPath + "/error/access-denied.jsp");
+			return;
+		}
+
+		chain.doFilter(request, response);
 	}
 }
