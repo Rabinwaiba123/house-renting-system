@@ -32,7 +32,7 @@ public class ContactDAO {
 	public List<Contact> getAllContacts() {
 		List<Contact> list = new ArrayList<>();
 		try (Connection con = DBConnection.getConnection()) {
-			String sql = "SELECT * FROM contacts ORDER BY created_at DESC";
+			String sql = "SELECT * FROM contacts";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {

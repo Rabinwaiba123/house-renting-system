@@ -10,20 +10,11 @@ public class RegisterService {
 
 	public String registerUser(User user, String confirmPassword) {
 
-		if (user.getFullName() == null || user.getFullName().trim().isEmpty()) {
-			return "Full name is required.";
-		}
-
-		if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
-			return "Email is required.";
-		}
-
-		if (user.getPhone() == null || user.getPhone().trim().isEmpty()) {
-			return "Phone number is required.";
-		}
-
-		if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
-			return "Password is required.";
+		if (user.getFullName() == null || user.getFullName().trim().isEmpty() || user.getEmail() == null
+				|| user.getEmail().isEmpty() || user.getPhone() == null || user.getPhone().isEmpty()
+				|| user.getPhone() == null || user.getPhone().isEmpty() || user.getPhone() == null
+				|| user.getPhone().isEmpty() || user.getPassword() == null || user.getPassword().isEmpty()) {
+			return "Please Fill out all the text boxes.";
 		}
 
 		if (!user.getPassword().equals(confirmPassword)) {

@@ -32,7 +32,7 @@ public class ReviewDAO {
 	public List<Review> getAllReviews() {
 		List<Review> list = new ArrayList<>();
 		try (Connection con = DBConnection.getConnection()) {
-			String sql = "SELECT * FROM reviews ORDER BY created_at DESC";
+			String sql = "SELECT * FROM reviews";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -76,7 +76,7 @@ public class ReviewDAO {
 	public List<Review> getReviewsByPropertyId(int propertyId) {
 		List<Review> list = new ArrayList<>();
 		try (Connection con = DBConnection.getConnection()) {
-			String sql = "SELECT * FROM reviews WHERE property_id = ? ORDER BY created_at DESC";
+			String sql = "SELECT * FROM reviews WHERE property_id = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, propertyId);
 			ResultSet rs = ps.executeQuery();

@@ -15,7 +15,7 @@ import service.BookingService;
 import util.SessionUtil;
 
 @WebServlet("/booking")
-public class BookingController extends HttpServlet {
+public class MyBookingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

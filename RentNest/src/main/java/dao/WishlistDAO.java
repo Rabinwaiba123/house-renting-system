@@ -30,7 +30,7 @@ public class WishlistDAO {
 	public List<Wishlist> getAllWishlists() {
 		List<Wishlist> list = new ArrayList<>();
 		try (Connection con = DBConnection.getConnection()) {
-			String sql = "SELECT * FROM wishlist ORDER BY created_at DESC";
+			String sql = "SELECT * FROM wishlist";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -50,7 +50,7 @@ public class WishlistDAO {
 	public List<Wishlist> getWishlistByUserId(int userId) {
 		List<Wishlist> list = new ArrayList<>();
 		try (Connection con = DBConnection.getConnection()) {
-			String sql = "SELECT * FROM wishlist WHERE user_id = ? ORDER BY created_at DESC";
+			String sql = "SELECT * FROM wishlist WHERE user_id = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();

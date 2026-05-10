@@ -50,12 +50,12 @@ public class RegisterController extends HttpServlet {
 		user.setImage(imagePath);
 		user.setRole(role);
 
-		String result = registerService.registerUser(user, confirmPassword);
+		String message = registerService.registerUser(user, confirmPassword);
 
-		if (result.equals("success")) {
+		if (message.equals("success")) {
 			response.sendRedirect(request.getContextPath() + "/login?success=registered");
 		} else {
-			request.setAttribute("errorMessage", result);
+			request.setAttribute("errorMessage", message);
 			request.getRequestDispatcher("/WEB-INF/pages/auth/register.jsp").forward(request, response);
 		}
 	}

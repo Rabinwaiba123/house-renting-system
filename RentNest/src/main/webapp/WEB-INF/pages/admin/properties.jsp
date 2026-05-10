@@ -32,7 +32,8 @@
 			<div class="table-container">
 				<div class="table-header">
 					<h1 class="table-heading">Properties</h1>
-					<button class="view">Add Property</button>
+					<a href="${pageContext.request.contextPath}/admin/add-property"
+						class="view"> Add Property </a>
 				</div>
 
 

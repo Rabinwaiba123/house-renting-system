@@ -11,6 +11,7 @@ import util.DBConnection;
 
 public class UserDAO {
 
+	// Register new user
 	public int register(User user) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {
@@ -34,6 +35,7 @@ public class UserDAO {
 		return status;
 	}
 
+	// Check if email already exists
 	public boolean emailExists(String email) {
 		try (Connection con = DBConnection.getConnection()) {
 			String sql = "SELECT user_id FROM users WHERE email = ? AND is_deleted = false";
@@ -47,6 +49,7 @@ public class UserDAO {
 		return false;
 	}
 
+	// Check if phone number already exists
 	public boolean phoneExists(String phone) {
 		try (Connection con = DBConnection.getConnection()) {
 			String sql = "SELECT user_id FROM users WHERE phone = ? AND is_deleted = false";
@@ -60,6 +63,7 @@ public class UserDAO {
 		return false;
 	}
 
+	// Get user by email
 	public User getUserByEmail(String email) {
 		User e = null;
 		try (Connection conn = DBConnection.getConnection()) {
@@ -85,6 +89,7 @@ public class UserDAO {
 		return e;
 	}
 
+	// Get all users
 	public List<User> getAllUsers() {
 		List<User> list = new ArrayList<>();
 		try (Connection con = DBConnection.getConnection()) {
@@ -111,10 +116,30 @@ public class UserDAO {
 		return list;
 	}
 
+	// Update user profile
+	public int updateProfile(User user) {
+		int status = 0;
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "UPDATE users SET full_name = ?, phone = ?, address = ?, image = ? "
+					+ "WHERE user_id = ? AND is_deleted = FALSE";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, user.getFullName());
+			ps.setString(2, user.getPhone());
+			ps.setString(3, user.getAddress());
+			ps.setString(4, user.getImage());
+			ps.setInt(5, user.getUserId());
+			status = ps.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return status;
+	}
+
+	// Approve user account
 	public int approveUser(int userId) {
 		int status = 0;
 		try (Connection conn = DBConnection.getConnection()) {
-			String sql = "UPDATE users SET status = TRUE WHERE user_id=?";
+			String sql = "UPDATE users SET status = TRUE WHERE user_id = ? AND is_deleted = FALSE";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, userId);
 			status = ps.executeUpdate();
@@ -124,10 +149,11 @@ public class UserDAO {
 		return status;
 	}
 
+	// Soft delete user
 	public int deleteUser(int userId) {
 		int status = 0;
 		try (Connection conn = DBConnection.getConnection()) {
-			String sql = "UPDATE users SET is_deleted = TRUE WHERE user_id=?";
+			String sql = "UPDATE users SET is_deleted = TRUE WHERE user_id = ? AND is_deleted = FALSE";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, userId);
 			status = ps.executeUpdate();
