@@ -11,17 +11,17 @@
 	<div class="searchbar">
 		<input type="text" placeholder="Search" />
 		<div class="searchbtn">
-			<img src="${pageContext.request.contextPath}/images/search-icon.svg"
+			<img src="${pageContext.request.contextPath}/images/icons/search-icon.svg"
 				class="icn srchicn" alt="search-icon" />
 		</div>
 	</div>
 
 	<div class="message">
 		<div class="circle"></div>
-		<img src="${pageContext.request.contextPath}/images/bell_icon.png"
+		<img src="${pageContext.request.contextPath}/images/icons/bell_icon.png"
 			class="icn" alt="bell-icon" />
 		<div class="dp">
-			<img src="${pageContext.request.contextPath}/images/images.jpg"
+			<img src="${pageContext.request.contextPath}/images/photos/images.jpg"
 				class="dpicn" alt="dp" />
 		</div>
 	</div>

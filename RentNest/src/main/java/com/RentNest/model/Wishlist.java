@@ -12,13 +12,6 @@ public class Wishlist {
 		super();
 	}
 
-	public Wishlist(int wishlistId, int userId, int propertyId) {
-		super();
-		this.wishlistId = wishlistId;
-		this.userId = userId;
-		this.propertyId = propertyId;
-	}
-
 	// Getters and Setters
 
 	public int getWishlistId() {

@@ -13,14 +13,6 @@ public class Contact {
 		super();
 	}
 
-	public Contact(int contactId, String fullName, String email, String subject, String message) {
-		super();
-		this.contactId = contactId;
-		this.fullName = fullName;
-		this.email = email;
-		this.subject = subject;
-		this.message = message;
-	}
 
 	// Getters and Setters
 

@@ -16,6 +16,9 @@ public class UserService {
 	public int approveUser(int userId) {
 		return userDAO.approveUser(userId);
 	}
+	public int rejectUser(int userId) {
+		return userDAO.rejectUser(userId);
+	}
 
 	public int deleteUser(int userId) {
 		return userDAO.deleteUser(userId);

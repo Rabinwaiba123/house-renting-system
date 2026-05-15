@@ -14,15 +14,6 @@ public class Review {
 		super();
 	}
 
-	public Review(int reviewId, int userId, int propertyId, int rating, String comment) {
-		super();
-		this.reviewId = reviewId;
-		this.userId = userId;
-		this.propertyId = propertyId;
-		this.rating = rating;
-		this.comment = comment;
-	}
-
 	// Getters and Setters
 
 	public int getReviewId() {

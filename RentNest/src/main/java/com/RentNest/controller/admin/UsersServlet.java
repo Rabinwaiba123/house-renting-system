@@ -12,9 +12,13 @@ import java.util.List;
 import com.RentNest.model.User;
 import com.RentNest.service.UserService;
 
-@WebServlet("/admin/users")
+@WebServlet(asyncSupported = true, urlPatterns = { "/admin/users" })
 public class UsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	public UsersServlet() {
+		super();
+	}
 
 	private UserService userService = new UserService();
 
@@ -38,6 +42,8 @@ public class UsersServlet extends HttpServlet {
 
 		if ("approve".equals(action)) {
 			status = userService.approveUser(userId);
+		} else if ("reject".equals(action)) {
+			status = userService.rejectUser(userId);
 		} else if ("delete".equals(action)) {
 			status = userService.deleteUser(userId);
 		}

@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class ProfileController
  */
-@WebServlet("/user/profile")
+@WebServlet(asyncSupported = true, urlPatterns = { "/user/profile" })
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

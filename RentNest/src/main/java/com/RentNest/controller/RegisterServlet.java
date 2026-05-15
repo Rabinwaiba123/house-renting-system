@@ -14,11 +14,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-@WebServlet("/register")
+@WebServlet(asyncSupported = true, urlPatterns = { "/register"})
 @MultipartConfig
 public class RegisterServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+
+	public RegisterServlet() {
+		super();
+	}
 
 	private RegisterService registerService = new RegisterService();
 
@@ -37,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
 		String address = request.getParameter("address");
-		String role = request.getParameter("role");
+		String role = "tenant";
 
 		Part imagePart = request.getPart("image");
 		String imagePath = ImageUtil.uploadImage(imagePart, getServletContext(), "uploads");

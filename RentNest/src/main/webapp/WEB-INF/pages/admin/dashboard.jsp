@@ -5,7 +5,7 @@
 <head>
 <title>Admin Dashboard</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/main.css">
+	href="${pageContext.request.contextPath}/css/admin/admin.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
@@ -25,7 +25,7 @@
 				<input type="text" name="" id="" placeholder="Search" />
 				<div class="searchbtn">
 					<img
-						src="${pageContext.request.contextPath}/images/search-icon.svg"
+						src="${pageContext.request.contextPath}/images/icons/search-icon.svg"
 						class="icn srchicn" alt="search-icon" />
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 					<i class="fa fa-users fa-2x"></i>
 					<div class="text">
 						<p>TOTAL USERS</p>
-						<h2>12</h2>
+						<h2>${totalUsers}</h2>
 					</div>
 				</div>
 
@@ -45,7 +45,7 @@
 					<i class="fa fa-file-text-o fa-2x"></i>
 					<div class="text">
 						<p>TOTAL BOOKINGS</p>
-						<h2>8</h2>
+						<h2>${totalBookings}</h2>
 					</div>
 				</div>
 
@@ -53,15 +53,15 @@
 					<i class="fa fa-home fa-2x"></i>
 					<div class="text">
 						<p>TOTAL PROPERTIES</p>
-						<h2>423</h2>
+						<h2>${totalProperties}</h2>
 					</div>
 				</div>
 
 				<div class="box box4">
-					<i class="fa fa-home fa-2x"></i>
+					<i class="fa fa-envelope fa-2x"></i>
 					<div class="text">
-						<p>TOTAL MESSAGE</p>
-						<h2>423</h2>
+						<p>TOTAL MESSAGES</p>
+						<h2>${totalContacts}</h2>
 					</div>
 				</div>
 			</div>

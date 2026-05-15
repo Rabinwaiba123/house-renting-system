@@ -24,7 +24,7 @@
 	height: 320px;
 	background: linear-gradient(rgba(0, 72, 170, 0.88),
 		rgba(0, 52, 130, 0.92)),
-		url("${pageContext.request.contextPath}/images/contact-bg.jpg");
+		url("${pageContext.request.contextPath}/images/photos/contact-bg.png");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -372,7 +372,7 @@
 
 					<div class="form-group">
 
-						<label>Name</label> <input type="text" name="name"
+						<label>Name</label> <input type="text" name="fullName"
 							placeholder="Full Name" required>
 
 					</div>
@@ -403,6 +403,14 @@
 					<button type="submit" class="send-btn">Send</button>
 
 				</form>
+
+				<c:if test="${not empty errorMessage}">
+					<p class="auth-error">${errorMessage}</p>
+				</c:if>
+
+				<c:if test="${not empty successMessage}">
+					<p class="auth-success">${successMessage}</p>
+				</c:if>
 
 			</div>
 

@@ -5,93 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Owner Add Property</title>
+<title>Add Property</title>
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/main.css">
-
+	href="${pageContext.request.contextPath}/css/admin/admin.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
-
-<style>
-.main form {
-	max-width: 700px;
-	margin: 30px auto;
-	background: #ffffff;
-	padding: 30px;
-	border-radius: 12px;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-	display: flex;
-	flex-direction: column;
-	gap: 18px;
-}
-
-.main form input, .main form select, .main form textarea {
-	width: 100%;
-	padding: 12px 14px;
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	font-size: 14px;
-	outline: none;
-}
-
-.main form input:focus, .main form select:focus, .main form textarea:focus
-	{
-	border-color: #4CAF50;
-	box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.15);
-}
-
-.main form textarea {
-	min-height: 100px;
-	resize: vertical;
-}
-
-.main form input[type="file"] {
-	border: none;
-	padding: 5px;
-}
-
-.main form button {
-	padding: 12px;
-	background: #4CAF50;
-	color: white;
-	border: none;
-	border-radius: 8px;
-	font-size: 15px;
-	font-weight: 600;
-	cursor: pointer;
-}
-
-.main form button:hover {
-	background: #43a047;
-}
-
-.message {
-	max-width: 700px;
-	margin: 15px auto;
-	padding: 12px;
-	border-radius: 8px;
-	text-align: center;
-	font-weight: 500;
-}
-
-.success {
-	background: #d4edda;
-	color: #155724;
-}
-
-.error {
-	background: #f8d7da;
-	color: #721c24;
-}
-
-@media ( max-width : 768px) {
-	.main form {
-		padding: 20px;
-	}
-}
-</style>
 
 <body>
 
@@ -107,17 +27,17 @@
 				<input type="text" placeholder="Search" />
 				<div class="searchbtn">
 					<img
-						src="${pageContext.request.contextPath}/images/search-icon.svg"
+						src="${pageContext.request.contextPath}/images/icons/icons/search-icon.svg"
 						class="icn srchicn" alt="search-icon" />
 				</div>
 			</div>
 
 			<c:if test="${not empty successMessage}">
-				<div class="message success">${successMessage}</div>
+				<div class="form-message success">${successMessage}</div>
 			</c:if>
 
 			<c:if test="${not empty errorMessage}">
-				<div class="message error">${errorMessage}</div>
+				<div class="form-message error">${errorMessage}</div>
 			</c:if>
 
 			<form action="${pageContext.request.contextPath}/admin/add-property"

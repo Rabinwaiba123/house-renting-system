@@ -1,289 +1,463 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>RentNest - About</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About - RentNest</title>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/navbar.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
 <style>
-/* Hero */
-.hero {
+/* about.css */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+body {
+	background: #f5f5f7;
+	color: #222;
+	line-height: 1.6;
+}
+
+main {
+	width: 100%;
+}
+
+/* HERO */
+.about-hero {
+	padding: 80px 7%;
 	text-align: center;
-	padding: 70px 20px;
 }
 
-.hero h1 {
-	font-size: 42px;
+.about-hero h1 {
+	font-size: 52px;
+	font-weight: 700;
+	margin-bottom: 15px;
+	color: #111;
 }
 
-.subtitle {
-	max-width: 600px;
-	margin: auto;
+.about-hero p {
+	max-width: 700px;
+	margin: 0 auto 45px;
+	font-size: 17px;
 	color: #666;
-	margin-top: 10px;
 }
 
-.hero img {
-	width: 75%;
-	margin-top: 30px;
-	border-radius: 15px;
-	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+.hero-img {
+	width: 100%;
+	height: 500px;
+	object-fit: cover;
+	border-radius: 20px;
+	display: block;
 }
 
-.hero img:hover {
-	transform: scale(1.02);
-}
-
-/* Purpose */
-.purpose {
+/* PURPOSE SECTION */
+.purpose-section {
+	padding: 80px 7%;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	padding: 80px;
-	gap: 50px;
+	gap: 60px;
+	background: #fff;
 }
 
-.purpose img {
-	width: 400px;
-	border-radius: 15px;
+.purpose-img {
+	flex: 1;
 }
 
-.purpose img:hover {
-	transform: scale(1.03);
-}
-
-.purpose .text {
-	max-width: 500px;
-}
-
-.purpose p {
-	color: #555;
-	line-height: 1.6;
-	margin-top: 10px;
-}
-
-/* Cards */
-.cards {
-	display: flex;
-	justify-content: center;
-	gap: 40px;
-	padding: 60px;
-}
-
-.card {
-	background: white;
-	padding: 30px;
-	width: 260px;
-	border-radius: 15px;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-}
-
-.card:hover {
-	transform: translateY(-10px);
-	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-/* Why */
-.why {
-	text-align: center;
-	padding: 70px;
-}
-
-.features {
-	display: flex;
-	justify-content: center;
-	gap: 30px;
-	margin-top: 30px;
-}
-
-.feature {
-	background: white;
-	padding: 25px;
-	border-radius: 15px;
-	width: 180px;
-	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
-}
-
-.feature:hover {
-	transform: translateY(-8px);
-	background: #f9f9ff;
-}
-
-/* Team */
-.team {
-	text-align: center;
-	padding: 70px;
-}
-
-.members {
-	display: flex;
-	justify-content: center;
-	gap: 30px;
-	flex-wrap: wrap;
-}
-
-.member {
-	text-align: center;
-}
-
-.member img {
-	width: 180px;
-	height: 180px;
+.purpose-img img {
+	width: 100%;
+	height: 420px;
 	object-fit: cover;
-	border-radius: 15px;
+	border-radius: 16px;
 }
 
-.member img:hover {
-	transform: scale(1.1);
+.purpose-content {
+	flex: 1;
 }
 
-.member:hover {
-	transform: translateY(-5px);
+.purpose-content h2 {
+	font-size: 42px;
+	margin-bottom: 25px;
+	color: #111;
 }
 
-.member p {
-	margin-top: 10px;
+.purpose-content p {
+	font-size: 16px;
+	color: #666;
+	margin-bottom: 18px;
+}
+
+/* MISSION VISION */
+.mission-vision {
+	padding: 80px 7%;
+	display: flex;
+	gap: 30px;
+	background: #f5f5f7;
+}
+
+.info-card {
+	flex: 1;
+	background: #fff;
+	padding: 40px;
+	border-radius: 16px;
+}
+
+.icon {
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+
+.info-card h3 {
+	font-size: 28px;
+	margin-bottom: 15px;
+}
+
+.info-card p {
+	color: #666;
+	font-size: 15px;
+}
+
+/* WHY CHOOSE US */
+.choose-section {
+	padding: 90px 7%;
+	background: #fff;
+	text-align: center;
+}
+
+.choose-section h2 {
+	font-size: 44px;
+	margin-bottom: 10px;
+}
+
+.choose-section p {
+	color: #666;
+	margin-bottom: 50px;
+}
+
+.choose-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 25px;
+}
+
+.choose-card {
+	background: #f7f7f7;
+	padding: 35px 25px;
+	border-radius: 16px;
+	text-align: left;
+}
+
+.choose-icon {
+	font-size: 28px;
+	margin-bottom: 20px;
+	color: #5d4eff;
+}
+
+.choose-card h3 {
+	font-size: 22px;
+	margin-bottom: 12px;
+}
+
+.choose-card p {
+	font-size: 15px;
+	color: #666;
+	margin: 0;
+}
+
+/* TEAM SECTION */
+.team-section {
+	padding: 90px 7%;
+	text-align: center;
+	background: #f5f5f7;
+}
+
+.team-section h2 {
+	font-size: 44px;
+	margin-bottom: 10px;
+}
+
+.team-section p {
+	color: #666;
+	margin-bottom: 50px;
+}
+
+.team-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 25px;
+}
+
+.team-card {
+	background: #fff;
+	border-radius: 16px;
+	padding-bottom: 25px;
+	overflow: hidden;
+}
+
+.team-card img {
+	width: 100%;
+	height: 320px;
+	object-fit: cover;
+	display: block;
+}
+
+.team-card h3 {
+	font-size: 22px;
+	margin-top: 18px;
+	margin-bottom: 6px;
+}
+
+.team-card span {
+	color: #6b5cff;
+	font-size: 14px;
 }
 
 /* CTA */
-.cta {
+.cta-section {
+	margin: 80px 7%;
+	background: linear-gradient(to right, #5d4eff, #7a67ff);
+	border-radius: 24px;
+	padding: 80px 30px;
 	text-align: center;
-	background: linear-gradient(to right, #5f5cff, #7c3aed);
 	color: white;
-	padding: 70px;
-	border-radius: 20px;
-	margin: 50px;
 }
 
-.cta:hover {
-	box-shadow: 0 10px 40px rgba(92, 70, 255, 0.3);
+.cta-section h2 {
+	font-size: 48px;
+	margin-bottom: 15px;
 }
 
-.cta button {
-	padding: 12px 25px;
-	border: none;
-	border-radius: 25px;
+.cta-section p {
+	font-size: 17px;
+	margin-bottom: 35px;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.cta-section a {
+	display: inline-block;
 	background: white;
-	font-weight: bold;
-	margin-top: 15px;
+	color: #5d4eff;
+	padding: 14px 32px;
+	border-radius: 40px;
+	text-decoration: none;
+	font-weight: 600;
+	transition: 0.3s;
 }
 
-.cta button:hover {
-	background: #e0e0ff;
-	transform: scale(1.08);
+.cta-section a:hover {
+	transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media ( max-width : 992px) {
+	.purpose-section {
+		flex-direction: column;
+	}
+	.choose-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.team-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media ( max-width : 768px) {
+	.about-hero h1 {
+		font-size: 38px;
+	}
+	.purpose-content h2, .choose-section h2, .team-section h2, .cta-section h2
+		{
+		font-size: 34px;
+	}
+	.hero-img {
+		height: 350px;
+	}
+	.choose-grid, .team-grid, .mission-vision {
+		grid-template-columns: 1fr;
+		flex-direction: column;
+	}
+	.team-card img {
+		height: 280px;
+	}
+}
+
+@media ( max-width : 576px) {
+	.about-hero {
+		padding: 60px 5%;
+	}
+	.purpose-section, .mission-vision, .choose-section, .team-section {
+		padding: 60px 5%;
+	}
+	.cta-section {
+		margin: 60px 5%;
+		padding: 60px 20px;
+	}
+	.about-hero h1 {
+		font-size: 32px;
+	}
+	.cta-section h2 {
+		font-size: 30px;
+	}
 }
 </style>
-</head>
 <body>
 
 	<!-- ================= NAVBAR ================= -->
 	<jsp:include page="/WEB-INF/pages/include/navbar.jsp" />
 
-	<!-- Hero -->
-	<section class="hero">
-		<h1>About Our Platform</h1>
-		<p class="subtitle">Helping you find the perfect home easily and
-			securely. We believe everyone deserves a space that feels like home.
-		</p>
-		<img src="../Image/ghar.png" alt="House" />
-	</section>
+	<main>
 
-	<!-- Purpose -->
-	<section class="purpose">
-		<div class="img">
-			<img src="../Image/padhailikhai.png" />
-		</div>
+		<section class="about-hero">
+			<h1>About Our Platform</h1>
+			<p>Helping you find the perfect home easily and securely. We
+				believe everyone deserves a space that feels like home.</p>
 
-		<div class="text">
-			<h2>Our Purpose Vision</h2>
+			<img
+				src="${pageContext.request.contextPath}/images/photos/about-house.jpg"
+				alt="Modern house" class="hero-img">
+		</section>
 
-			<p>Founded in 2024, RentNest was created with a simple idea —
-				finding a home should be an exciting and meaningful experience, not
-				a stressful one.</p>
-
-			<p>We aim to simplify the process by offering verified listings,
-				transparent communication, and a user-friendly platform that puts
-				people first.</p>
-
-			<p>Our vision is to become a trusted space where individuals can
-				confidently discover, choose, and move into homes that truly match
-				their lifestyle.</p>
-		</div>
-	</section>
-
-	<!-- Cards -->
-	<section class="cards">
-		<div class="card">
-			<h3>Our Mission</h3>
-			<p>To empower users with a seamless and secure property search
-				experience.</p>
-		</div>
-
-		<div class="card">
-			<h3>Our Vision</h3>
-			<p>To redefine modern living through innovation and trust.</p>
-		</div>
-	</section>
-
-	<!-- Why -->
-	<section class="why">
-		<h2>Why Choose Us</h2>
-
-		<div class="features">
-			<div class="feature">Easy Booking</div>
-			<div class="feature">Verified Listings</div>
-			<div class="feature">Secure Payments</div>
-			<div class="feature">24/7 Support</div>
-		</div>
-	</section>
-
-	<!-- Team -->
-	<section class="team">
-		<h2>Meet the Curators</h2>
-
-		<div class="members">
-			<div class="member">
-				<img src="../Image/waiba .jpeg" />
-				<p>Rabin Waiba</p>
+		<section class="purpose-section">
+			<div class="purpose-img">
+				<img
+					src="${pageContext.request.contextPath}/images/photos/purpose.png"
+					alt="Purpose and vision">
 			</div>
 
-			<div class="member">
-				<img src="../Image/sneha.jpeg" />
-				<p>Sneha Singh</p>
+			<div class="purpose-content">
+				<h2>Our Purpose & Vision</h2>
+				<p>Founded in 2024, RentNest emerged from a simple observation:
+					the journey to find a home should be as joyful as moving into one.
+					We help simplify traditional real estate through a digital-first
+					experience.</p>
+				<p>Our vision is to become a trusted platform for residential
+					spaces, bridging the gap between property owners and seekers
+					through transparency, technology, and human-centric design.</p>
+			</div>
+		</section>
+
+		<section class="mission-vision">
+			<div class="info-card">
+				<div class="icon">🚀</div>
+				<h3>Our Mission</h3>
+				<p>To empower individuals by providing a seamless, secure, and
+					transparent platform for discovering and securing high-quality
+					residential properties worldwide.</p>
 			</div>
 
-			<div class="member">
-				<img src="../Image/team3.jpg" />
-				<p>Riti Roshan</p>
+			<div class="info-card">
+				<div class="icon">👁</div>
+				<h3>Our Vision</h3>
+				<p>To redefine the standard of modern living by curating spaces
+					that inspire, providing every user with the keys to their dream
+					lifestyle through innovation.</p>
 			</div>
+		</section>
 
-			<div class="member">
-				<img src="../Image/snehaha.jpeg" />
-				<p>Sneha Singh</p>
+		<section class="choose-section">
+			<h2>Why Choose Us</h2>
+			<p>The standard of excellence in property management.</p>
+
+			<div class="choose-grid">
+				<div class="choose-card">
+					<div class="choose-icon">☑</div>
+					<h3>Easy Booking</h3>
+					<p>Schedule viewings and sign leases with a single click from
+						any device.</p>
+				</div>
+
+				<div class="choose-card">
+					<div class="choose-icon">✦</div>
+					<h3>Verified Listings</h3>
+					<p>Every property is carefully inspected and verified for your
+						peace of mind.</p>
+				</div>
+
+				<div class="choose-card">
+					<div class="choose-icon">🛡</div>
+					<h3>Secure Payments</h3>
+					<p>Bank-grade encryption keeps all your rent and deposit
+						transactions safe.</p>
+				</div>
+
+				<div class="choose-card">
+					<div class="choose-icon">☎</div>
+					<h3>24/7 Support</h3>
+					<p>Our dedicated concierge team is always here to help you
+						settle in.</p>
+				</div>
 			</div>
+		</section>
 
-			<div class="member">
-				<img src="../Image/team4.jpg" />
-				<p>Bibek Soni</p>
+		<section class="team-section">
+			<h2>Meet the Curators</h2>
+			<p>The passionate minds behind your next home.</p>
+
+			<div class="team-grid">
+				<div class="team-card">
+					<img
+						src="${pageContext.request.contextPath}/images/team/member1.jpg"
+						alt="Team member">
+					<h3>Marcus Thorne</h3>
+					<span>CEO & Founder</span>
+				</div>
+
+				<div class="team-card">
+					<img
+						src="${pageContext.request.contextPath}/images/team/member2.jpg"
+						alt="Team member">
+					<h3>Elena Rodriguez</h3>
+					<span>Chief Design Officer</span>
+				</div>
+
+				<div class="team-card">
+					<img
+						src="${pageContext.request.contextPath}/images/team/member3.jpg"
+						alt="Team member">
+					<h3>David Chen</h3>
+					<span>Head of Operations</span>
+				</div>
+
+				<div class="team-card">
+					<img
+						src="${pageContext.request.contextPath}/images/team/member4.jpg"
+						alt="Team member">
+					<h3>Sarah Jenkins</h3>
+					<span>Lead Curator</span>
+				</div>
+				<div class="team-card">
+					<img
+						src="${pageContext.request.contextPath}/images/team/member4.jpg"
+						alt="Team member">
+					<h3>Sarah Jenkins</h3>
+					<span>Lead Curator</span>
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<!-- CTA -->
-	<section class="cta">
-		<h2>Start your journey today</h2>
-		<p>Join thousands of happy tenants finding their dream home.</p>
-		<button>Browse Properties</button>
-	</section>
+		<section class="cta-section">
+			<h2>Start your journey today</h2>
+			<p>Join thousands of happy tenants who found their dream home
+				with RentNest.</p>
+			<a href="${pageContext.request.contextPath}/properties">Browse
+				Properties</a>
+		</section>
+
+	</main>
 
 	<!-- ================= FOOTER ================= -->
 	<jsp:include page="/WEB-INF/pages/include/footer.jsp" />
+
 </body>
 </html>

@@ -7,9 +7,7 @@
 <head>
 <title>Admin Users</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/main.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/AdminUser.css">
+	href="${pageContext.request.contextPath}/css/admin/admin.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
@@ -26,7 +24,7 @@
 				<input type="text" name="" id="" placeholder="Search" />
 				<div class="searchbtn">
 					<img
-						src="${pageContext.request.contextPath}/images/search-icon.svg"
+						src="${pageContext.request.contextPath}/images/icons/search-icon.svg"
 						class="icn srchicn" alt="search-icon" />
 				</div>
 			</div>
@@ -34,7 +32,6 @@
 			<div class="table-container">
 				<div class="table-header">
 					<h1 class="table-heading">Users</h1>
-					<button class="view">Add user</button>
 				</div>
 
 
@@ -43,7 +40,7 @@
 					<table class="users-table">
 						<thead>
 							<tr>
-								<th>ID</th>
+								<th>S.N</th>
 								<th>Full Name</th>
 								<th>Email</th>
 								<th>Phone</th>
@@ -55,9 +52,9 @@
 						<tbody>
 							<c:choose>
 								<c:when test="${not empty users}">
-									<c:forEach var="user" items="${users}">
+									<c:forEach var="user" items="${users}" varStatus="status">
 										<tr>
-											<td>${user.userId}</td>
+											<td>${status.count}</td>
 											<td>${user.fullName}</td>
 											<td>${user.email}</td>
 											<td>${user.phone}</td>
@@ -65,22 +62,28 @@
 
 											<td><c:choose>
 													<c:when test="${user.status}">
-														<span class="status-badge approved">Approved</span>
+														<span>Active</span>
 													</c:when>
 													<c:otherwise>
-														<span class="status-badge pending">Pending</span>
+														<span>Inactive</span>
 													</c:otherwise>
 												</c:choose></td>
 
-											<td class="actions"><c:if test="${!user.status}">
-													<form
-														action="${pageContext.request.contextPath}/admin/users"
-														method="post" style="display: inline;">
-														<input type="hidden" name="userId" value="${user.userId}">
-														<input type="hidden" name="action" value="approve">
-														<button type="submit" class="approve-btn">Approve</button>
-													</form>
-												</c:if>
+											<td class="actions">
+												<form
+													action="${pageContext.request.contextPath}/admin/users"
+													method="post" style="display: inline;">
+													<input type="hidden" name="userId" value="${user.userId}">
+													<input type="hidden" name="action" value="approve">
+													<button type="submit" class="approve-btn">Approve</button>
+												</form>
+												<form
+													action="${pageContext.request.contextPath}/admin/users"
+													method="post" style="display: inline;">
+													<input type="hidden" name="userId" value="${user.userId}">
+													<input type="hidden" name="action" value="reject-btn">
+													<button type="submit" class="reject-btn">Reject</button>
+												</form>
 
 												<form
 													action="${pageContext.request.contextPath}/admin/users"
@@ -88,14 +91,15 @@
 													<input type="hidden" name="userId" value="${user.userId}">
 													<input type="hidden" name="action" value="delete">
 													<button type="submit" class="delete-btn">Delete</button>
-												</form></td>
+												</form>
+											</td>
 										</tr>
 									</c:forEach>
 								</c:when>
 
 								<c:otherwise>
 									<tr>
-										<td colspan="8">No users found.</td>
+										<td>No users found.</td>
 									</tr>
 								</c:otherwise>
 							</c:choose>

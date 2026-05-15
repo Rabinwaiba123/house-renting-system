@@ -10,9 +10,13 @@ import java.io.IOException;
 /**
  * Servlet implementation class AboutController
  */
-@WebServlet("/about")
+@WebServlet(asyncSupported = true, urlPatterns = { "/about"})
 public class AboutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	public AboutServlet() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

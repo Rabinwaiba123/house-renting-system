@@ -15,11 +15,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-@WebServlet("/admin/add-property")
+@WebServlet(asyncSupported = true, urlPatterns = { "/admin/add-property"})
 @MultipartConfig
 public class AddPropertyServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+
+	public AddPropertyServlet() {
+		super();
+	}
 
 	private PropertyService propertyService = new PropertyService();
 
@@ -68,7 +73,7 @@ public class AddPropertyServlet extends HttpServlet {
 			property.setImage(imagePath);
 
 			property.setAvailability(true);
-			property.setStatus(false); // false = pending admin approval
+			property.setStatus(true);
 			property.setDeleted(false);
 
 			String error = propertyService.validateProperty(property);
@@ -83,7 +88,7 @@ public class AddPropertyServlet extends HttpServlet {
 			boolean success = propertyService.addProperty(property);
 
 			if (success) {
-				request.setAttribute("successMessage", "Property added successfully. Please wait for admin approval.");
+				request.setAttribute("successMessage", "Property added successfully.");
 			} else {
 				request.setAttribute("errorMessage", "Failed to add property.");
 			}

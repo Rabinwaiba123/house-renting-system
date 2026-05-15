@@ -1,181 +1,121 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <title>Admin Reports</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/main.css">
+	href="${pageContext.request.contextPath}/css/admin/admin.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
 <body>
-	<!-- ================= NAVBAR ================= -->
+
 	<jsp:include page="/WEB-INF/pages/include/admin-navbar.jsp" />
 
 	<div class="main-container">
-		<!-- ================= SIDEBAR ================= -->
+
 		<jsp:include page="/WEB-INF/pages/include/admin-sidebar.jsp" />
 
 		<div class="main">
-			<div class="searchbar2">
-				<input type="text" placeholder="Search" />
-				<div class="searchbtn">
-					<img
-						src="${pageContext.request.contextPath}/images/search-icon.svg"
-						class="icn srchicn" alt="search-icon" />
-				</div>
-			</div>
 
 			<div class="Page-Heading">
-				<h1>Reports Overview</h1>
+				<h1>Reports and Analysis</h1>
 			</div>
 
 			<div class="box-container">
-
 				<div class="box box1">
 					<i class="fa fa-users fa-2x"></i>
 					<div class="text">
 						<p>TOTAL USERS</p>
-						<h2>150</h2>
+						<h2>${totalUsers}</h2>
 					</div>
 				</div>
 
 				<div class="box box2">
-					<i class="fa fa-home fa-2x"></i>
+					<i class="fa fa-file-text-o fa-2x"></i>
 					<div class="text">
-						<p>TOTAL PROPERTIES</p>
-						<h2>80</h2>
+						<p>TOTAL BOOKINGS</p>
+						<h2>${totalBookings}</h2>
 					</div>
 				</div>
 
 				<div class="box box3">
-					<i class="fa fa-calendar fa-2x"></i>
+					<i class="fa fa-home fa-2x"></i>
 					<div class="text">
-						<p>TOTAL BOOKINGS</p>
-						<h2>45</h2>
+						<p>TOTAL PROPERTIES</p>
+						<h2>${totalProperties}</h2>
 					</div>
 				</div>
 
 				<div class="box box4">
-					<i class="fa fa-money fa-2x"></i>
+					<i class="fa fa-envelope fa-2x"></i>
 					<div class="text">
-						<p>TOTAL REVENUE</p>
-						<h2>$5000</h2>
+						<p>TOTAL MESSAGES</p>
+						<h2>${totalContacts}</h2>
 					</div>
 				</div>
+			</div>
+
+			<div class="report-container">
+
+				<h2>Property Report</h2>
+				<table class="admin-table">
+					<tr>
+						<th>Property Status</th>
+						<th>Total</th>
+					</tr>
+					<tr>
+						<td>Available Properties</td>
+						<td>${availableProperties}</td>
+					</tr>
+					<tr>
+						<td>Booked Properties</td>
+						<td>${bookedProperties}</td>
+					</tr>
+					<tr>
+						<td>Approved Properties</td>
+						<td>${approvedProperties}</td>
+					</tr>
+					<tr>
+						<td>Pending Properties</td>
+						<td>${pendingProperties}</td>
+					</tr>
+				</table>
+
+				<h2>Booking Report</h2>
+				<table class="admin-table">
+					<tr>
+						<th>Booking Status</th>
+						<th>Total</th>
+					</tr>
+					<tr>
+						<td>Total Bookings</td>
+						<td>${totalBookings}</td>
+					</tr>
+				</table>
+
+				<h2>System Report</h2>
+				<table class="admin-table">
+					<tr>
+						<th>Report Name</th>
+						<th>Total</th>
+					</tr>
+					<tr>
+						<td>Total Users</td>
+						<td>${totalUsers}</td>
+					</tr>
+					<tr>
+						<td>Total Contact Messages</td>
+						<td>${totalContacts}</td>
+					</tr>
+				</table>
 
 			</div>
 
-			<div class="table-container">
-				<div class="table-header">
-					<h1 class="table-heading">Generate Reports</h1>
-					<button class="view">Download All</button>
-				</div>
-
-				<div class="booking-filter">
-					<div class="filter-group">
-						<label>Report Type</label> <select>
-							<option>All</option>
-							<option>User Report</option>
-							<option>Property Report</option>
-							<option>Booking Report</option>
-							<option>Payment Report</option>
-						</select>
-					</div>
-
-					<div class="filter-group">
-						<label>From Date</label> <input type="date" />
-					</div>
-
-					<div class="filter-group">
-						<label>To Date</label> <input type="date" />
-					</div>
-
-					<button class="filter-btn">Generate</button>
-				</div>
-
-
-				<div class="table-body">
-					<table class="users-table">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Report Name</th>
-								<th>Category</th>
-								<th>Date Range</th>
-								<th>Created By</th>
-								<th>Generated Date</th>
-								<th>Status</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Monthly User Report</td>
-								<td>Users</td>
-								<td>2026-04-01 to 2026-04-30</td>
-								<td>Admin</td>
-								<td>2026-04-22</td>
-								<td><span class="status-badge active">Ready</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-download"></i> <i class="fa fa-trash"></i></td>
-							</tr>
-
-							<tr>
-								<td>2</td>
-								<td>Property Summary Report</td>
-								<td>Properties</td>
-								<td>2026-04-01 to 2026-04-30</td>
-								<td>Admin</td>
-								<td>2026-04-21</td>
-								<td><span class="status-badge active">Ready</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-download"></i> <i class="fa fa-trash"></i></td>
-							</tr>
-
-							<tr>
-								<td>3</td>
-								<td>Weekly Booking Report</td>
-								<td>Bookings</td>
-								<td>2026-04-15 to 2026-04-21</td>
-								<td>Admin</td>
-								<td>2026-04-21</td>
-								<td><span class="status-badge pending">Processing</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-download"></i> <i class="fa fa-trash"></i></td>
-							</tr>
-
-							<tr>
-								<td>4</td>
-								<td>Payment Collection Report</td>
-								<td>Payments</td>
-								<td>2026-04-01 to 2026-04-20</td>
-								<td>Admin</td>
-								<td>2026-04-20</td>
-								<td><span class="status-badge active">Ready</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-download"></i> <i class="fa fa-trash"></i></td>
-							</tr>
-
-							<tr>
-								<td>5</td>
-								<td>Yearly System Summary</td>
-								<td>Overall</td>
-								<td>2026-01-01 to 2026-12-31</td>
-								<td>Admin</td>
-								<td>2026-04-18</td>
-								<td><span class="status-badge blocked">Failed</span></td>
-								<td class="actions"><i class="fa fa-eye"></i> <i
-									class="fa fa-download"></i> <i class="fa fa-trash"></i></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
 		</div>
 	</div>
 

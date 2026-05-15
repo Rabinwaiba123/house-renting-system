@@ -559,7 +559,7 @@ button, select {
 					<a href="#properties" class="btn btn-primary hero-btn">Book Now</a>
 				</div>
 				<div class="hero-image">
-					<img src="images/Untitled design.png" alt="Modern rental house" />
+					<img src="images/photos/Untitled design.png" alt="Modern rental house" />
 				</div>
 			</div>
 		</section>
@@ -574,10 +574,10 @@ button, select {
 
 					<div class="filter-tabs">
 						<a href="#" class="tab"><img
-							src="images/bed_hotel_double_sleep_bedroom_room_icon_229653.png"
+							src="images/icons/bed_hotel_double_sleep_bedroom_room_icon_229653.png"
 							alt="rooms" />Rooms</a> <a href="#" class="tab"><img
-							src="images/buildings_icon-icons.com_56742.png" alt="flats" />Flats</a>
-						<a href="#" class="tab"><img src="images/house_38533.png"
+							src="images/icons/buildings_icon-icons.com_56742.png" alt="flats" />Flats</a>
+						<a href="#" class="tab"><img src="images/icons/house_38533.png"
 							alt="houses" />House</a>
 					</div>
 				</div>
@@ -613,7 +613,7 @@ button, select {
 				<div class="feature-grid">
 					<article class="feature-card">
 						<div class="feature-icon">
-							<img src="images/search_icon_125165.svg" alt="Easy to find" />
+							<img src="images/icons/search_icon_125165.svg" alt="Easy to find" />
 						</div>
 						<h3>Easy to find</h3>
 						<p>Easily search and explore a wide range of houses and rooms
@@ -624,7 +624,7 @@ button, select {
 
 					<article class="feature-card">
 						<div class="feature-icon">
-							<img src="images/label_114874.svg" alt="Affordable prices" />
+							<img src="images/icons/label_114874.svg" alt="Affordable prices" />
 						</div>
 						<h3>Affordable Prices</h3>
 						<p>We provide listings with competitive and transparent
@@ -635,7 +635,7 @@ button, select {
 					<article class="feature-card">
 						<div class="feature-icon">
 							<img
-								src="images/3507760-clock-history-iconoteka-time-watch_107692.svg"
+								src="images/icons/3507760-clock-history-iconoteka-time-watch_107692.svg"
 								alt="Quickly process" />
 						</div>
 						<h3>Quickly Process</h3>
@@ -650,9 +650,9 @@ button, select {
 		<section class="help section" id="about">
 			<div class="container help-grid">
 				<div class="help-images">
-					<img src="images/AZ19GXhGC_Urw0-5srCesQ-AZ19GXhGPnoinQqUgil0Kg.jpg"
+					<img src="images//photos/AZ19GXhGC_Urw0-5srCesQ-AZ19GXhGPnoinQqUgil0Kg.jpg"
 						alt="Living room interior" /> <img
-						src="images/AZ19GiZaeyx7kadXlVHTPw-AZ19GiZaOxGI_Rh77GCP-Q.jpg"
+						src="images/photos/AZ19GiZaeyx7kadXlVHTPw-AZ19GiZaOxGI_Rh77GCP-Q.jpg"
 						alt="Bedroom interior" />
 				</div>
 

@@ -66,9 +66,9 @@ public class UserDAO {
 	// Get user by email
 	public User getUserByEmail(String email) {
 		User e = null;
-		try (Connection conn = DBConnection.getConnection()) {
+		try (Connection con = DBConnection.getConnection()) {
 			String sql = "SELECT * FROM users WHERE email = ? AND is_deleted = FALSE";
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -138,9 +138,9 @@ public class UserDAO {
 	// Approve user account
 	public int approveUser(int userId) {
 		int status = 0;
-		try (Connection conn = DBConnection.getConnection()) {
+		try (Connection con = DBConnection.getConnection()) {
 			String sql = "UPDATE users SET status = TRUE WHERE user_id = ? AND is_deleted = FALSE";
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, userId);
 			status = ps.executeUpdate();
 		} catch (Exception ex) {
@@ -149,12 +149,26 @@ public class UserDAO {
 		return status;
 	}
 
+	// Reject user account
+	public int rejectUser(int userId) {
+		int status = 0;
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "UPDATE users SET status = FALSE WHERE user_id = ? AND is_deleted = FALSE";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, userId);
+			status = ps.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return status;
+	}
+	
 	// Soft delete user
 	public int deleteUser(int userId) {
 		int status = 0;
-		try (Connection conn = DBConnection.getConnection()) {
+		try (Connection con = DBConnection.getConnection()) {
 			String sql = "UPDATE users SET is_deleted = TRUE WHERE user_id = ? AND is_deleted = FALSE";
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, userId);
 			status = ps.executeUpdate();
 		} catch (Exception ex) {

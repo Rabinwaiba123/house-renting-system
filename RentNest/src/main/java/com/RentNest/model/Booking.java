@@ -9,35 +9,15 @@ public class Booking {
 	private int userId;
 	private int propertyId;
 	private Date bookingDate;
-
-	
-	public Booking() {
-		super();
-	}
-
-	public Booking(int bookingId, int userId, int propertyId, Date bookingDate, Date moveInDate, int durationMonths,
-			String message, boolean status, boolean isCancelled, boolean isDeleted, Timestamp createdAt) {
-		super();
-		this.bookingId = bookingId;
-		this.userId = userId;
-		this.propertyId = propertyId;
-		this.bookingDate = bookingDate;
-		this.moveInDate = moveInDate;
-		this.durationMonths = durationMonths;
-		this.message = message;
-		this.status = status;
-		this.isCancelled = isCancelled;
-		this.isDeleted = isDeleted;
-		this.createdAt = createdAt;
-	}
-
 	private Date moveInDate;
 	private int durationMonths;
 	private String message;
-	private boolean status;
-	private boolean isCancelled;
 	private boolean isDeleted;
 	private Timestamp createdAt;
+
+	public Booking() {
+		super();
+	}
 
 	// Getters and Setters
 
@@ -95,22 +75,6 @@ public class Booking {
 
 	public void setMessage(String message) {
 		this.message = message;
-	}
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
-	public boolean isCancelled() {
-		return isCancelled;
-	}
-
-	public void setCancelled(boolean isCancelled) {
-		this.isCancelled = isCancelled;
 	}
 
 	public boolean isDeleted() {

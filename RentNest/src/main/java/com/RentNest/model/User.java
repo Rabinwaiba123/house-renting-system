@@ -22,21 +22,6 @@ public class User {
 		super();
 	}
 
-	public User(int userId, String fullName, String email, String phone, String password, String address, String image,
-			String role, boolean status, boolean isDeleted, Timestamp createdAt) {
-		super();
-		this.userId = userId;
-		this.fullName = fullName;
-		this.email = email;
-		this.phone = phone;
-		this.password = password;
-		this.address = address;
-		this.image = image;
-		this.role = role;
-		this.status = status;
-		this.isDeleted = isDeleted;
-		this.createdAt = createdAt;
-	}
 
 	// Getters and Setters
 

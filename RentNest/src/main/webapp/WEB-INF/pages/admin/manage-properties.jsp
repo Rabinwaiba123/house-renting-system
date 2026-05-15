@@ -6,7 +6,7 @@
 <head>
 <title>Admin Properties</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/main.css">
+	href="${pageContext.request.contextPath}/css/admin/admin.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
@@ -24,7 +24,7 @@
 				<input type="text" name="" id="" placeholder="Search" />
 				<div class="searchbtn">
 					<img
-						src="${pageContext.request.contextPath}/images/search-icon.svg"
+						src="${pageContext.request.contextPath}/images/icons/search-icon.svg"
 						class="icn srchicn" alt="search-icon" />
 				</div>
 			</div>
@@ -47,9 +47,8 @@
 								<th>Type</th>
 								<th>Location</th>
 								<th>Price</th>
-								<th>Rooms</th>
-								<th>Status</th>
 								<th>Availability</th>
+								<th>Status</th>
 								<th>Action</th>
 							</tr>
 						</thead>
@@ -60,23 +59,35 @@
 											<img src="${pageContext.request.contextPath}/${p.image}"
 												width="100" height="70">
 										</c:if></td>
-
 									<td>${p.title}</td>
 									<td>${p.type}</td>
 									<td>${p.location}</td>
 									<td>Rs. ${p.price}</td>
-									<td>${p.rooms}</td>
-									<td>${p.status}</td>
-									<td>${p.availability}</td>
+									<td>${p.availability ? 'Available' : 'Not Available'}</td>
+									<td>${p.status ? 'Approved' : 'Pending'}</td>
 
-									<td><a
-										href="${pageContext.request.contextPath}/property?action=approve&id=${p.propertyId}">
-											Approve </a> | <a
-										href="${pageContext.request.contextPath}/property?action=reject&id=${p.propertyId}">
-											Reject </a> | <a
-										href="${pageContext.request.contextPath}/property?action=delete&id=${p.propertyId}&from=admin"
-										onclick="return confirm('Are you sure you want to delete this property?');">
-											Delete </a></td>
+									<td>
+										<div class="actions">
+
+											<a
+												href="${pageContext.request.contextPath}/admin/edit-property?id=${p.propertyId}"
+												class="edit-btn"> Edit </a>
+
+											<form
+												action="${pageContext.request.contextPath}/admin/manage-properties"
+												method="post" class="action-form">
+
+												<input type="hidden" name="propertyId"
+													value="${p.propertyId}"> <input type="hidden"
+													name="action" value="delete">
+
+												<button type="submit" class="delete-btn">
+													Delete</button>
+
+											</form>
+
+										</div>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>

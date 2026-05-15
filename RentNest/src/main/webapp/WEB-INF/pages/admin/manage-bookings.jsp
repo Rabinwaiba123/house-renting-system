@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
-
+<%@ taglib uri="jakarta.tags.core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Contacts</title>
+<title>Admin Bookings</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/admin/admin.css">
 <link rel="stylesheet"
@@ -15,6 +14,8 @@
 <body>
 	<!-- ================= NAVBAR ================= -->
 	<jsp:include page="/WEB-INF/pages/include/admin-navbar.jsp" />
+
+
 
 	<div class="main-container">
 		<!-- ================= SIDEBAR ================= -->
@@ -32,50 +33,51 @@
 
 			<div class="table-container">
 				<div class="table-header">
-					<h1 class="table-heading">Contacts</h1>
+					<h1 class="table-heading">Bookings</h1>
 				</div>
+
 
 				<div class="table-body">
 					<table class="users-table">
 						<thead>
 							<tr>
 								<th>S.N</th>
-								<th>Full Name</th>
-								<th>Email</th>
-								<th>Subject</th>
-								<th>Message</th>
-								<th>Actions</th>
+								<th>User ID</th>
+								<th>Property ID</th>
+								<th>Booking Date</th>
+								<th>Move In Date</th>
+								<th>Duration</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 
 						<tbody>
 							<c:choose>
-								<c:when test="${not empty contacts}">
-									<c:forEach var="contact" items="${contacts}" varStatus="status">
-										<tr>
-											<td>${status.count}</td>
-											<td>${contact.fullName}</td>
-											<td>${contact.email}</td>
-											<td>${contact.subject}</td>
-											<td>${contact.message}</td>
-											<td class="actions">
-												<form
-													action="${pageContext.request.contextPath}/admin/contacts"
-													method="post">
-													<input type="hidden" name="contactId"
-														value="${contact.contactId}"> <input type="hidden"
-														name="action" value="delete">
-													<button type="submit" class="delete-btn">Delete</button>
-												</form>
-											</td>
-										</tr>
-									</c:forEach>
+								<c:when test="${empty bookings}">
+									<tr>
+										<td>No bookings found.</td>
+									</tr>
 								</c:when>
 
 								<c:otherwise>
-									<tr>
-										<td>No message found.</td>
-									</tr>
+									<c:forEach var="booking" items="${bookings}" varStatus="status">
+										<tr>
+											<td>${status.count}</td>
+											<td>${booking.userId}</td>
+											<td>${booking.propertyId}</td>
+											<td>${booking.bookingDate}</td>
+											<td>${booking.moveInDate}</td>
+											<td>${booking.durationMonths}Months</td>
+											<td class="actions"><form
+													action="${pageContext.request.contextPath}/admin/manage-bookings"
+													method="post">
+													<input type="hidden" name="action" value="delete">
+													<input type="hidden" name="bookingId"
+														value="${booking.bookingId}">
+													<button type="submit" class="delete-btn">Delete</button>
+												</form></td>
+										</tr>
+									</c:forEach>
 								</c:otherwise>
 							</c:choose>
 						</tbody>
@@ -84,7 +86,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
-

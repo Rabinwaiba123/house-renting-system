@@ -1,27 +1,43 @@
 package com.RentNest.controller.admin;
 
+import java.io.IOException;
+import java.util.List;
+
+import com.RentNest.model.Booking;
+import com.RentNest.service.BookingService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import jakarta.servlet.http.*;
 
-/**
- * Servlet implementation class BookingsController
- */
-@WebServlet("/admin/bookings")
+@WebServlet("/admin/manage-bookings")
 public class BookingsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
+	private BookingService bookingService = new BookingService();
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/pages/admin/bookings.jsp").forward(request, response);
+
+		List<Booking> bookings = bookingService.getAllBookings();
+		request.setAttribute("bookings", bookings);
+
+		request.getRequestDispatcher("/WEB-INF/pages/admin/manage-bookings.jsp").forward(request, response);
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-	}
+		String action = request.getParameter("action");
 
+		int bookingId = Integer.parseInt(request.getParameter("bookingId"));
+
+		if ("delete".equals(action)) {
+			bookingService.deleteBooking(bookingId);
+		}
+
+		response.sendRedirect(request.getContextPath() + "/admin/manage-bookings");
+	}
 }

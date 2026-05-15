@@ -682,7 +682,7 @@ button, select {
 								<option>Lalitpur, Nepal</option>
 								<option>Bhaktapur, Nepal</option>
 							</select> <img
-								src="${pageContext.request.contextPath}/images/down_icon-icons.com_61209.png"
+								src="${pageContext.request.contextPath}/images/icons/down_icon-icons.com_61209.png"
 								alt="dropdown icon" />
 						</div>
 					</div>
@@ -695,7 +695,7 @@ button, select {
 								<option>Flat</option>
 								<option>House</option>
 							</select> <img
-								src="${pageContext.request.contextPath}/images/down_icon-icons.com_61209.png"
+								src="${pageContext.request.contextPath}/images/icons/down_icon-icons.com_61209.png"
 								alt="dropdown icon" />
 						</div>
 					</div>
@@ -708,7 +708,7 @@ button, select {
 								<option>Rs4000 - Rs8000</option>
 								<option>Rs8000 - Rs15000</option>
 							</select> <img
-								src="${pageContext.request.contextPath}/images/down_icon-icons.com_61209.png"
+								src="${pageContext.request.contextPath}/images/icons/down_icon-icons.com_61209.png"
 								alt="dropdown icon" />
 						</div>
 					</div>
@@ -731,7 +731,7 @@ button, select {
 								<p class="price">Rs. ${p.price}</p>
 
 								<a
-									href="${pageContext.request.contextPath}/property?action=detail&id=${p.propertyId}"
+									href="${pageContext.request.contextPath}/property-detail?id=${p.propertyId}"
 									class="card-btn"> See More </a>
 							</div>
 						</article>
