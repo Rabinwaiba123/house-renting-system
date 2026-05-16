@@ -33,13 +33,19 @@ public class BookingDAO {
 
 	public List<Booking> getAllBookings() {
 		List<Booking> list = new ArrayList<>();
+
 		try (Connection con = DBConnection.getConnection()) {
-			String sql = "SELECT * FROM bookings WHERE is_deleted = false ORDER BY created_at DESC";
+
+			String sql = "SELECT b.*, u.full_name AS username, p.title AS property_title " + "FROM bookings b "
+					+ "JOIN users u ON b.user_id = u.user_id " + "JOIN properties p ON b.property_id = p.property_id "
+					+ "WHERE b.is_deleted = false " + "ORDER BY b.created_at DESC";
+
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
 				Booking b = new Booking();
+
 				b.setBookingId(rs.getInt("booking_id"));
 				b.setUserId(rs.getInt("user_id"));
 				b.setPropertyId(rs.getInt("property_id"));
@@ -49,11 +55,17 @@ public class BookingDAO {
 				b.setMessage(rs.getString("message"));
 				b.setDeleted(rs.getBoolean("is_deleted"));
 				b.setCreatedAt(rs.getTimestamp("created_at"));
+
+				b.setUsername(rs.getString("username"));
+				b.setPropertyTitle(rs.getString("property_title"));
+
 				list.add(b);
 			}
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+
 		return list;
 	}
 
@@ -73,7 +85,7 @@ public class BookingDAO {
 				b.setMoveInDate(rs.getDate("move_in_date"));
 				b.setDurationMonths(rs.getInt("duration_months"));
 				b.setMessage(rs.getString("message"));
-				b.setDeleted(rs.getBoolean("deleted"));
+				b.setDeleted(rs.getBoolean("is_deleted"));
 				b.setCreatedAt(rs.getTimestamp("created_at"));
 			}
 		} catch (Exception ex) {
@@ -99,7 +111,7 @@ public class BookingDAO {
 				b.setMoveInDate(rs.getDate("move_in_date"));
 				b.setDurationMonths(rs.getInt("duration_months"));
 				b.setMessage(rs.getString("message"));
-				b.setDeleted(rs.getBoolean("deleted"));
+				b.setDeleted(rs.getBoolean("is_deleted"));
 				b.setCreatedAt(rs.getTimestamp("created_at"));
 				list.add(b);
 			}

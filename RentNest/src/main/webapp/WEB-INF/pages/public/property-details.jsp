@@ -309,8 +309,8 @@ button {
 
 							<div class="property-features">
 								<div>
-									<strong>${property.bedrooms}</strong>
-									<p>Bedrooms</p>
+									<strong>${property.rooms}</strong>
+									<p>Rooms</p>
 								</div>
 
 								<div>

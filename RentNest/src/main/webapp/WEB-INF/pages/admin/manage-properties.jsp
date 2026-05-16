@@ -53,43 +53,53 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="p" items="${properties}">
-								<tr>
-									<td><c:if test="${not empty p.image}">
-											<img src="${pageContext.request.contextPath}/${p.image}"
-												width="100" height="70">
-										</c:if></td>
-									<td>${p.title}</td>
-									<td>${p.type}</td>
-									<td>${p.location}</td>
-									<td>Rs. ${p.price}</td>
-									<td>${p.availability ? 'Available' : 'Not Available'}</td>
-									<td>${p.status ? 'Approved' : 'Pending'}</td>
+							<c:choose>
+								<c:when test="${not empty properties}">
+									<c:forEach var="p" items="${properties}">
+										<tr>
+											<td><c:if test="${not empty p.image}">
+													<img src="${pageContext.request.contextPath}/${p.image}"
+														width="100" height="70">
+												</c:if></td>
+											<td>${p.title}</td>
+											<td>${p.type}</td>
+											<td>${p.location}</td>
+											<td>Rs. ${p.price}</td>
+											<td>${p.availability ? 'Available' : 'Not Available'}</td>
+											<td>${p.status ? 'Approved' : 'Pending'}</td>
 
-									<td>
-										<div class="actions">
+											<td>
+												<div class="actions">
 
-											<a
-												href="${pageContext.request.contextPath}/admin/edit-property?id=${p.propertyId}"
-												class="edit-btn"> Edit </a>
+													<a
+														href="${pageContext.request.contextPath}/admin/edit-property?id=${p.propertyId}"
+														class="edit-btn"> Edit </a>
 
-											<form
-												action="${pageContext.request.contextPath}/admin/manage-properties"
-												method="post" class="action-form">
+													<form
+														action="${pageContext.request.contextPath}/admin/manage-properties"
+														method="post" class="action-form">
 
-												<input type="hidden" name="propertyId"
-													value="${p.propertyId}"> <input type="hidden"
-													name="action" value="delete">
+														<input type="hidden" name="propertyId"
+															value="${p.propertyId}"> <input type="hidden"
+															name="action" value="delete">
 
-												<button type="submit" class="delete-btn">
-													Delete</button>
+														<button type="submit" class="delete-btn">Delete</button>
 
-											</form>
+													</form>
 
-										</div>
-									</td>
-								</tr>
-							</c:forEach>
+												</div>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<tr>
+										<td colspan="8">No properties found.</td>
+									</tr>
+								</c:otherwise>
+							</c:choose>
+
+
 						</tbody>
 					</table>
 				</div>

@@ -53,7 +53,7 @@ public class AddPropertyServlet extends HttpServlet {
 			String description = request.getParameter("description");
 
 			double price = Double.parseDouble(request.getParameter("price"));
-			int bedrooms = Integer.parseInt(request.getParameter("bedrooms"));
+			int rooms = Integer.parseInt(request.getParameter("rooms"));
 			int bathrooms = Integer.parseInt(request.getParameter("bathrooms"));
 			int areaSqft = Integer.parseInt(request.getParameter("areaSqft"));
 
@@ -66,7 +66,7 @@ public class AddPropertyServlet extends HttpServlet {
 			property.setType(type);
 			property.setLocation(location);
 			property.setPrice(price);
-			property.setBedrooms(bedrooms);
+			property.setRooms(rooms);
 			property.setBathrooms(bathrooms);
 			property.setAreaSqft(areaSqft);
 			property.setDescription(description);

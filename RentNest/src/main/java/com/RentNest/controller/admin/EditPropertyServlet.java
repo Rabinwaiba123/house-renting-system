@@ -61,7 +61,7 @@ public class EditPropertyServlet extends HttpServlet {
 			property.setType(request.getParameter("type"));
 			property.setLocation(request.getParameter("location"));
 			property.setPrice(Double.parseDouble(request.getParameter("price")));
-			property.setBedrooms(Integer.parseInt(request.getParameter("bedrooms")));
+			property.setRooms(Integer.parseInt(request.getParameter("rooms")));
 			property.setBathrooms(Integer.parseInt(request.getParameter("bathrooms")));
 			property.setAreaSqft(Integer.parseInt(request.getParameter("areaSqft")));
 			property.setDescription(request.getParameter("description"));

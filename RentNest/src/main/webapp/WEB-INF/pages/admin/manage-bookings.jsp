@@ -42,8 +42,8 @@
 						<thead>
 							<tr>
 								<th>S.N</th>
-								<th>User ID</th>
-								<th>Property ID</th>
+								<th>Tenant</th>
+								<th>Property Title</th>
 								<th>Booking Date</th>
 								<th>Move In Date</th>
 								<th>Duration</th>
@@ -55,7 +55,7 @@
 							<c:choose>
 								<c:when test="${empty bookings}">
 									<tr>
-										<td>No bookings found.</td>
+										<td colspan="7">No bookings found.</td>
 									</tr>
 								</c:when>
 
@@ -63,8 +63,8 @@
 									<c:forEach var="booking" items="${bookings}" varStatus="status">
 										<tr>
 											<td>${status.count}</td>
-											<td>${booking.userId}</td>
-											<td>${booking.propertyId}</td>
+											<td>${booking.username}</td>
+											<td>${booking.propertyTitle}</td>
 											<td>${booking.bookingDate}</td>
 											<td>${booking.moveInDate}</td>
 											<td>${booking.durationMonths}Months</td>

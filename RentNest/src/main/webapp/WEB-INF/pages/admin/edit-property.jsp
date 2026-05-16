@@ -82,8 +82,8 @@
 				</div>
 
 				<div class="form-group">
-					<label>Bedrooms</label> <input type="number" name="bedrooms"
-						value="${property.bedrooms}" required>
+					<label>rooms</label> <input type="number" name="rooms"
+						value="${property.rooms}" required>
 				</div>
 
 				<div class="form-group">

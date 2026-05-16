@@ -15,6 +15,9 @@ public class Booking {
 	private boolean isDeleted;
 	private Timestamp createdAt;
 
+	private String username;
+	private String propertyTitle;
+
 	public Booking() {
 		super();
 	}
@@ -93,4 +96,21 @@ public class Booking {
 		this.createdAt = createdAt;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPropertyTitle() {
+		return propertyTitle;
+	}
+
+	public void setPropertyTitle(String propertyTitle) {
+		this.propertyTitle = propertyTitle;
+	}
+	
+	
 }

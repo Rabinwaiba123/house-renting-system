@@ -99,7 +99,7 @@
 
 								<c:otherwise>
 									<tr>
-										<td>No users found.</td>
+										<td colspan="7">No users found.</td>
 									</tr>
 								</c:otherwise>
 							</c:choose>

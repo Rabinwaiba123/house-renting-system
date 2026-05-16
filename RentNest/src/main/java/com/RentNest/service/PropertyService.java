@@ -54,7 +54,7 @@ public class PropertyService {
 		if (property.getPrice() <= 0) {
 			return "Price must be greater than 0.";
 		}
-		if (property.getBedrooms() <= 0) {
+		if (property.getRooms() <= 0) {
 			return "Bedrooms must be greater than 0.";
 		}
 		if (property.getBathrooms() <= 0) {

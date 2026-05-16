@@ -9,7 +9,7 @@ public class Property {
 	private String type;
 	private String location;
 	private double price;
-	private int bedrooms;
+	private int rooms;
 	private int bathrooms;
 	private int areaSqft;
 	private String description;
@@ -19,7 +19,6 @@ public class Property {
 	private boolean isDeleted;
 	private Timestamp createdAt;
 
-	
 	public Property() {
 		super();
 	}
@@ -66,12 +65,12 @@ public class Property {
 		this.price = price;
 	}
 
-	public int getBedrooms() {
-		return bedrooms;
+	public int getRooms() {
+		return rooms;
 	}
 
-	public void setBedrooms(int bedrooms) {
-		this.bedrooms = bedrooms;
+	public void setRooms(int bedrooms) {
+		this.rooms = bedrooms;
 	}
 
 	public int getBathrooms() {

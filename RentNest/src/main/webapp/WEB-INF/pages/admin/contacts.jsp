@@ -74,7 +74,7 @@
 
 								<c:otherwise>
 									<tr>
-										<td>No message found.</td>
+										<td colspan="6">No message found.</td>
 									</tr>
 								</c:otherwise>
 							</c:choose>
