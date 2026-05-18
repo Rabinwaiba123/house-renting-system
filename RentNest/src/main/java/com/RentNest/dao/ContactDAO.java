@@ -50,28 +50,6 @@ public class ContactDAO {
 		return list;
 	}
 
-	// Get single contact by id
-	public Contact getContactById(int contactId) {
-		Contact c = null;
-		try (Connection con = DBConnection.getConnection()) {
-			String sql = "SELECT * FROM contacts WHERE contact_id = ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, contactId);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				c = new Contact();
-				c.setContactId(rs.getInt("contact_id"));
-				c.setFullName(rs.getString("full_name"));
-				c.setEmail(rs.getString("email"));
-				c.setSubject(rs.getString("subject"));
-				c.setMessage(rs.getString("message"));
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return c;
-	}
-
 	// Delete contact message
 	public int deleteContact(int contactId) {
 		int status = 0;

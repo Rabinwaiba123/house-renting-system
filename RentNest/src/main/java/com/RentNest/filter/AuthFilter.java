@@ -40,8 +40,7 @@ public class AuthFilter implements Filter {
 
 		boolean adminPage = path.startsWith("/admin");
 
-		boolean tenantPage = path.startsWith("/wishlist") || path.startsWith("/my-bookings")
-				|| path.startsWith("/profile") || path.startsWith("/booking") || path.startsWith("/review");
+		boolean tenantPage = path.startsWith("/user/") || path.equals("/booking") || path.equals("/review");
 
 		boolean knownPage = publicPage || adminPage || tenantPage;
 

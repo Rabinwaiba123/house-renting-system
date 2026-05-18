@@ -31,19 +31,17 @@ public class WishlistServlet extends HttpServlet {
 		List<Wishlist> wishlist = wishlistDAO.getWishlistByUserId(user.getUserId());
 		request.setAttribute("wishlist", wishlist);
 
-		request.getRequestDispatcher("/WEB-INF/pages/tenant/wishlist.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/user/wishlist.jsp").forward(request, response);
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		User user = (User) SessionUtil.getAttribute(request, "user");
-
 		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 		}
-
 		String action = request.getParameter("action");
 
 		try {
@@ -60,7 +58,6 @@ public class WishlistServlet extends HttpServlet {
 					wishlistDAO.addWishlist(wishlist);
 					request.getSession().setAttribute("success", "Property added to wishlist.");
 				}
-
 				response.sendRedirect(request.getContextPath() + "/property-detail?id=" + propertyId);
 				return;
 			}
@@ -73,7 +70,6 @@ public class WishlistServlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/user/wishlist");
 				return;
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("error", "Something went wrong.");

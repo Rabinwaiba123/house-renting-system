@@ -41,10 +41,6 @@ public class BookingService {
 		return bookingDAO.getAllBookings();
 	}
 
-	public Booking getBookingById(int bookingId) {
-		return bookingDAO.getBookingById(bookingId);
-	}
-
 	public List<Booking> getBookingsByUserId(int userId) {
 		return bookingDAO.getBookingsByUserId(userId);
 	}

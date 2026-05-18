@@ -58,7 +58,7 @@ public class ProfileServlet extends HttpServlet {
 		request.setAttribute("bookingCount", userService.getBookingCount(user.getUserId()));
 		request.setAttribute("wishlistCount", userService.getWishlistCount(user.getUserId()));
 
-		request.getRequestDispatcher("/WEB-INF/pages/tenant/my-profile.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/user/my-profile.jsp").forward(request, response);
 	}
 
 	@Override

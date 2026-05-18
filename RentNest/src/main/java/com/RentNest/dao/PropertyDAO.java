@@ -37,6 +37,26 @@ public class PropertyDAO {
 		return status;
 	}
 
+	private Property mapProperty(ResultSet rs) throws Exception {
+		Property p = new Property();
+		p.setPropertyId(rs.getInt("property_id"));
+		p.setTitle(rs.getString("title"));
+		p.setType(rs.getString("type"));
+		p.setLocation(rs.getString("location"));
+		p.setPrice(rs.getDouble("price"));
+		p.setRooms(rs.getInt("rooms"));
+		p.setBathrooms(rs.getInt("bathrooms"));
+		p.setAreaSqft(rs.getInt("area_sqft"));
+		p.setDescription(rs.getString("description"));
+		p.setImage(rs.getString("image"));
+		p.setAvailability(rs.getBoolean("availability"));
+		p.setStatus(rs.getBoolean("status"));
+		p.setDeleted(rs.getBoolean("is_deleted"));
+		p.setCreatedAt(rs.getTimestamp("created_at"));
+
+		return p;
+	}
+
 	// Get all approved properties for public/user side
 	public List<Property> getPublicProperties() {
 		List<Property> list = new ArrayList<>();
@@ -80,26 +100,6 @@ public class PropertyDAO {
 			e.printStackTrace();
 		}
 		return result;
-	}
-
-	private Property mapProperty(ResultSet rs) throws Exception {
-		Property p = new Property();
-		p.setPropertyId(rs.getInt("property_id"));
-		p.setTitle(rs.getString("title"));
-		p.setType(rs.getString("type"));
-		p.setLocation(rs.getString("location"));
-		p.setPrice(rs.getDouble("price"));
-		p.setRooms(rs.getInt("rooms"));
-		p.setBathrooms(rs.getInt("bathrooms"));
-		p.setAreaSqft(rs.getInt("area_sqft"));
-		p.setDescription(rs.getString("description"));
-		p.setImage(rs.getString("image"));
-		p.setAvailability(rs.getBoolean("availability"));
-		p.setStatus(rs.getBoolean("status"));
-		p.setDeleted(rs.getBoolean("is_deleted"));
-		p.setCreatedAt(rs.getTimestamp("created_at"));
-
-		return p;
 	}
 
 	public List<Property> searchProperties(String keyword, String type, String maxPrice) {

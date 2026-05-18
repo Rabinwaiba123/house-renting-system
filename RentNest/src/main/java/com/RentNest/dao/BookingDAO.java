@@ -75,32 +75,6 @@ public class BookingDAO {
 		return list;
 	}
 
-	public Booking getBookingById(int bookingId) {
-		Booking b = null;
-		try (Connection con = DBConnection.getConnection()) {
-			String sql = "SELECT * FROM bookings WHERE booking_id = ? AND is_deleted = false";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, bookingId);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				b = new Booking();
-				b.setBookingId(rs.getInt("booking_id"));
-				b.setUserId(rs.getInt("user_id"));
-				b.setPropertyId(rs.getInt("property_id"));
-				b.setBookingDate(rs.getDate("booking_date"));
-				b.setMoveInDate(rs.getDate("move_in_date"));
-				b.setDurationMonths(rs.getInt("duration_months"));
-				b.setMessage(rs.getString("message"));
-				b.setDeleted(rs.getBoolean("is_deleted"));
-				b.setCreatedAt(rs.getTimestamp("created_at"));
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		return b;
-	}
-
 	public List<Booking> getBookingsByUserId(int userId) {
 		List<Booking> bookings = new ArrayList<>();
 
@@ -164,19 +138,6 @@ public class BookingDAO {
 			ex.printStackTrace();
 		}
 
-		return false;
-	}
-
-	public boolean updateBookingStatus(int bookingId, boolean status) {
-		String sql = "UPDATE bookings SET status = ? WHERE booking_id = ?";
-		try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-			ps.setBoolean(1, status);
-			ps.setInt(2, bookingId);
-			int rows = ps.executeUpdate();
-			return rows > 0;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return false;
 	}
 

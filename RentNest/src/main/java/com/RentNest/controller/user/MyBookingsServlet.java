@@ -30,6 +30,6 @@ public class MyBookingsServlet extends HttpServlet {
 		List<Booking> bookings = bookingService.getBookingsByUserId(user.getUserId());
 		request.setAttribute("bookings", bookings);
 
-		request.getRequestDispatcher("/WEB-INF/pages/tenant/my-bookings.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/user/my-bookings.jsp").forward(request, response);
 	}
 }
