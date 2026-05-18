@@ -1,1 +1,42 @@
 @charset "UTF-8";
+
+.wishlist-page {
+	background: #f7f8fc;
+	min-height: 100vh;
+	padding: 54px 0 80px;
+}
+
+.wishlist-container {
+	width: min(1180px, calc(100% - 40px));
+	margin: 0 auto;
+}
+
+.wishlist-heading {
+	margin-bottom: 28px;
+}
+
+.wishlist-heading h1 {
+	color: #0f172a;
+	font-size: clamp(30px, 4vw, 44px);
+	margin-bottom: 6px;
+}
+
+.wishlist-heading p {
+	color: #64748b;
+}
+
+.empty-box a {
+	display: inline-flex;
+	padding: 12px 22px;
+	border-radius: 999px;
+	background: #2563eb;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 800;
+}
+
+@media ( max-width : 640px) {
+	.wishlist-container {
+		width: calc(100% - 28px);
+	}
+}

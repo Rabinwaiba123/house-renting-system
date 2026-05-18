@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+.contact-hero {
+	background: #ffffff;
+	padding: 70px 0 60px;
+	text-align: center;
+}
+
+.contact-hero-content {
+	width: min(850px, calc(100% - 40px));
+	margin: 0 auto;
+}
+
+.contact-hero h1 {
+	color: #0f172a;
+	font-size: clamp(34px, 5vw, 56px);
+	margin-bottom: 12px;
+}
+
+.contact-hero p {
+	color: #64748b;
+	font-size: 17px;
+	line-height: 1.8;
+}
+
+.contact-section {
+	padding: 70px 0 80px;
+}
+
+.contact-card {
+	width: min(1180px, calc(100% - 40px));
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 0.85fr 1.15fr;
+	gap: 30px;
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 24px;
+	box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+	padding: 30px;
+}
+
+.contact-info {
+	background: #0f172a;
+	color: #ffffff;
+	border-radius: 20px;
+	padding: 32px;
+}
+
+.contact-info h2, .contact-form h2 {
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+
+.info-item {
+	display: flex;
+	gap: 14px;
+	margin-bottom: 22px;
+}
+
+.info-icon {
+	width: 44px;
+	height: 44px;
+	flex: 0 0 44px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.12);
+	color: #93c5fd;
+	font-size: 18px;
+}
+
+.info-text h3 {
+	font-size: 16px;
+	margin-bottom: 4px;
+}
+
+.info-text p {
+	color: #cbd5e1;
+	line-height: 1.6;
+}
+
+.social-title {
+	margin-top: 30px;
+	margin-bottom: 12px;
+	font-weight: 800;
+}
+
+.social-icons {
+	display: flex;
+	gap: 10px;
+}
+
+.social-icons a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.13);
+	text-decoration: none;
+}
+
+.contact-form {
+	padding: 8px 4px;
+}
+
+.contact-form h2 {
+	color: #0f172a;
+}
+
+.contact-form textarea {
+	min-height: 140px;
+	resize: vertical;
+}
+
+@media ( max-width : 900px) {
+	.contact-card {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media ( max-width : 620px) {
+	.contact-card, .contact-hero-content {
+		width: calc(100% - 28px);
+	}
+	.contact-card, .contact-info {
+		padding: 22px;
+	}
+}

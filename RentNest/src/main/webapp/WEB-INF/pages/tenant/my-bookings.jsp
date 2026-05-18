@@ -5,111 +5,155 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My Bookings</title>
+<meta charset="UTF-8">
+<title>My Bookings - RentNest</title>
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/common.css">
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/navbar.css">
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/user/MyBooking.css">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<style>
-body {
-	margin: 0;
-	font-family: Arial, sans-serif;
-	background: #f5f5f5;
-	color: #222;
-}
 
-.booking-page {
-	max-width: 1100px;
-	margin: 40px auto;
-	background: #fff;
-	padding: 30px;
-	border-radius: 16px;
-	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-}
-
-.booking-page h1 {
-	margin-bottom: 25px;
-	color: #222;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-th, td {
-	padding: 14px;
-	border-bottom: 1px solid #ddd;
-	text-align: left;
-	font-size: 14px;
-}
-
-th {
-	background: #ef742f;
-	color: white;
-}
-
-.empty {
-	text-align: center;
-	padding: 30px;
-	color: #777;
-}
-
-.status {
-	padding: 7px 12px;
-	border-radius: 20px;
-	font-size: 13px;
-	font-weight: bold;
-}
-
-.status.Pending {
-	background: #fff3cd;
-	color: #856404;
-}
-
-.status.Approved {
-	background: #d4edda;
-	color: #155724;
-}
-
-.status.Rejected {
-	background: #f8d7da;
-	color: #721c24;
-}
-
-@media ( max-width : 700px) {
-	.booking-page {
-		margin: 20px;
-		padding: 18px;
-		overflow-x: auto;
-	}
-	table {
-		min-width: 700px;
-	}
-}
-</style>
 <body>
 
 	<jsp:include page="/WEB-INF/pages/include/navbar.jsp" />
 
-	<h2>My Bookings</h2>
+	<main class="booking-page">
 
-	<table border="1" cellpadding="10">
-		<tr>
-			<th>Property</th>
-			<th>Start Date</th>
-			<th>End Date</th>
-			<th>Message</th>
-			<th>Status</th>
-		</tr>
+		<div class="booking-container">
 
-		<c:forEach var="b" items="${bookings}">
-			<tr>
-				<td>${b.propertyTitle}</td>
-				<td>${b.startDate}</td>
-				<td>${b.endDate}</td>
-				<td>${b.message}</td>
-				<td>${b.status}</td>
-			</tr>
-		</c:forEach>
-	</table>
+			<div class="booking-heading">
+				<h1>My Bookings</h1>
+				<p>Manage your booked properties.</p>
+			</div>
+
+			<c:if test="${not empty sessionScope.success}">
+				<p class="alert success">${sessionScope.success}</p>
+				<c:remove var="success" scope="session" />
+			</c:if>
+
+			<c:if test="${not empty sessionScope.error}">
+				<p class="alert error">${sessionScope.error}</p>
+				<c:remove var="error" scope="session" />
+			</c:if>
+
+			<c:choose>
+
+				<c:when test="${empty bookings}">
+
+					<div class="empty-box">
+						<h2>No bookings found.</h2>
+
+						<p>You have not booked any properties yet.</p>
+
+						<a href="${pageContext.request.contextPath}/property-list">
+							Browse Properties </a>
+					</div>
+
+				</c:when>
+
+				<c:otherwise>
+
+					<div class="booking-grid">
+
+						<c:forEach var="b" items="${bookings}">
+
+							<div class="booking-card">
+
+								<div class="booking-image">
+
+									<c:choose>
+
+										<c:when test="${not empty b.image}">
+
+											<img src="${pageContext.request.contextPath}/${b.image}"
+												alt="${b.title}">
+
+										</c:when>
+
+										<c:otherwise>
+
+											<img
+												src="${pageContext.request.contextPath}/images/photos/default-property.jpg"
+												alt="Property">
+
+										</c:otherwise>
+
+									</c:choose>
+
+								</div>
+
+								<div class="booking-content">
+
+									<span class="property-type">${b.type}</span>
+
+									<h2>${b.title}</h2>
+
+									<p class="location">
+										<i class="fa fa-map-marker"></i> ${b.location}
+									</p>
+
+									<div class="property-info">
+
+										<span>${b.rooms} Rooms</span> <span>${b.bathrooms}
+											Baths</span> <span>${b.areaSqft} sqft</span>
+
+									</div>
+
+									<h3>Rs. ${b.price}</h3>
+
+									<div class="booking-details">
+
+										<p>
+											<strong>Booking Date:</strong> ${b.bookingDate}
+										</p>
+
+										<p>
+											<strong>Move In:</strong> ${b.moveInDate}
+										</p>
+
+										<p>
+											<strong>Duration:</strong> ${b.durationMonths} Months
+										</p>
+
+										<c:if test="${not empty b.message}">
+											<p>
+												<strong>Message:</strong> ${b.message}
+											</p>
+										</c:if>
+
+									</div>
+
+									<div class="booking-actions">
+
+										<a
+											href="${pageContext.request.contextPath}/property-detail?id=${b.propertyId}"
+											class="view-btn"> View Property </a>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</c:forEach>
+
+					</div>
+
+				</c:otherwise>
+
+			</c:choose>
+
+		</div>
+
+	</main>
 
 </body>
 </html>

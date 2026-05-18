@@ -64,7 +64,7 @@
 										<tr>
 											<td>${status.count}</td>
 											<td>${booking.username}</td>
-											<td>${booking.propertyTitle}</td>
+											<td>${booking.title}</td>
 											<td>${booking.bookingDate}</td>
 											<td>${booking.moveInDate}</td>
 											<td>${booking.durationMonths}Months</td>

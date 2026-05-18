@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+.error-body {
+	background: linear-gradient(135deg, #eff6ff 0%, #ffffff 60%);
+	min-height: 100vh;
+	padding-top: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: "Poppins", sans-serif;
+}
+
+.error-wrapper {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 40px 20px;
+}
+
+.error-card {
+	width: min(620px, 100%);
+	background: #ffffff;
+	border-radius: 28px;
+	padding: 55px 45px;
+	text-align: center;
+	box-shadow: 0 20px 55px rgba(37, 99, 235, 0.12);
+	border: 1px solid #e5e7eb;
+}
+
+.error-icon {
+	width: 86px;
+	height: 86px;
+	border-radius: 50%;
+	background: #eff6ff;
+	color: #2563eb;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto 22px;
+	font-size: 38px;
+}
+
+.error-icon.warning {
+	background: #fff7ed;
+	color: #f97316;
+}
+
+.error-icon.danger {
+	background: #fef2f2;
+	color: #ef4444;
+}
+
+.error-card h1 {
+	font-size: clamp(72px, 12vw, 120px);
+	line-height: 1;
+	font-weight: 800;
+	color: #2563eb;
+	margin-bottom: 10px;
+	letter-spacing: -4px;
+}
+
+.error-card h2 {
+	font-size: clamp(26px, 4vw, 36px);
+	color: #111827;
+	font-weight: 800;
+	margin-bottom: 14px;
+}
+
+.error-card p {
+	color: #64748b;
+	font-size: 16px;
+	line-height: 1.8;
+	max-width: 500px;
+	margin: 0 auto 30px;
+}
+
+.error-actions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 14px;
+	flex-wrap: wrap;
+}
+
+.error-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 13px 24px;
+	border-radius: 999px;
+	background: #2563eb;
+	color: #ffffff;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	transition: 0.25s ease;
+	box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+	border: none;
+	cursor: pointer;
+}
+
+.error-btn:hover {
+	background: #1d4ed8;
+	transform: translateY(-2px);
+}
+
+.error-btn.secondary {
+	background: #ffffff;
+	color: #2563eb;
+	border: 1px solid #bfdbfe;
+	box-shadow: none;
+}
+
+.error-btn.secondary:hover {
+	background: #eff6ff;
+}
+
+@media screen and (max-width: 600px) {
+	.error-card {
+		padding: 42px 24px;
+		border-radius: 22px;
+	}
+	.error-card h1 {
+		letter-spacing: -2px;
+	}
+	.error-actions {
+		flex-direction: column;
+	}
+	.error-btn {
+		width: 100%;
+	}
+}

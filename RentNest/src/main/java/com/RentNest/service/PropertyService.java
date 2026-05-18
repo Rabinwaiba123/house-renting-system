@@ -41,6 +41,18 @@ public class PropertyService {
 		return propertyDAO.addProperty(property) > 0;
 	}
 
+	public boolean markPropertyAsUnavailable(int propertyId) {
+		return propertyDAO.markPropertyAsUnavailable(propertyId);
+	}
+
+	public List<Property> searchProperties(String keyword, String type, String maxPrice) {
+		return propertyDAO.searchProperties(keyword, type, maxPrice);
+	}
+
+	public List<Property> getLatestProperties() {
+		return propertyDAO.getLatestProperties();
+	}
+
 	public String validateProperty(Property property) {
 		if (property.getTitle() == null || property.getTitle().trim().isEmpty()) {
 			return "Property title is required.";
@@ -55,7 +67,7 @@ public class PropertyService {
 			return "Price must be greater than 0.";
 		}
 		if (property.getRooms() <= 0) {
-			return "Bedrooms must be greater than 0.";
+			return "Rooms must be greater than 0.";
 		}
 		if (property.getBathrooms() <= 0) {
 			return "Bathrooms must be greater than 0.";

@@ -5,58 +5,72 @@ import java.io.IOException;
 import com.RentNest.model.Booking;
 import com.RentNest.model.User;
 import com.RentNest.service.BookingService;
+import com.RentNest.service.PropertyService;
+import com.RentNest.util.SessionUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/booking")
+@WebServlet(asyncSupported = true, urlPatterns = { "/booking" })
 public class BookingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private BookingService bookingService = new BookingService();
+	private PropertyService propertyService = new PropertyService();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
+		User user = (User) SessionUtil.getAttribute(request, "user");
 
-		if (session == null || session.getAttribute("user") == null) {
+		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 		}
 
-		User user = (User) session.getAttribute("user");
-
 		try {
 			int propertyId = Integer.parseInt(request.getParameter("propertyId"));
-			String moveInDateStr = request.getParameter("moveInDate");
 
-			java.sql.Date moveInDate = java.sql.Date.valueOf(moveInDateStr);
-			int durationMonths = Integer.parseInt(request.getParameter("durationMonths"));
-			String message = request.getParameter("message");
+			if (bookingService.bookingExists(user.getUserId(), propertyId)) {
+				request.getSession().setAttribute("error", "You have already booked this property.");
+				response.sendRedirect(request.getContextPath() + "/property-detail?id=" + propertyId);
+				return;
+			}
 
 			Booking booking = new Booking();
-			booking.setPropertyId(propertyId);
+
 			booking.setUserId(user.getUserId());
-			booking.setMoveInDate(moveInDate);
-			booking.setDurationMonths(durationMonths);
-			booking.setMessage(message);
+			booking.setPropertyId(propertyId);
+			booking.setMoveInDate(java.sql.Date.valueOf(request.getParameter("moveInDate")));
+			booking.setDurationMonths(Integer.parseInt(request.getParameter("durationMonths")));
+			booking.setMessage(request.getParameter("message"));
 
-			boolean isBooked = bookingService.addBooking(booking);
+			String validation = bookingService.validateBooking(booking);
 
-			if (isBooked) {
-				session.setAttribute("success", "Booking request sent successfully.");
+			if (validation != null) {
+				request.getSession().setAttribute("error", validation);
+				response.sendRedirect(request.getContextPath() + "/property-detail?id=" + propertyId);
+				return;
+			}
+
+			boolean result = bookingService.addBooking(booking);
+
+			if (result) {
+				propertyService.markPropertyAsUnavailable(propertyId);
+				request.getSession().setAttribute("success", "Booking successful. This property is now unavailable.");
 			} else {
-				session.setAttribute("error", "Failed to send booking request.");
+				request.getSession().setAttribute("error", "Failed to send booking request.");
 			}
 
 			response.sendRedirect(request.getContextPath() + "/property-detail?id=" + propertyId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			session.setAttribute("error", "Invalid booking details.");
+			request.getSession().setAttribute("error", "Invalid booking details.");
 			response.sendRedirect(request.getContextPath() + "/properties");
 		}
 	}

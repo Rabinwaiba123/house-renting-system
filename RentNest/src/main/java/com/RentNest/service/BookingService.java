@@ -11,25 +11,28 @@ public class BookingService {
 
 	private BookingDAO bookingDAO = new BookingDAO();
 
-	public boolean addBooking(Booking booking) {
-
-		if (booking == null) {
-			return false;
-		}
-
-		if (booking.getUserId() <= 0 || booking.getPropertyId() <= 0) {
-			return false;
-		}
-
+	public String validateBooking(Booking booking) {
 		if (booking.getMoveInDate() == null) {
-			return false;
+			return "Move in date is required.";
+		}
+
+		if (booking.getMoveInDate().toLocalDate().isBefore(LocalDate.now())) {
+			return "Move in date cannot be in the past.";
 		}
 
 		if (booking.getDurationMonths() <= 0) {
-			return false;
+			return "Please select booking duration.";
 		}
 
+		return null;
+	}
+
+	public boolean addBooking(Booking booking) {
 		booking.setBookingDate(Date.valueOf(LocalDate.now()));
+
+		if (booking.getMessage() == null || booking.getMessage().trim().isEmpty()) {
+			booking.setMessage("No message provided.");
+		}
 
 		return bookingDAO.addBooking(booking) > 0;
 	}
@@ -48,5 +51,9 @@ public class BookingService {
 
 	public boolean deleteBooking(int bookingId) {
 		return bookingDAO.deleteBooking(bookingId) > 0;
+	}
+
+	public boolean bookingExists(int userId, int propertyId) {
+		return bookingDAO.bookingExists(userId, propertyId);
 	}
 }

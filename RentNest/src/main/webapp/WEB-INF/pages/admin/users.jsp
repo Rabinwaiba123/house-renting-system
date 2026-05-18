@@ -81,7 +81,7 @@
 													action="${pageContext.request.contextPath}/admin/users"
 													method="post" style="display: inline;">
 													<input type="hidden" name="userId" value="${user.userId}">
-													<input type="hidden" name="action" value="reject-btn">
+													<input type="hidden" name="action" value="reject">
 													<button type="submit" class="reject-btn">Reject</button>
 												</form>
 

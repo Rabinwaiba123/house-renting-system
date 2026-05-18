@@ -89,6 +89,34 @@ public class UserDAO {
 		return e;
 	}
 
+	// Get user by id
+	public User getUserById(int userId) {
+		User e = null;
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "SELECT * FROM users WHERE user_id = ? AND is_deleted = FALSE";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				e = new User();
+				e.setUserId(rs.getInt("user_id"));
+				e.setFullName(rs.getString("full_name"));
+				e.setEmail(rs.getString("email"));
+				e.setPhone(rs.getString("phone"));
+				e.setPassword(rs.getString("password"));
+				e.setAddress(rs.getString("address"));
+				e.setImage(rs.getString("image"));
+				e.setRole(rs.getString("role"));
+				e.setStatus(rs.getBoolean("status"));
+				e.setDeleted(rs.getBoolean("is_deleted"));
+				e.setCreatedAt(rs.getTimestamp("created_at"));
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return e;
+	}
+
 	// Get all users
 	public List<User> getAllUsers() {
 		List<User> list = new ArrayList<>();
@@ -120,19 +148,65 @@ public class UserDAO {
 	public int updateProfile(User user) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {
-			String sql = "UPDATE users SET full_name = ?, phone = ?, address = ?, image = ? "
-					+ "WHERE user_id = ? AND is_deleted = FALSE";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, user.getFullName());
-			ps.setString(2, user.getPhone());
-			ps.setString(3, user.getAddress());
-			ps.setString(4, user.getImage());
-			ps.setInt(5, user.getUserId());
+			String sql;
+			PreparedStatement ps;
+
+			if (user.getPassword() != null && !user.getPassword().trim().isEmpty()) {
+				sql = "UPDATE users SET full_name = ?, phone = ?, address = ?, image = ?, password = ? "
+						+ "WHERE user_id = ? AND is_deleted = FALSE";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, user.getFullName());
+				ps.setString(2, user.getPhone());
+				ps.setString(3, user.getAddress());
+				ps.setString(4, user.getImage());
+				ps.setString(5, user.getPassword());
+				ps.setInt(6, user.getUserId());
+			} else {
+				sql = "UPDATE users SET full_name = ?, phone = ?, address = ?, image = ? "
+						+ "WHERE user_id = ? AND is_deleted = FALSE";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, user.getFullName());
+				ps.setString(2, user.getPhone());
+				ps.setString(3, user.getAddress());
+				ps.setString(4, user.getImage());
+				ps.setInt(5, user.getUserId());
+			}
+
 			status = ps.executeUpdate();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return status;
+	}
+
+	public int getBookingCount(int userId) {
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "SELECT COUNT(*) FROM bookings WHERE user_id = ? AND is_deleted = FALSE";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return 0;
+	}
+
+	public int getWishlistCount(int userId) {
+		try (Connection con = DBConnection.getConnection()) {
+			String sql = "SELECT COUNT(*) FROM wishlist WHERE user_id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return 0;
 	}
 
 	// Approve user account
@@ -162,7 +236,7 @@ public class UserDAO {
 		}
 		return status;
 	}
-	
+
 	// Soft delete user
 	public int deleteUser(int userId) {
 		int status = 0;

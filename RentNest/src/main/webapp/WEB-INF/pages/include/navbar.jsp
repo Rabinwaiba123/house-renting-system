@@ -33,7 +33,7 @@
 						Profile</a></li>
 
 				<li class="mobile-profile"><a
-					href="${pageContext.request.contextPath}/booking?action=myBookings">My
+					href="${pageContext.request.contextPath}/user/my-bookings">My
 						Bookings</a></li>
 
 				<li class="mobile-profile"><a
@@ -76,8 +76,7 @@
 				<div class="profile-dropdown">
 					<a href="${pageContext.request.contextPath}/user/profile"> <i
 						class="fa fa-user"></i> My Profile
-					</a> <a
-						href="${pageContext.request.contextPath}/booking?action=myBookings">
+					</a> <a href="${pageContext.request.contextPath}/user/my-bookings">
 						<i class="fa fa-calendar"></i> My Bookings
 					</a> <a href="${pageContext.request.contextPath}/user/wishlist"> <i
 						class="fa fa-heart"></i> Wishlist

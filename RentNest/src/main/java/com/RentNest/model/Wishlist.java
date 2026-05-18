@@ -6,13 +6,14 @@ public class Wishlist {
 	private int userId;
 	private int propertyId;
 
-	
-	
-	public Wishlist() {
-		super();
-	}
-
-	// Getters and Setters
+	private String title;
+	private String type;
+	private String location;
+	private double price;
+	private int rooms;
+	private int bathrooms;
+	private int areaSqft;
+	private String image;
 
 	public int getWishlistId() {
 		return wishlistId;
@@ -38,4 +39,67 @@ public class Wishlist {
 		this.propertyId = propertyId;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getRooms() {
+		return rooms;
+	}
+
+	public void setRooms(int rooms) {
+		this.rooms = rooms;
+	}
+
+	public int getBathrooms() {
+		return bathrooms;
+	}
+
+	public void setBathrooms(int bathrooms) {
+		this.bathrooms = bathrooms;
+	}
+
+	public int getAreaSqft() {
+		return areaSqft;
+	}
+
+	public void setAreaSqft(int areaSqft) {
+		this.areaSqft = areaSqft;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 }

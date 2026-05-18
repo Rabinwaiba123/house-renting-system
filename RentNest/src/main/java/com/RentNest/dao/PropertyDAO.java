@@ -102,6 +102,60 @@ public class PropertyDAO {
 		return p;
 	}
 
+	public List<Property> searchProperties(String keyword, String type, String maxPrice) {
+
+		List<Property> list = new ArrayList<>();
+
+		StringBuilder sql = new StringBuilder(
+				"SELECT * FROM properties WHERE is_deleted = FALSE AND status = TRUE AND availability = TRUE");
+
+		if (keyword != null && !keyword.trim().isEmpty()) {
+			sql.append(" AND (title LIKE ? OR location LIKE ? OR description LIKE ?)");
+		}
+
+		if (type != null && !type.trim().isEmpty()) {
+			sql.append(" AND LOWER(type) = LOWER(?)");
+		}
+
+		if (maxPrice != null && !maxPrice.trim().isEmpty()) {
+			sql.append(" AND price <= ?");
+		}
+
+		sql.append(" ORDER BY created_at DESC");
+
+		try (Connection con = DBConnection.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql.toString())) {
+
+			int index = 1;
+
+			if (keyword != null && !keyword.trim().isEmpty()) {
+				String searchKeyword = "%" + keyword.trim() + "%";
+				ps.setString(index++, searchKeyword);
+				ps.setString(index++, searchKeyword);
+				ps.setString(index++, searchKeyword);
+			}
+
+			if (type != null && !type.trim().isEmpty()) {
+				ps.setString(index++, type.trim());
+			}
+
+			if (maxPrice != null && !maxPrice.trim().isEmpty()) {
+				ps.setDouble(index++, Double.parseDouble(maxPrice));
+			}
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(mapProperty(rs));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 	// Get property by id
 	public Property getPropertyById(int propertyId) {
 		Property p = null;
@@ -138,7 +192,7 @@ public class PropertyDAO {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {
 			String sql = "UPDATE properties SET title = ?, type = ?, location = ?, price = ?, "
-					+ "bedrooms = ?, bathrooms = ?, area_sqft = ?, description = ?, image = ?, "
+					+ "rooms = ?, bathrooms = ?, area_sqft = ?, description = ?, image = ?, "
 					+ "availability = ?, status = ? WHERE property_id = ? AND is_deleted = FALSE";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, property.getTitle());
@@ -158,6 +212,61 @@ public class PropertyDAO {
 			ex.printStackTrace();
 		}
 		return status;
+	}
+
+	public boolean markPropertyAsUnavailable(int propertyId) {
+
+		try (Connection con = DBConnection.getConnection()) {
+
+			String sql = "UPDATE properties SET availability = FALSE WHERE property_id = ?";
+
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, propertyId);
+
+			return ps.executeUpdate() > 0;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return false;
+	}
+
+	public List<Property> getLatestProperties() {
+		List<Property> list = new ArrayList<>();
+
+		try (Connection con = DBConnection.getConnection()) {
+
+			String sql = "SELECT * FROM properties "
+					+ "WHERE status = TRUE AND availability = TRUE AND is_deleted = FALSE "
+					+ "ORDER BY created_at DESC LIMIT 3";
+
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Property p = new Property();
+
+				p.setPropertyId(rs.getInt("property_id"));
+				p.setTitle(rs.getString("title"));
+				p.setDescription(rs.getString("description"));
+				p.setLocation(rs.getString("location"));
+				p.setPrice(rs.getDouble("price"));
+				p.setRooms(rs.getInt("rooms"));
+				p.setBathrooms(rs.getInt("bathrooms"));
+				p.setAreaSqft(rs.getInt("area_sqft"));
+				p.setType(rs.getString("type"));
+
+				p.setImage(rs.getString("image"));
+
+				list.add(p);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 
 	// Delete property

@@ -7,14 +7,7 @@ public class Review {
 	private int propertyId;
 	private int rating;
 	private String comment;
-
-	
-	
-	public Review() {
-		super();
-	}
-
-	// Getters and Setters
+	private String username;
 
 	public int getReviewId() {
 		return reviewId;
@@ -56,4 +49,11 @@ public class Review {
 		this.comment = comment;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }
