@@ -45,10 +45,12 @@ public class ProfileServlet extends HttpServlet {
 
 		Object success = SessionUtil.getAttribute(request, "success");
 		Object error = SessionUtil.getAttribute(request, "error");
+
 		if (success != null) {
 			request.setAttribute("success", success);
 			request.getSession().removeAttribute("success");
 		}
+
 		if (error != null) {
 			request.setAttribute("error", error);
 			request.getSession().removeAttribute("error");
@@ -72,25 +74,28 @@ public class ProfileServlet extends HttpServlet {
 			return;
 		}
 
-		String fullName = request.getParameter("fullName");
-		String phone = request.getParameter("phone");
-		String address = request.getParameter("address");
-		String password = request.getParameter("password");
-
 		User currentUser = userService.getUserById(sessionUser.getUserId());
+
 		if (currentUser == null) {
 			SessionUtil.invalidate(request);
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 		}
 
+		String fullName = request.getParameter("fullName");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String password = request.getParameter("password");
+
 		String validationMessage = userService.validateProfile(fullName, phone, password);
+
 		if (validationMessage != null) {
 			request.setAttribute("error", validationMessage);
 			request.setAttribute("user", currentUser);
 			request.setAttribute("bookingCount", userService.getBookingCount(currentUser.getUserId()));
 			request.setAttribute("wishlistCount", userService.getWishlistCount(currentUser.getUserId()));
-			request.getRequestDispatcher("/WEB-INF/pages/tenant/my-profile.jsp").forward(request, response);
+
+			request.getRequestDispatcher("/WEB-INF/pages/user/my-profile.jsp").forward(request, response);
 			return;
 		}
 
@@ -103,8 +108,8 @@ public class ProfileServlet extends HttpServlet {
 
 		User user = new User();
 		user.setUserId(currentUser.getUserId());
-		user.setFullName(fullName);
-		user.setPhone(phone);
+		user.setFullName(fullName.trim());
+		user.setPhone(phone.trim());
 		user.setAddress(address);
 		user.setImage(imagePath);
 		user.setPassword(password);

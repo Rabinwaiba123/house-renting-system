@@ -123,21 +123,21 @@
 					<div class="form-group">
 
 						<label>Name</label> <input type="text" name="fullName"
-							placeholder="Full Name" required>
+							placeholder="Full Name">
 
 					</div>
 
 					<div class="form-group">
 
 						<label>Email</label> <input type="email" name="email"
-							placeholder="Email Address" required>
+							placeholder="Email Address">
 
 					</div>
 
 					<div class="form-group">
 
 						<label>Subject</label> <input type="text" name="subject"
-							placeholder="What is this regarding?" required>
+							placeholder="What is this regarding?">
 
 					</div>
 
@@ -145,8 +145,7 @@
 
 						<label>Message</label>
 
-						<textarea name="message" placeholder="Write your message here..."
-							required></textarea>
+						<textarea name="message" placeholder="Write your message here..."></textarea>
 
 					</div>
 

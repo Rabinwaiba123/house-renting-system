@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${property.title}-RentNest</title>
+<title>${property.title}- RentNest</title>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
@@ -78,6 +78,7 @@
 							<p class="detail-price">Rs. ${property.price} / month</p>
 
 							<div class="detail-meta">
+
 								<div class="meta-box">
 									<strong>${property.type}</strong> <span>Type</span>
 								</div>
@@ -93,6 +94,7 @@
 								<div class="meta-box">
 									<strong>${property.areaSqft}</strong> <span>Sq. Ft</span>
 								</div>
+
 							</div>
 
 							<c:choose>
@@ -167,7 +169,8 @@
 
 				<section class="booking-card">
 					<h2>Book Property</h2>
-					<p>Send a booking request to the property owner.</p>
+					<p class="booking-text">Send a booking request to the property
+						owner.</p>
 
 					<c:choose>
 						<c:when test="${not property.availability}">
@@ -185,16 +188,27 @@
 								method="post" class="booking-form">
 
 								<input type="hidden" name="propertyId"
-									value="${property.propertyId}"> <label>Move In
-									Date</label> <input type="date" name="moveInDate" required> <label>Duration</label>
-								<select name="durationMonths" required>
-									<option value="">Select Duration</option>
-									<option value="1">1 Month</option>
-									<option value="3">3 Months</option>
-									<option value="6">6 Months</option>
-									<option value="12">12 Months</option>
-								</select> <label>Message</label>
-								<textarea name="message" placeholder="Write your message"></textarea>
+									value="${property.propertyId}">
+
+								<div class="form-group">
+									<label>Move In Date</label> <input type="date"
+										name="moveInDate" required>
+								</div>
+
+								<div class="form-group">
+									<label>Duration</label> <select name="durationMonths" required>
+										<option value="">Select Duration</option>
+										<option value="1">1 Month</option>
+										<option value="3">3 Months</option>
+										<option value="6">6 Months</option>
+										<option value="12">12 Months</option>
+									</select>
+								</div>
+
+								<div class="form-group full-width">
+									<label>Message</label>
+									<textarea name="message" placeholder="Write your message"></textarea>
+								</div>
 
 								<button type="submit" class="book-btn">Book Now</button>
 							</form>
