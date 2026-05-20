@@ -71,7 +71,7 @@ public class BookingServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("error", "Invalid booking details.");
-			response.sendRedirect(request.getContextPath() + "/properties");
+			response.sendRedirect(request.getContextPath() + "/property-list");
 		}
 	}
 }

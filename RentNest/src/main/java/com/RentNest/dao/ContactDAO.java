@@ -9,9 +9,18 @@ import java.util.List;
 import com.RentNest.model.Contact;
 import com.RentNest.util.DBConnection;
 
+/**
+ * ContactDAO ---------- Responsibilities: - Handles database operations for
+ * contact form messages. - Saves messages submitted by users or visitors. -
+ * Retrieves all contact messages for the admin panel. - Allows admin to delete
+ * contact records after review.
+ *
+ * Important concepts used: - JDBC database connection - PreparedStatement for
+ * safe SQL execution - DAO layer for separating database logic from controller
+ * logic
+ */
 public class ContactDAO {
 
-	// Save contact message
 	public int addContact(Contact contact) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {
@@ -28,7 +37,6 @@ public class ContactDAO {
 		return status;
 	}
 
-	// Get all contact messages
 	public List<Contact> getAllContacts() {
 		List<Contact> list = new ArrayList<>();
 		try (Connection con = DBConnection.getConnection()) {
@@ -50,7 +58,6 @@ public class ContactDAO {
 		return list;
 	}
 
-	// Delete contact message
 	public int deleteContact(int contactId) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {

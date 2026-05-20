@@ -9,9 +9,26 @@ import java.util.List;
 import com.RentNest.model.User;
 import com.RentNest.util.DBConnection;
 
+/**
+ * UserDAO
+ * -------
+ * Responsibilities:
+ * - Handles all database operations related to users.
+ * - Supports user registration, login lookup, profile update and admin user management.
+ * - Checks duplicate email and phone number before registration.
+ * - Provides booking and wishlist counts for user profile/dashboard.
+ * - Uses soft delete to deactivate users instead of permanently deleting records.
+ *
+ * Important concepts used:
+ * - JDBC CRUD operations
+ * - PreparedStatement for secure SQL queries
+ * - User authentication support
+ * - Admin approval/rejection of user accounts
+ * - Soft delete for safer data handling
+ */
+
 public class UserDAO {
 
-	// Register new user
 	public int register(User user) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {
@@ -35,7 +52,11 @@ public class UserDAO {
 		return status;
 	}
 
-	// Check if email already exists
+	/**
+	 * Checks whether an email already exists in the users table.
+	 * This helps prevent duplicate account registration.
+	 */
+
 	public boolean emailExists(String email) {
 		try (Connection con = DBConnection.getConnection()) {
 			String sql = "SELECT user_id FROM users WHERE email = ? AND is_deleted = false";
@@ -48,8 +69,12 @@ public class UserDAO {
 		}
 		return false;
 	}
+	
+	/**
+	 * Checks whether a phone number already exists in the users table.
+	 * This helps maintain unique contact information for each user.
+	 */
 
-	// Check if phone number already exists
 	public boolean phoneExists(String phone) {
 		try (Connection con = DBConnection.getConnection()) {
 			String sql = "SELECT user_id FROM users WHERE phone = ? AND is_deleted = false";
@@ -63,7 +88,6 @@ public class UserDAO {
 		return false;
 	}
 
-	// Get user by email
 	public User getUserByEmail(String email) {
 		User e = null;
 		try (Connection con = DBConnection.getConnection()) {
@@ -89,7 +113,6 @@ public class UserDAO {
 		return e;
 	}
 
-	// Get user by id
 	public User getUserById(int userId) {
 		User e = null;
 		try (Connection con = DBConnection.getConnection()) {
@@ -117,7 +140,6 @@ public class UserDAO {
 		return e;
 	}
 
-	// Get all users
 	public List<User> getAllUsers() {
 		List<User> list = new ArrayList<>();
 		try (Connection con = DBConnection.getConnection()) {
@@ -144,7 +166,6 @@ public class UserDAO {
 		return list;
 	}
 
-	// Update user profile
 	public int updateProfile(User user) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {
@@ -209,7 +230,6 @@ public class UserDAO {
 		return 0;
 	}
 
-	// Approve user account
 	public int approveUser(int userId) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {
@@ -223,7 +243,6 @@ public class UserDAO {
 		return status;
 	}
 
-	// Reject user account
 	public int rejectUser(int userId) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {
@@ -237,7 +256,6 @@ public class UserDAO {
 		return status;
 	}
 
-	// Soft delete user
 	public int deleteUser(int userId) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {

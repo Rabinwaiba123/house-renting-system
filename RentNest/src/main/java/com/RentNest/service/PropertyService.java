@@ -33,12 +33,12 @@ public class PropertyService {
 		return propertyDAO.deleteProperty(id) > 0;
 	}
 
-	public boolean updateProperty(Property property) {
-		return propertyDAO.updateProperty(property) > 0;
-	}
-
 	public boolean addProperty(Property property) {
 		return propertyDAO.addProperty(property) > 0;
+	}
+
+	public boolean updateProperty(Property property) {
+		return propertyDAO.updateProperty(property) > 0;
 	}
 
 	public boolean markPropertyAsUnavailable(int propertyId) {
