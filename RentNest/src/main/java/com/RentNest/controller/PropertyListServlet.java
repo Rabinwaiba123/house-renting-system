@@ -40,7 +40,10 @@ public class PropertyListServlet extends HttpServlet {
 
 		request.getRequestDispatcher("/WEB-INF/pages/public/property-list.jsp").forward(request, response);
 	}
-
+	/*
+	 * doPost() Method
+	 * Redirect POST Request To doGet() Method
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
