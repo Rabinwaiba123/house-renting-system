@@ -20,9 +20,9 @@
 
 <body>
 
-	<!-- NAVBAR -->
+	<!-- Include reusable navigation component -->
 	<jsp:include page="/WEB-INF/pages/include/navbar.jsp" />
-
+	<!-- Main page container -->
 	<main class="about-page">
 
 		<section class="about-hero">
