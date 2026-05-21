@@ -58,51 +58,37 @@
 					<h2>Latest Properties</h2>
 					<p>Recently added available properties for rent.</p>
 				</div>
-
 				<c:choose>
 					<c:when test="${not empty latestProperties}">
-
 						<div class="property-grid">
-
 							<c:forEach var="property" items="${latestProperties}">
-
 								<article class="property-card">
-
 									<div class="property-image">
-
 										<c:choose>
 											<c:when test="${not empty property.image}">
 												<img
 													src="${pageContext.request.contextPath}/${property.image}"
 													alt="${property.title}">
 											</c:when>
-
 											<c:otherwise>
 												<img
 													src="${pageContext.request.contextPath}/images/photos/default-property.jpg"
 													alt="Property">
 											</c:otherwise>
 										</c:choose>
-
 										<span class="property-type">${property.type}</span>
-
 									</div>
-
 									<div class="card-body">
-
 										<h3>${property.title}</h3>
-
 										<p class="location">
 											<i class="fa fa-map-marker"></i> ${property.location}
 										</p>
-
 										<div class="property-info">
 											<span><i class="fa fa-bed"></i> ${property.rooms}
 												Rooms</span> <span><i class="fa fa-bath"></i>
 												${property.bathrooms} Baths</span> <span><i
 												class="fa fa-expand"></i> ${property.areaSqft} sqft</span>
 										</div>
-
 										<p class="price">Rs. ${property.price}</p>
 
 										<div class="card-actions">
@@ -110,22 +96,15 @@
 												href="${pageContext.request.contextPath}/property-detail?id=${property.propertyId}"
 												class="card-btn">View Details</a>
 										</div>
-
 									</div>
-
 								</article>
-
 							</c:forEach>
-
 						</div>
-
 						<div class="view-all-box">
 							<a href="${pageContext.request.contextPath}/property-list"
 								class="btn">View All Properties</a>
 						</div>
-
 					</c:when>
-
 					<c:otherwise>
 						<div class="empty-box">
 							<h3>No latest properties found.</h3>
@@ -133,7 +112,6 @@
 						</div>
 					</c:otherwise>
 				</c:choose>
-
 			</div>
 		</section>
 
@@ -160,7 +138,7 @@
 					<div class="feature-card">
 						<img
 							src="${pageContext.request.contextPath}/images/icons/label_114874.svg"
-							 class="why-img" alt="Price">
+							class="why-img" alt="Price">
 						<h3>Affordable Prices</h3>
 						<p>Find suitable rental properties within your budget.</p>
 					</div>
@@ -168,7 +146,7 @@
 					<div class="feature-card">
 						<img
 							src="${pageContext.request.contextPath}/images/icons/3507760-clock-history-iconoteka-time-watch_107692.svg"
-							 class="why-img" alt="Fast">
+							class="why-img" alt="Fast">
 						<h3>Quick Process</h3>
 						<p>View details and send booking requests quickly.</p>
 					</div>
