@@ -43,7 +43,7 @@
 				<p class="alert error">${sessionScope.error}</p>
 				<c:remove var="error" scope="session" />
 			</c:if>
-
+			<!-- Check booking availability -->
 			<c:choose>
 
 				<c:when test="${empty bookings}">

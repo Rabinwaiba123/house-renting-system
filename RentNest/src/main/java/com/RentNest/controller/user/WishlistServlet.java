@@ -37,6 +37,9 @@ public class WishlistServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/pages/user/wishlist.jsp").forward(request, response);
 	}
 
+	/*
+	 * Handles POST requests Supports add and delete operations for wishlist
+	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

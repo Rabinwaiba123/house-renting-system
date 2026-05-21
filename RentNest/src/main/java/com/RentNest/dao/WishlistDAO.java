@@ -10,20 +10,15 @@ import com.RentNest.model.Wishlist;
 import com.RentNest.util.DBConnection;
 
 /**
- * WishlistDAO
- * -----------
- * Responsibilities:
- * - Handles database operations related to the user's wishlist.
- * - Allows users to save properties they are interested in.
- * - Retrieves wishlist items with full property details.
- * - Prevents duplicate wishlist entries by checking existing records.
- * - Allows users to remove properties from their wishlist.
+ * WishlistDAO ----------- Responsibilities: - Handles database operations
+ * related to the user's wishlist. - Allows users to save properties they are
+ * interested in. - Retrieves wishlist items with full property details. -
+ * Prevents duplicate wishlist entries by checking existing records. - Allows
+ * users to remove properties from their wishlist.
  *
- * Important concepts used:
- * - JDBC insert, select and delete operations
- * - PreparedStatement for safe SQL execution
- * - SQL JOIN between wishlist and properties
- * - DAO layer separation for wishlist database logic
+ * Important concepts used: - JDBC insert, select and delete operations -
+ * PreparedStatement for safe SQL execution - SQL JOIN between wishlist and
+ * properties - DAO layer separation for wishlist database logic
  */
 
 public class WishlistDAO {
@@ -75,8 +70,8 @@ public class WishlistDAO {
 	}
 
 	/**
-	 * Checks whether a property already exists in the user's wishlist.
-	 * This prevents duplicate wishlist records for the same user and property.
+	 * Checks whether a property already exists in the user's wishlist. This
+	 * prevents duplicate wishlist records for the same user and property.
 	 */
 	public boolean wishlistExists(int userId, int propertyId) {
 		try (Connection con = DBConnection.getConnection()) {
@@ -99,6 +94,7 @@ public class WishlistDAO {
 			String sql = "DELETE FROM wishlist WHERE wishlist_id = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, wishlistId);
+			// Execute delete operation
 			status = ps.executeUpdate();
 		} catch (Exception ex) {
 			ex.printStackTrace();

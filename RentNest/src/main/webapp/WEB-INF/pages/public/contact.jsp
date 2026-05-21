@@ -113,6 +113,10 @@
 			</div>
 
 			<!-- ================= RIGHT FORM ================= -->
+			<!--
+				This section allows users to send
+				messages or inquiries to the system
+			-->
 			<div class="contact-form">
 
 				<h2>Send us a message</h2>
