@@ -32,6 +32,7 @@ public class UserDAO {
 	public int register(User user) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {
+			/**Insert new user record into database with default values*/
 			String sql = "INSERT INTO users(full_name, email, phone, password, address, image, role, status, is_deleted) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -55,6 +56,7 @@ public class UserDAO {
 	/**
 	 * Checks whether an email already exists in the users table.
 	 * This helps prevent duplicate account registration.
+	 * Map database record to User object if email exists
 	 */
 
 	public boolean emailExists(String email) {

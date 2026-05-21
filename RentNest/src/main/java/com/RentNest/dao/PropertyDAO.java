@@ -72,7 +72,7 @@ public class PropertyDAO {
 
 		return p;
 	}
-
+    /**Retrieve only approved and available properties for public users*/
 	public List<Property> getPublicProperties() {
 		List<Property> list = new ArrayList<>();
 		try (Connection con = DBConnection.getConnection()) {
