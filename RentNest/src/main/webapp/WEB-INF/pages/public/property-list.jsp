@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%-- Import JSTL Core Tag Library --%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -130,7 +131,7 @@
 		</section>
 
 	</main>
-
+<%-- Include Footer Section --%>
 	<jsp:include page="/WEB-INF/pages/include/footer.jsp" />
 
 </body>
