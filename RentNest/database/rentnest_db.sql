@@ -20,11 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `rentnest_db`
 --
+-- --------------------------------------------------------
+-- RentNest Database
+-- This database stores user accounts, rental properties,
+-- bookings, reviews, wishlist items and contact messages.
+-- Soft delete is used in major tables to avoid permanent data loss.
+-- --------------------------------------------------------
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `bookings`
+-- Stores booking requests made by users for rental properties
 --
 
 CREATE TABLE `bookings` (
@@ -51,7 +58,7 @@ INSERT INTO `bookings` (`booking_id`, `user_id`, `property_id`, `booking_date`, 
 
 --
 -- Table structure for table `contacts`
---
+-- Stores contact form messages submitted by users
 
 CREATE TABLE `contacts` (
   `contact_id` int(11) NOT NULL,
@@ -72,7 +79,7 @@ INSERT INTO `contacts` (`contact_id`, `full_name`, `email`, `subject`, `message`
 
 --
 -- Table structure for table `properties`
---
+-- Stores rental property details added and managed by admin
 
 CREATE TABLE `properties` (
   `property_id` int(11) NOT NULL,
@@ -107,7 +114,7 @@ INSERT INTO `properties` (`property_id`, `title`, `type`, `location`, `price`, `
 
 --
 -- Table structure for table `reviews`
---
+-- Stores user ratings and reviews for properties
 
 CREATE TABLE `reviews` (
   `review_id` int(11) NOT NULL,
@@ -129,7 +136,7 @@ INSERT INTO `reviews` (`review_id`, `user_id`, `property_id`, `rating`, `comment
 
 --
 -- Table structure for table `users`
---
+-- Stores registered users including admin and tenants
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
