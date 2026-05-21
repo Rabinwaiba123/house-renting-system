@@ -32,7 +32,7 @@ public class UserDAO {
 	public int register(User user) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {
-			/**Insert new user record into database with default values*/
+			//Insert new user record into database with default values
 			String sql = "INSERT INTO users(full_name, email, phone, password, address, image, role, status, is_deleted) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -56,7 +56,6 @@ public class UserDAO {
 	/**
 	 * Checks whether an email already exists in the users table.
 	 * This helps prevent duplicate account registration.
-	 * Map database record to User object if email exists
 	 */
 
 	public boolean emailExists(String email) {
@@ -96,7 +95,8 @@ public class UserDAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
+			// Retrieve user details for login authentication
+			if (rs.next())  {
 				e = new User();
 				e.setUserId(rs.getInt("user_id"));
 				e.setFullName(rs.getString("full_name"));
@@ -121,6 +121,7 @@ public class UserDAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
+			// Convert database record into User object
 			if (rs.next()) {
 				e = new User();
 				e.setUserId(rs.getInt("user_id"));
@@ -147,6 +148,7 @@ public class UserDAO {
 			String sql = "SELECT * FROM users WHERE is_deleted = FALSE ORDER BY created_at DESC";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
+			// Fetch all active users from database
 			while (rs.next()) {
 				User e = new User();
 				e.setUserId(rs.getInt("user_id"));
@@ -172,7 +174,7 @@ public class UserDAO {
 		try (Connection con = DBConnection.getConnection()) {
 			String sql;
 			PreparedStatement ps;
-
+			// Check whether user wants to update password
 			if (user.getPassword() != null && !user.getPassword().trim().isEmpty()) {
 				sql = "UPDATE users SET full_name = ?, phone = ?, address = ?, image = ?, password = ? "
 						+ "WHERE user_id = ? AND is_deleted = FALSE";
@@ -183,6 +185,7 @@ public class UserDAO {
 				ps.setString(4, user.getImage());
 				ps.setString(5, user.getPassword());
 				ps.setInt(6, user.getUserId());
+				// Update profile without changing existing password
 			} else {
 				sql = "UPDATE users SET full_name = ?, phone = ?, address = ?, image = ? "
 						+ "WHERE user_id = ? AND is_deleted = FALSE";
@@ -203,6 +206,7 @@ public class UserDAO {
 
 	public int getBookingCount(int userId) {
 		try (Connection con = DBConnection.getConnection()) {
+			// Count total active bookings of user
 			String sql = "SELECT COUNT(*) FROM bookings WHERE user_id = ? AND is_deleted = FALSE";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, userId);

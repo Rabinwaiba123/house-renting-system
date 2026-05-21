@@ -27,6 +27,7 @@ public class PropertyDAO {
 	public int addProperty(Property property) {
 		int status = 0;
 		try (Connection con = DBConnection.getConnection()) {
+			// Insert new property details into database
 			String sql = "INSERT INTO properties(title, type, location, price, rooms, bathrooms, area_sqft, description, image, availability, status, is_deleted) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -72,14 +73,15 @@ public class PropertyDAO {
 
 		return p;
 	}
-    /**Retrieve only approved and available properties for public users*/
+    
 	public List<Property> getPublicProperties() {
 		List<Property> list = new ArrayList<>();
 		try (Connection con = DBConnection.getConnection()) {
 			String sql = "SELECT * FROM properties WHERE status = TRUE AND availability = TRUE AND is_deleted = FALSE ORDER BY created_at DESC";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
+			while (rs.next()) //Retrieve only approved and available properties for public users 
+				{
 				list.add(mapProperty(rs));
 			}
 		} catch (Exception ex) {
@@ -94,7 +96,8 @@ public class PropertyDAO {
 			String sql = "SELECT * FROM properties  WHERE is_deleted = FALSE ORDER BY created_at DESC ";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
+			while (rs.next()) // Fetch all active properties for admin management
+			{
 				list.add(mapProperty(rs));
 			}
 		} catch (Exception ex) {
@@ -106,7 +109,7 @@ public class PropertyDAO {
 	public int changePropertyStatus(int propertyId, boolean status) {
 		int result = 0;
 		try (Connection con = DBConnection.getConnection()) {
-			String sql = "UPDATE properties SET status = ? WHERE property_id = ?";
+			String sql = "UPDATE properties SET status = ? WHERE property_id = ?"; // Update approval status of property
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setBoolean(1, status);
 			ps.setInt(2, propertyId);
@@ -119,6 +122,7 @@ public class PropertyDAO {
 
 	public List<Property> searchProperties(String keyword, String type, String maxPrice) {
 		List<Property> list = new ArrayList<>();
+		// Build dynamic SQL query based on search filters
 		StringBuilder sql = new StringBuilder(
 				"SELECT * FROM properties WHERE is_deleted = FALSE AND status = TRUE AND availability = TRUE");
 		if (keyword != null && !keyword.trim().isEmpty()) {
@@ -135,7 +139,7 @@ public class PropertyDAO {
 				PreparedStatement ps = con.prepareStatement(sql.toString())) {
 			int index = 1;
 			if (keyword != null && !keyword.trim().isEmpty()) {
-				String searchKeyword = "%" + keyword.trim() + "%";
+				String searchKeyword = "%" + keyword.trim() + "%"; // Enable partial keyword matching using wildcard search
 				ps.setString(index++, searchKeyword);
 				ps.setString(index++, searchKeyword);
 				ps.setString(index++, searchKeyword);
@@ -163,7 +167,8 @@ public class PropertyDAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, propertyId);
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
+			if (rs.next())// Convert database record into Property object
+				{
 				p = new Property();
 				p.setPropertyId(rs.getInt("property_id"));
 				p.setTitle(rs.getString("title"));
@@ -188,7 +193,9 @@ public class PropertyDAO {
 
 	public int updateProperty(Property property) {
 		int status = 0;
-		try (Connection con = DBConnection.getConnection()) {
+		try (Connection con = DBConnection.getConnection()) 
+		// Update existing property details
+		{
 			String sql = "UPDATE properties SET title = ?, type = ?, location = ?, price = ?, "
 					+ "rooms = ?, bathrooms = ?, area_sqft = ?, description = ?, image = ?, "
 					+ "availability = ?, status = ? WHERE property_id = ? AND is_deleted = FALSE";
