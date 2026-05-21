@@ -19,7 +19,14 @@ public class HomeServlet extends HttpServlet {
 	public HomeServlet() {
 		super();
 	}
-	
+	/**
+	 * Handles HTTP GET requests.
+	 * 
+	 * @param request  HttpServletRequest object that contains the request from client
+	 * @param response HttpServletResponse object used to send response to client
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException      if an input or output error occurs
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PropertyService propertyService = new PropertyService();
