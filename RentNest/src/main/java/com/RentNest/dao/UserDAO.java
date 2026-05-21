@@ -74,6 +74,7 @@ public class UserDAO {
 	
 	/**
 	 * Checks whether a phone number already exists in the users table.
+	 * This helps maintain unique contact information for each user.
 	 */
 
 	public boolean phoneExists(String phone) {
