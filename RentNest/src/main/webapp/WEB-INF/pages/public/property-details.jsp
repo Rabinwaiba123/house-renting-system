@@ -240,7 +240,7 @@
 		</c:otherwise>
 
 	</c:choose>
-
+<%-- Include Footer Section --%>
 	<jsp:include page="/WEB-INF/pages/include/footer.jsp" />
 
 </body>
