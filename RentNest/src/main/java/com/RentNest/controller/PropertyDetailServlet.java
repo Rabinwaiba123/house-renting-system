@@ -66,6 +66,7 @@ public class PropertyDetailServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/pages/public/property-details.jsp").forward(request, response);
 
 		} catch (NumberFormatException e) {
+			<%-- Print Error In Console --%>
 			e.printStackTrace();
 			response.sendRedirect(request.getContextPath() + "/property-list");
 		}
