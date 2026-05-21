@@ -10,27 +10,58 @@ public class RegisterService {
 
 	public String registerUser(User user, String confirmPassword) {
 
-		if (user.getFullName() == null || user.getFullName().trim().isEmpty() || user.getEmail() == null
-				|| user.getEmail().isEmpty() || user.getPhone() == null || user.getPhone().isEmpty()
-				|| user.getPhone() == null || user.getPhone().isEmpty() || user.getPhone() == null
-				|| user.getPhone().isEmpty() || user.getPassword() == null || user.getPassword().isEmpty()) {
-			return "Please Fill out all the text boxes.";
+		String fullName = user.getFullName();
+		String email = user.getEmail();
+		String phone = user.getPhone();
+		String password = user.getPassword();
+
+		// Empty field validation
+		if (fullName == null || fullName.trim().isEmpty() || email == null || email.trim().isEmpty() || phone == null
+				|| phone.trim().isEmpty() || password == null || password.trim().isEmpty() || confirmPassword == null
+				|| confirmPassword.trim().isEmpty()) {
+
+			return "Please fill out all the text boxes.";
 		}
 
-		if (!user.getPassword().equals(confirmPassword)) {
+		// Full name validation
+		if (!fullName.matches("^[A-Za-z ]+$")) {
+			return "Full name must contain only letters.";
+		}
+
+		// Email validation
+		if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+			return "Please enter a valid email address.";
+		}
+
+		// Phone validation
+		if (!phone.matches("^[0-9]{10}$")) {
+			return "Phone number must contain exactly 10 digits.";
+		}
+
+		// Password length validation
+		if (password.length() < 6) {
+			return "Password must be at least 6 characters long.";
+		}
+
+		// Confirm password validation
+		if (!password.equals(confirmPassword)) {
 			return "Password and confirm password do not match.";
 		}
 
-		if (userDAO.emailExists(user.getEmail())) {
+		// Duplicate email validation
+		if (userDAO.emailExists(email)) {
 			return "Email already exists.";
 		}
 
-		if (userDAO.phoneExists(user.getPhone())) {
+		// Duplicate phone validation
+		if (userDAO.phoneExists(phone)) {
 			return "Phone number already exists.";
 		}
 
-		user.setPassword(PasswordUtil.getHashPassword(user.getPassword()));
+		// Encrypt password
+		user.setPassword(PasswordUtil.getHashPassword(password));
 
+		// Admin approved directly, normal user needs approval
 		if ("admin".equalsIgnoreCase(user.getRole())) {
 			user.setStatus(true);
 		} else {

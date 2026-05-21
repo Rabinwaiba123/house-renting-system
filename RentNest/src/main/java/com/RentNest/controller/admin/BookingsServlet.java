@@ -10,7 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
-@WebServlet("/admin/manage-bookings")
+@WebServlet(asyncSupported = true, urlPatterns = { "/admin/manage-bookings" })
 public class BookingsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

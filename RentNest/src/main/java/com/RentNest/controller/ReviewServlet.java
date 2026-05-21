@@ -2,9 +2,9 @@ package com.RentNest.controller;
 
 import java.io.IOException;
 
-import com.RentNest.dao.ReviewDAO;
 import com.RentNest.model.Review;
 import com.RentNest.model.User;
+import com.RentNest.service.ReviewService;
 import com.RentNest.util.SessionUtil;
 
 import jakarta.servlet.ServletException;
@@ -13,12 +13,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/review")
+@WebServlet(asyncSupported = true, urlPatterns = { "/review" })
 public class ReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private ReviewDAO reviewDAO = new ReviewDAO();
+	private ReviewService reviewService = new ReviewService();
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -35,8 +36,10 @@ public class ReviewServlet extends HttpServlet {
 			int rating = Integer.parseInt(request.getParameter("rating"));
 			String comment = request.getParameter("comment");
 
-			if (rating < 1 || rating > 5 || comment == null || comment.trim().isEmpty()) {
-				request.getSession().setAttribute("error", "Please enter valid review.");
+			String validation = reviewService.validateReview(rating, comment);
+
+			if (validation != null) {
+				request.getSession().setAttribute("error", validation);
 				response.sendRedirect(request.getContextPath() + "/property-detail?id=" + propertyId);
 				return;
 			}
@@ -47,9 +50,9 @@ public class ReviewServlet extends HttpServlet {
 			review.setRating(rating);
 			review.setComment(comment.trim());
 
-			int result = reviewDAO.addReview(review);
+			boolean result = reviewService.addReview(review);
 
-			if (result > 0) {
+			if (result) {
 				request.getSession().setAttribute("success", "Review submitted successfully.");
 			} else {
 				request.getSession().setAttribute("error", "Failed to submit review.");
@@ -60,7 +63,7 @@ public class ReviewServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("error", "Something went wrong.");
-			response.sendRedirect(request.getContextPath() + "/properties");
+			response.sendRedirect(request.getContextPath() + "/property-list");
 		}
 	}
 }

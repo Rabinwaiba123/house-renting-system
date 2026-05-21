@@ -43,32 +43,32 @@
 
 					<div class="form-group">
 						<label>Full Name</label> <input type="text" name="fullName"
-							placeholder="Enter full name" required>
+							placeholder="Enter full name">
 					</div>
 
 					<div class="form-group">
 						<label>Email Address</label> <input type="email" name="email"
-							placeholder="Enter email address" required>
+							placeholder="Enter email address">
 					</div>
 
 					<div class="form-group">
 						<label>Phone Number</label> <input type="text" name="phone"
-							placeholder="Enter phone number" required>
+							placeholder="Enter phone number">
 					</div>
 
 					<div class="form-group">
 						<label>Address</label> <input type="text" name="address"
-							placeholder="Enter address" required>
+							placeholder="Enter address">
 					</div>
 
 					<div class="form-group">
 						<label>Password</label> <input type="password" name="password"
-							placeholder="Enter password" required>
+							placeholder="Enter password">
 					</div>
 
 					<div class="form-group">
 						<label>Confirm Password</label> <input type="password"
-							name="confirmPassword" placeholder="Confirm password" required>
+							name="confirmPassword" placeholder="Confirm password">
 					</div>
 
 					<div class="form-group full">

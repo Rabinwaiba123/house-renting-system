@@ -19,7 +19,7 @@ public class HomeServlet extends HttpServlet {
 	public HomeServlet() {
 		super();
 	}
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PropertyService propertyService = new PropertyService();
@@ -31,3 +31,5 @@ public class HomeServlet extends HttpServlet {
 
 	}
 }
+
+

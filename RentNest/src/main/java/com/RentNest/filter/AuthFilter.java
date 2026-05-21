@@ -25,7 +25,6 @@ public class AuthFilter implements Filter {
 		String contextPath = req.getContextPath();
 		String path = req.getRequestURI().substring(contextPath.length());
 
-		/* Allow static files */
 		if (path.startsWith("/css/") || path.startsWith("/js/") || path.startsWith("/images/")
 				|| path.startsWith("/uploads/")) {
 			chain.doFilter(request, response);
@@ -39,22 +38,14 @@ public class AuthFilter implements Filter {
 				|| path.equals("/property-list") || path.startsWith("/property-detail") || path.equals("/logout");
 
 		boolean adminPage = path.startsWith("/admin");
-
 		boolean tenantPage = path.startsWith("/user/") || path.equals("/booking") || path.equals("/review");
-
 		boolean knownPage = publicPage || adminPage || tenantPage;
 
-		/*
-		 * Wrong URL should show 404. Do not redirect unknown URLs to login.
-		 */
 		if (!knownPage) {
 			chain.doFilter(request, response);
 			return;
 		}
 
-		/*
-		 * User not logged in: public pages are allowed. protected pages go to login.
-		 */
 		if (user == null) {
 			if (publicPage) {
 				chain.doFilter(request, response);
@@ -65,10 +56,6 @@ public class AuthFilter implements Filter {
 		}
 
 		String role = user.getRole();
-
-		/*
-		 * Logged-in user should not open login/register again.
-		 */
 		if (path.equals("/login") || path.equals("/register")) {
 			if ("admin".equalsIgnoreCase(role)) {
 				res.sendRedirect(contextPath + "/admin/dashboard");
@@ -78,10 +65,6 @@ public class AuthFilter implements Filter {
 			return;
 		}
 
-		/*
-		 * Admin should only access admin pages and logout. If admin opens /home,
-		 * /property-list, /wishlist, etc. show access denied.
-		 */
 		if ("admin".equalsIgnoreCase(role)) {
 			if (!adminPage && !path.equals("/logout")) {
 				res.sendError(HttpServletResponse.SC_FORBIDDEN);
@@ -89,9 +72,6 @@ public class AuthFilter implements Filter {
 			}
 		}
 
-		/*
-		 * Tenant/user should not access admin pages.
-		 */
 		if (!"admin".equalsIgnoreCase(role) && adminPage) {
 			res.sendError(HttpServletResponse.SC_FORBIDDEN);
 			return;

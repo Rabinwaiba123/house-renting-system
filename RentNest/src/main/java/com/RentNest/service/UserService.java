@@ -19,11 +19,12 @@ public class UserService {
 	}
 
 	public String validateProfile(String fullName, String phone, String password) {
+
 		if (fullName == null || fullName.trim().isEmpty()) {
 			return "Full name is required.";
 		}
 
-		if (!fullName.matches("^[A-Za-z ]+$")) {
+		if (!fullName.trim().matches("^[A-Za-z ]+$")) {
 			return "Full name must contain letters only.";
 		}
 
@@ -31,21 +32,25 @@ public class UserService {
 			return "Phone number is required.";
 		}
 
-		if (!phone.matches("^[0-9]{7,15}$")) {
+		if (!phone.trim().matches("^[0-9]{7,15}$")) {
 			return "Phone number must contain 7 to 15 digits.";
 		}
 
-		if (password != null && !password.trim().isEmpty() && password.length() < 6) {
-			return "Password must be at least 6 characters long.";
+		if (password != null && !password.trim().isEmpty()) {
+			if (password.length() < 6) {
+				return "Password must be at least 6 characters long.";
+			}
 		}
 
 		return null;
 	}
 
 	public int updateProfile(User user) {
+
 		if (user.getPassword() != null && !user.getPassword().trim().isEmpty()) {
 			user.setPassword(PasswordUtil.getHashPassword(user.getPassword()));
 		}
+
 		return userDAO.updateProfile(user);
 	}
 
