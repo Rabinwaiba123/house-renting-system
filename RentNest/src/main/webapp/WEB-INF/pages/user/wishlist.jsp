@@ -49,7 +49,7 @@
 							Properties</a>
 					</div>
 				</c:when>
-
+				<!-- If wishlist contains items -->
 				<c:otherwise>
 					<div class="properties-grid">
 
